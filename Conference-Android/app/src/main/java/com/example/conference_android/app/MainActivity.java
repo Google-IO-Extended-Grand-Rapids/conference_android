@@ -1,17 +1,36 @@
 package com.example.conference_android.app;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends Activity {
+
+    private Button btnShowPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        btnShowPresenter = (Button) findViewById(R.id.btnShowPresenter);
+
+        btnShowPresenter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startTheGivenActivity(EventLeaderActivity.class);
+            }
+        });
+    }
+
+    private void startTheGivenActivity(Class<?> clazz) {
+        Intent intent = new Intent(this, clazz);
+        startActivity(intent);
     }
 
 

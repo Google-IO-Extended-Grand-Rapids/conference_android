@@ -65,9 +65,9 @@ public class ConferenceFactory {
             currScheduledEvent.setStartDttm(currStartDateTime);
             currScheduledEvent.setEndDttm(endTime);
 
-            int eventIndex = new Random().nextInt(eventCount + 1);
-            int roomIndex = new Random().nextInt(roomCount + 1);
-            int eventLeaderIndex = new Random().nextInt(eventLeaderCount + 1);
+            int eventIndex = new Random().nextInt(eventCount);
+            int roomIndex = new Random().nextInt(roomCount);
+            int eventLeaderIndex = new Random().nextInt(eventLeaderCount);
 
             currScheduledEvent.setEventId(events.get(eventIndex).get_id());
             currScheduledEvent.setEventLeaderId(eventLeaders.get(eventLeaderIndex).get_id());
@@ -96,9 +96,9 @@ public class ConferenceFactory {
 
             currEventLeader.setConferenceId(conferenceId);
             currEventLeader.set_id(random.getRandomLong());
-            currEventLeader.setBiography(random.getRandomString("Bio"));
-            currEventLeader.setFirstName(random.getRandomString("FirstName"));
-            currEventLeader.setLastName(random.getRandomString("LastName"));
+            currEventLeader.setBiography(random.getRandomString("Bio_"));
+            currEventLeader.setFirstName(random.getRandomString("FirstName_"));
+            currEventLeader.setLastName(random.getRandomString("LastName_"));
 
             eventLeaders.add(currEventLeader);
         }
