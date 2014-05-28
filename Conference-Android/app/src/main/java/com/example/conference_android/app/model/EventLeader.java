@@ -8,6 +8,15 @@ public class EventLeader {
     private String firstName;
     private String lastName;
     private String biography;
+    private Long conferenceId;
+
+    public Long getConferenceId() {
+        return conferenceId;
+    }
+
+    public void setConferenceId(Long conferenceId) {
+        this.conferenceId = conferenceId;
+    }
 
     public Long get_id() {
         return _id;

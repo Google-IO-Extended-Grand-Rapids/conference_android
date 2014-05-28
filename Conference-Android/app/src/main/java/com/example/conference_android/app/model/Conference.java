@@ -1,6 +1,7 @@
 package com.example.conference_android.app.model;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by carlushenry on 5/28/14.
@@ -11,6 +12,17 @@ public class Conference {
     private String description;
     private Date startDttm;
     private Date endDttm;
+    private List<Sponsor> sponsors;
+
+    public List<ScheduledEvent> getScheduledEvents() {
+        return scheduledEvents;
+    }
+
+    public void setScheduledEvents(List<ScheduledEvent> scheduledEvents) {
+        this.scheduledEvents = scheduledEvents;
+    }
+
+    private List<ScheduledEvent> scheduledEvents;
 
     public Long getId() {
 
@@ -51,6 +63,14 @@ public class Conference {
 
     public void setEndDttm(Date endDttm) {
         this.endDttm = endDttm;
+    }
+
+    public List<Sponsor> getSponsors() {
+        return sponsors;
+    }
+
+    public void setSponsors(List<Sponsor> sponsors) {
+        this.sponsors = sponsors;
     }
 
     @Override

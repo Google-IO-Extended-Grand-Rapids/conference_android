@@ -5,13 +5,22 @@ import java.util.Date;
 /**
  * Created by carlushenry on 5/28/14.
  */
-public class EventSchedule {
+public class ScheduledEvent {
     private Long _id;
     private Long eventId;
     private Long eventLeaderId;
     private Long roomId;
     private Date startDttm;
     private Date endDttm;
+    private Long conferenceId;
+
+    public Long getConferenceId() {
+        return conferenceId;
+    }
+
+    public void setConferenceId(Long conferenceId) {
+        this.conferenceId = conferenceId;
+    }
 
     public Long get_id() {
         return _id;
@@ -66,7 +75,7 @@ public class EventSchedule {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        EventSchedule that = (EventSchedule) o;
+        ScheduledEvent that = (ScheduledEvent) o;
 
         if (_id != null ? !_id.equals(that._id) : that._id != null) return false;
 

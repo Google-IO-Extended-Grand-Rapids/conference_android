@@ -7,6 +7,15 @@ public class AttendeeSchedule {
     private Long _id;
     private Long attendeeId;
     private Long eventScheduleId;
+    private Long conferenceId;
+
+    public Long getConferenceId() {
+        return conferenceId;
+    }
+
+    public void setConferenceId(Long conferenceId) {
+        this.conferenceId = conferenceId;
+    }
 
     public Long get_id() {
         return _id;

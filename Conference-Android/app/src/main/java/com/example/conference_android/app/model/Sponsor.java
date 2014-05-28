@@ -8,7 +8,7 @@ public class Sponsor {
     private String name;
     private String description;
     private String sponsorshipLevel;
-    private Long conference_id;
+    private Long conferenceId;
     private String logo;
 
     public Long getId() {
@@ -43,12 +43,12 @@ public class Sponsor {
         this.sponsorshipLevel = sponsorshipLevel;
     }
 
-    public Long getConference_id() {
-        return conference_id;
+    public Long getConferenceId() {
+        return conferenceId;
     }
 
-    public void setConference_id(Long conference_id) {
-        this.conference_id = conference_id;
+    public void setConferenceId(Long conferenceId) {
+        this.conferenceId = conferenceId;
     }
 
     public String getLogo() {
