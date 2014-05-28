@@ -2,6 +2,7 @@ package com.example.conference_android.app;
 
 import android.app.Application;
 
+import com.example.conference_android.app.api.ConferenceController;
 import com.example.conference_android.app.model.Conference;
 import com.example.conference_android.app.model.Event;
 import com.example.conference_android.app.model.EventLeader;
@@ -14,28 +15,15 @@ import java.util.List;
  * Created by carlushenry on 5/28/14.
  */
 public class ConferenceApplication extends Application {
-    private Conference conference;
+    private ConferenceController conferenceController;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        this.conference = ConferenceFactory.createConference();
+        this.conferenceController = new ConferenceController();
     }
 
-    public List<Room> getRooms() {
-        return ConferenceFactory.getRooms();
+    public ConferenceController getConferenceController() {
+        return conferenceController;
     }
-
-    public List<EventLeader> getEventLeaders() {
-        return ConferenceFactory.getEventLeaders();
-    }
-
-    public List<Event> getEvents() {
-        return ConferenceFactory.getEvents();
-    }
-
-    public Conference getConference() {
-        return conference;
-    }
-
 }
