@@ -66,7 +66,6 @@ public class EventLeaderActivity extends Activity {
         this.txtBiographyValue.setText(currEventLeader.getBiography());
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 

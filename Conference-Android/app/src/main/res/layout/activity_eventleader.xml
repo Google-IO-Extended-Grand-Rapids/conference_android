@@ -15,7 +15,8 @@
         android:id="@+id/txtName"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:paddingRight="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +33,8 @@
         android:id="@+id/txtBiographyValue"
         android:layout_below="@+id/textBiography"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false" />
+        android:layout_alignParentStart="false"
+        android:layout_marginLeft="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
