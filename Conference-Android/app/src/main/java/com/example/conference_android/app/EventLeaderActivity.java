@@ -10,8 +10,6 @@ import android.widget.TextView;
 import com.example.conference_android.app.api.ConferenceController;
 import com.example.conference_android.app.model.EventLeader;
 
-import java.util.List;
-
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
