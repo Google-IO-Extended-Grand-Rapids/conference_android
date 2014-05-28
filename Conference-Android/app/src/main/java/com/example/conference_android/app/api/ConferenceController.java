@@ -27,6 +27,10 @@ public class ConferenceController {
         return ConferenceFactory.getEventLeaders();
     }
 
+    public EventLeader getFirstEventLeaders() {
+        return ConferenceFactory.getEventLeaders().get(0);
+    }
+
     public List<Event> getEvents() {
         return ConferenceFactory.getEvents();
     }
