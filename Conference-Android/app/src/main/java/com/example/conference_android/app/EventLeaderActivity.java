@@ -12,6 +12,7 @@ import com.example.conference_android.app.model.EventLeader;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -22,6 +23,7 @@ public class EventLeaderActivity extends Activity {
     private TextView txtBiographyValue;
     private TextView txtNameValue;
     private ConferenceController conferenceController;
+    private Subscription subscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,7 @@ public class EventLeaderActivity extends Activity {
         this.txtNameValue = (TextView) findViewById(R.id.txtNameValue);
 
 
-        Observable.create(new Observable.OnSubscribe<EventLeader>() {
+        subscription = Observable.create(new Observable.OnSubscribe<EventLeader>() {
             @Override
             public void call(Subscriber<? super EventLeader> subscriber) {
                 try {
@@ -47,15 +49,15 @@ public class EventLeaderActivity extends Activity {
                 }
             }
         })
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Action1<EventLeader>() {
-            @Override
-            public void call(EventLeader o) {
-                Log.i(TAG, "Updating Screen");
-                updateScreen(o);
-            }
-        });
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<EventLeader>() {
+                    @Override
+                    public void call(EventLeader o) {
+                        Log.i(TAG, "Updating Screen");
+                        updateScreen(o);
+                    }
+                });
         Log.i(TAG, "Completed the onCreate() method");
     }
 
@@ -84,4 +86,10 @@ public class EventLeaderActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onDestroy() {
+        if (subscription != null) {
+            subscription.unsubscribe();
+        }
+    }
 }
