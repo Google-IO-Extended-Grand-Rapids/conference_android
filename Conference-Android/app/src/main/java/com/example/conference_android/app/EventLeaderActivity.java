@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.conference_android.app.api.ConferenceController;
 import com.example.conference_android.app.model.EventLeader;
 
 import java.util.List;
@@ -13,21 +14,20 @@ import java.util.List;
 
 public class EventLeaderActivity extends Activity {
 
-    private ConferenceApplication app;
     private TextView txtBiographyValue;
     private TextView txtNameValue;
-    private List<EventLeader> eventLeaders;
+    private ConferenceController conferenceController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eventleader);
 
-        this.app = (ConferenceApplication) getApplication();
+        this.conferenceController = ((ConferenceApplication) getApplication()).getConferenceController();
 
         this.txtBiographyValue = (TextView) findViewById(R.id.txtBiographyValue);
         this.txtNameValue = (TextView) findViewById(R.id.txtNameValue);
-        eventLeaders = app.getEventLeaders();
+        List<EventLeader> eventLeaders = conferenceController.getEventLeaders();
 
         EventLeader currEventLeader = eventLeaders.get(0);
 
