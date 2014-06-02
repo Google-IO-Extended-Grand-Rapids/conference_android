@@ -35,7 +35,7 @@
 
     <style name="ActionBar.Solid.Googleio" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
         <item name="android:background">@drawable/ab_background_textured_googleio</item>
-        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_googleio</item>
+        <item name="android:backgroundStacked">@drawable/ab_background_textured_gray</item>
         <item name="android:backgroundSplit">@drawable/ab_background_textured_googleio</item>
         <item name="android:progressBarStyle">@style/ProgressBar.Googleio</item>
     </style>
