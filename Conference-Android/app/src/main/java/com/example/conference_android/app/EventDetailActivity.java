@@ -1,8 +1,11 @@
 package com.example.conference_android.app;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.conference_android.app.api.ConferenceController;
@@ -21,7 +24,7 @@ import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 
-public class EventDetailActivity extends Activity {
+public class EventDetailActivity extends ActionBarActivity {
     private static final String TAG = "EventDetailActivity";
     private TextView title;
     private TextView location;
@@ -34,6 +37,11 @@ public class EventDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         eventId = getIntent().getExtras().getInt("id");
 
         this.conferenceController = ((ConferenceApplication) getApplication()).getConferenceController();
@@ -96,5 +104,16 @@ public class EventDetailActivity extends Activity {
         if (subscription != null) {
             subscription.unsubscribe();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
