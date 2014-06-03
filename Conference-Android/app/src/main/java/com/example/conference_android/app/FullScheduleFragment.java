@@ -1,12 +1,14 @@
 package com.example.conference_android.app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.conference_android.app.api.ConferenceController;
@@ -71,10 +73,19 @@ public class FullScheduleFragment extends ListFragment {
                     }
                 });
         Log.i(TAG, "Completed the onCreate() method");
+
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Intent detailActivity = new Intent(getActivity(), EventDetailActivity.class);
+        detailActivity.putExtra("id", (Integer) v.getTag());
+        startActivity(detailActivity);
     }
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         if (subscription != null) {
             subscription.unsubscribe();
         }
@@ -101,6 +112,7 @@ public class FullScheduleFragment extends ListFragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             EventHolder eventHolder;
             convertView = getActivity().getLayoutInflater().inflate(layoutResourceId, parent, false);
+            convertView.setTag(eventDataList.get(position).getId());
 
             eventHolder = new EventHolder();
             eventHolder.time = (TextView) convertView.findViewById(R.id.time);

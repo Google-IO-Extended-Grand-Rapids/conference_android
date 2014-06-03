@@ -18,8 +18,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EventLeaderActivity"
-            android:label="@string/title_activity_eventleader" >
+            android:name=".EventDetailActivity"
+            android:label="@string/title_activity_eventdetail" >
         </activity>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
