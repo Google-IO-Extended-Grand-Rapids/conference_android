@@ -33,7 +33,7 @@ public class PersonalScheduleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.full_schedule_fragment, container, false);
-        TextView tvLabel = (TextView) view.findViewById(R.id.txtName);
+        TextView tvLabel = (TextView) view.findViewById(R.id.time);
         tvLabel.setText(page + " -- " + title);
         return view;
     }
