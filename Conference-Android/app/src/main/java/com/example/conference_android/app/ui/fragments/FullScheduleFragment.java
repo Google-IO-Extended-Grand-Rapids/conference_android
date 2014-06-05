@@ -1,4 +1,4 @@
-package com.example.conference_android.app;
+package com.example.conference_android.app.ui.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,11 +8,15 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.conference_android.app.ConferenceApplication;
+import com.example.conference_android.app.R;
 import com.example.conference_android.app.api.ConferenceController;
 import com.example.conference_android.app.model.EventData;
+import com.example.conference_android.app.ui.activities.EventDetailActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,13 +39,9 @@ public class FullScheduleFragment extends ListFragment {
     private ConferenceController conferenceController;
     private Subscription subscription;
 
-    public static FullScheduleFragment newInstance(int page, String title) {
-        FullScheduleFragment fragmentFirst = new FullScheduleFragment();
-        Bundle args = new Bundle();
-        args.putInt("1", page);
-        args.putString("someTitle", title);
-        fragmentFirst.setArguments(args);
-        return fragmentFirst;
+    public static FullScheduleFragment newInstance() {
+        FullScheduleFragment fullScheduleFragment = new FullScheduleFragment();
+        return fullScheduleFragment;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class FullScheduleFragment extends ListFragment {
                     @Override
                     public void call(List<EventData> o) {
                         Log.i(TAG, "Updating Screen");
-                        setListAdapter(new EventsListAdapter(getActivity(), R.layout.full_schedule_fragment, o));
+                        setListAdapter(new EventsListAdapter(getActivity(), R.layout.list_view_item, o));
                     }
                 });
         Log.i(TAG, "Completed the onCreate() method");
@@ -95,6 +95,7 @@ public class FullScheduleFragment extends ListFragment {
         TextView time;
         TextView title;
         TextView room;
+        ImageView scheduled;
     }
 
     // ***** LIST ADAPTER [START] ***** //
@@ -118,10 +119,14 @@ public class FullScheduleFragment extends ListFragment {
             eventHolder.time = (TextView) convertView.findViewById(R.id.time);
             eventHolder.title = (TextView) convertView.findViewById(R.id.title);
             eventHolder.room = (TextView) convertView.findViewById(R.id.room);
+            eventHolder.scheduled = (ImageView) convertView.findViewById(R.id.scheduled);
 
             eventHolder.time.setText(formatDate(eventDataList.get(position).getStart_dttm()));
             eventHolder.title.setText(eventDataList.get(position).getEvent().getTitle());
             eventHolder.room.setText(eventDataList.get(position).getRoom().getName());
+
+            if (eventDataList.get(position).getChosen_by_attendee().equals("false"))
+                eventHolder.scheduled.setVisibility(View.INVISIBLE);
 
             return convertView;
         }

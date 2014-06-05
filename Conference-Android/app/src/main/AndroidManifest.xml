@@ -5,11 +5,11 @@
     <application
         android:name="com.example.conference_android.app.ConferenceApplication"
         android:allowBackup="true"
-        android:logo="@drawable/ic_launcher"
+        android:logo="@drawable/gioegr4"
         android:label="@string/app_name"
         android:theme="@style/Theme.Googleio" >
         <activity
-            android:name="com.example.conference_android.app.MainActivity"
+            android:name=".ui.activities.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,9 +18,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".EventDetailActivity"
+            android:name=".ui.activities.EventDetailActivity"
             android:label="@string/title_activity_eventdetail"
-            android:parentActivityName="com.example.conference_android.app.MainActivity" >
+            android:parentActivityName=".ui.activities.MainActivity" >
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

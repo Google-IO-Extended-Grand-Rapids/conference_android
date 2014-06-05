@@ -1,4 +1,4 @@
-package com.example.conference_android.app;
+package com.example.conference_android.app.ui.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.conference_android.app.ConferenceApplication;
+import com.example.conference_android.app.R;
 import com.example.conference_android.app.api.ConferenceController;
 import com.example.conference_android.app.model.EventData;
 
