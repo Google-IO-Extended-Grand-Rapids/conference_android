@@ -2,6 +2,9 @@ package com.example.conference_android.app.model;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by danmikita on 6/2/14.
  */
@@ -18,7 +21,7 @@ public class EventData {
     @Expose
     private Event event;
     @Expose
-    private Event_leader event_leader;
+    private List<Event_leader> event_leaders = new ArrayList<Event_leader>();
     @Expose
     private String chosen_by_attendee;
 
@@ -62,12 +65,12 @@ public class EventData {
         this.event = event;
     }
 
-    public Event_leader getEvent_leader() {
-        return event_leader;
+    public List<Event_leader> getEvent_leaders() {
+        return event_leaders;
     }
 
-    public void setEvent_leader(Event_leader event_leader) {
-        this.event_leader = event_leader;
+    public void setEvent_leaders(List<Event_leader> event_leaders) {
+        this.event_leaders = event_leaders;
     }
 
     public String getChosen_by_attendee() {

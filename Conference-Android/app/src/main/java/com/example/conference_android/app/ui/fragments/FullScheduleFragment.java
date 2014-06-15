@@ -123,7 +123,8 @@ public class FullScheduleFragment extends ListFragment {
 
             eventHolder.time.setText(formatDate(eventDataList.get(position).getStart_dttm()));
             eventHolder.title.setText(eventDataList.get(position).getEvent().getTitle());
-            eventHolder.room.setText(eventDataList.get(position).getRoom().getName());
+            if(eventDataList.get(position).getRoom() != null)
+                eventHolder.room.setText(eventDataList.get(position).getRoom().getName());
 
             if (eventDataList.get(position).getChosen_by_attendee().equals("false"))
                 eventHolder.scheduled.setVisibility(View.INVISIBLE);

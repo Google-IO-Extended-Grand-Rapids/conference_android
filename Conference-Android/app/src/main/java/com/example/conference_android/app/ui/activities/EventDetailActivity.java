@@ -31,6 +31,10 @@ public class EventDetailActivity extends ActionBarActivity {
     private TextView title;
     private TextView location;
     private TextView description;
+    private TextView name1;
+    private TextView name2;
+    private TextView bio1;
+    private TextView bio2;
     private ConferenceController conferenceController;
     private Subscription subscription;
     private Integer eventId;
@@ -51,6 +55,10 @@ public class EventDetailActivity extends ActionBarActivity {
         this.title = (TextView) findViewById(R.id.title);
         this.location = (TextView) findViewById(R.id.location);
         this.description = (TextView) findViewById(R.id.description);
+        this.name1 = (TextView) findViewById(R.id.name1);
+        this.name2 = (TextView) findViewById(R.id.name2);
+        this.bio1 = (TextView) findViewById(R.id.bio1);
+        this.bio2 = (TextView) findViewById(R.id.bio2);
 
 
         subscription = Observable.create(new Observable.OnSubscribe<EventData>() {
@@ -79,9 +87,17 @@ public class EventDetailActivity extends ActionBarActivity {
     }
 
     private void updateScreen(EventData eventData) {
+        String name = eventData.getEvent_leaders().get(0).getFirst_name() + " " + eventData.getEvent_leaders().get(0).getLast_name();
+
+
         this.title.setText(eventData.getEvent().getTitle());
-        this.location.setText(formatLocation(eventData.getStart_dttm(), eventData.getEnd_dttm(), eventData.getRoom().getName()));
+        String roomName = "";
+        if(eventData.getRoom() != null)
+            roomName = eventData.getRoom().getName();
+        this.location.setText(formatLocation(eventData.getStart_dttm(), eventData.getEnd_dttm(), roomName));
         this.description.setText(eventData.getEvent().getDescription());
+        this.name1.setText(name);
+        this.bio1.setText(eventData.getEvent_leaders().get(0).getBiography());
     }
 
     private String formatLocation(String startString, String endString, String room) {
