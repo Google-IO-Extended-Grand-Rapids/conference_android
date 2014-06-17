@@ -55,6 +55,7 @@ public class FullScheduleFragment extends ListFragment {
             public void call(Subscriber<? super List<EventData>> subscriber) {
                 try {
                     Log.i(TAG, "Looking up first event leader");
+                    conferenceController.login("test1", "test1");
                     List<EventData> events = conferenceController.getEvents();
                     subscriber.onNext(events);
                     subscriber.onCompleted();

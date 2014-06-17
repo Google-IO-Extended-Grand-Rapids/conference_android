@@ -23,7 +23,7 @@ public class EventData {
     @Expose
     private List<Event_leader> event_leaders = new ArrayList<Event_leader>();
     @Expose
-    private String chosen_by_attendee;
+    private Boolean chosen_by_attendee;
 
     public Integer getId() {
         return id;
@@ -73,11 +73,11 @@ public class EventData {
         this.event_leaders = event_leaders;
     }
 
-    public String getChosen_by_attendee() {
+    public Boolean getChosen_by_attendee() {
         return chosen_by_attendee;
     }
 
-    public void setChosen_by_attendee(String chosen_by_attendee) {
+    public void setChosen_by_attendee(Boolean chosen_by_attendee) {
         this.chosen_by_attendee = chosen_by_attendee;
     }
 
