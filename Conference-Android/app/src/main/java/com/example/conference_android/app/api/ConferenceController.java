@@ -1,6 +1,8 @@
 package com.example.conference_android.app.api;
 
 import com.example.conference_android.app.model.EventData;
+import com.example.conference_android.app.model.Token;
+import com.google.gson.Gson;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.Collections;
@@ -12,6 +14,8 @@ import retrofit.RestAdapter;
 import retrofit.client.Header;
 import retrofit.client.OkClient;
 import retrofit.client.Response;
+import retrofit.converter.ConversionException;
+import retrofit.converter.GsonConverter;
 import retrofit.http.Field;
 import retrofit.http.FormUrlEncoded;
 import retrofit.http.GET;
@@ -28,24 +32,31 @@ public class ConferenceController {
 
     private interface ApiManagerService {
         @GET("/events.json")
-        List<EventData> getEvents(@retrofit.http.Header("Cookie") String authorization);
+        List<EventData> getEvents(@retrofit.http.Header("Cookie") String authorization, @retrofit.http.Header("Cookie") String reqMethod);
+
+        @GET("/token.json")
+        Response getToken();
 
         @GET("/events/{event_id}.json")
         EventData getEvent(@Path("event_id") Integer eventId);
 
         @FormUrlEncoded
         @POST("/login")
-        Response login(@Field("username") String username, @Field("password") String password);
+        Response login(@Field("username") String username,
+                       @Field("password") String password,
+                       @Field("authenticity_token") String authenticity_token,
+                       @Field("utf8") String check,
+                       @retrofit.http.Header("Cookie") String cookie);
     }
 
     public List<EventData> getEvents() {
         final RestAdapter restAdapter = new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.HEADERS)
+                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint("https://conference-schedule-webap.herokuapp.com")
                 .build();
 
         final ApiManagerService apiManager = restAdapter.create(ApiManagerService.class);
-        final List<EventData> eventData = apiManager.getEvents(cookie);
+        final List<EventData> eventData = apiManager.getEvents(cookie, "request_method=GET; path=/");
 
         Collections.sort(eventData, new Comparator<EventData>() {
             public int compare(EventData e1, EventData e2) {
@@ -93,15 +104,27 @@ public class ConferenceController {
     }
 
     public void login(String username, String password) {
+        Gson gson = new Gson();
         final RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("https://conference-schedule-webap.herokuapp.com")
+                .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setClient(new OkClient(new OkHttpClient()))
                 .build();
 
         final ApiManagerService apiManager = restAdapter.create(ApiManagerService.class);
-        final Response response = apiManager.login(username, password);
+        try {
+            final Response tokenResponse = apiManager.getToken();
+            final Token token = (Token) new GsonConverter(gson).fromBody(tokenResponse.getBody(), Token.class);
+            getCookie(tokenResponse);
 
+            final Response response = apiManager.login(username, password, token.getToken(), "\u2713", cookie);
+            getCookie(response);
+        } catch (ConversionException e) {
+            e.printStackTrace();
+        }
+    }
 
+    private void getCookie(Response response) {
         ListIterator iterator = response.getHeaders().listIterator();
         while (iterator.hasNext()) {
             Header header = (Header) iterator.next();
@@ -111,6 +134,5 @@ public class ConferenceController {
                     break;
                 }
         }
-
     }
 }
