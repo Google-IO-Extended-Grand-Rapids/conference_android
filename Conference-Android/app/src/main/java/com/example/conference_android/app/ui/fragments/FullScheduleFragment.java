@@ -23,19 +23,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-
 /**
  * Created by danmikita on 5/29/14.
  */
 public class FullScheduleFragment extends ListFragment {
     private ConferenceController conferenceController;
-    private Subscription subscription;
 
     public static FullScheduleFragment newInstance() {
         FullScheduleFragment fullScheduleFragment = new FullScheduleFragment();
@@ -48,26 +40,7 @@ public class FullScheduleFragment extends ListFragment {
 
         this.conferenceController = ((ConferenceApplication) getActivity().getApplication()).getConferenceController();
 
-        subscription = Observable.create(new Observable.OnSubscribe<List<EventData>>() {
-            @Override
-            public void call(Subscriber<? super List<EventData>> subscriber) {
-                try {
-                    List<EventData> events = conferenceController.getEvents();
-                    subscriber.onNext(events);
-                    subscriber.onCompleted();
-                } catch (Exception e) {
-                    subscriber.onError(e);
-                }
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<EventData>>() {
-                    @Override
-                    public void call(List<EventData> o) {
-                        setListAdapter(new EventsListAdapter(getActivity(), R.layout.list_view_item, o));
-                    }
-                });
+        setListAdapter(new EventsListAdapter(getActivity(), R.layout.list_view_item, conferenceController.getEventData()));
     }
 
     @Override
@@ -75,14 +48,6 @@ public class FullScheduleFragment extends ListFragment {
         Intent detailActivity = new Intent(getActivity(), EventDetailActivity.class);
         detailActivity.putExtra("id", (Integer) v.getTag());
         startActivity(detailActivity);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (subscription != null) {
-            subscription.unsubscribe();
-        }
     }
 
     static class EventHolder {

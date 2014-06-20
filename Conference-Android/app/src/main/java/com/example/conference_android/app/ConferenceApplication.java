@@ -8,7 +8,7 @@ import com.example.conference_android.app.api.ConferenceController;
  * Created by carlushenry on 5/28/14.
  */
 public class ConferenceApplication extends Application {
-    private ConferenceController conferenceController;
+    private static ConferenceController conferenceController;
 
     @Override
     public void onCreate() {

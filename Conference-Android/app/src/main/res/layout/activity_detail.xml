@@ -34,15 +34,6 @@
             android:layout_below="@+id/title"
             android:textColor="@color/grey_dark" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/selector_white_button"
-            android:id="@+id/button"
-            android:layout_below="@+id/title"
-            android:layout_alignRight="@+id/location"
-            android:layout_marginLeft="20dp"/>
-
     </RelativeLayout>
 
     <ScrollView
