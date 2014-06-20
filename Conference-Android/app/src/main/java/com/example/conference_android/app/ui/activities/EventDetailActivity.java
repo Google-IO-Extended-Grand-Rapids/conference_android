@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -18,16 +17,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-
 
 public class EventDetailActivity extends ActionBarActivity {
-    private static final String TAG = "EventDetailActivity";
+    private ConferenceController conferenceController;
+
     private TextView title;
     private TextView location;
     private TextView description;
@@ -35,8 +28,6 @@ public class EventDetailActivity extends ActionBarActivity {
     private TextView name2;
     private TextView bio1;
     private TextView bio2;
-    private ConferenceController conferenceController;
-    private Subscription subscription;
     private Integer eventId;
 
     @Override
@@ -60,44 +51,35 @@ public class EventDetailActivity extends ActionBarActivity {
         this.bio1 = (TextView) findViewById(R.id.bio1);
         this.bio2 = (TextView) findViewById(R.id.bio2);
 
+        EventData event = conferenceController.getEvent(eventId);
+        updateScreen(event);
 
-        subscription = Observable.create(new Observable.OnSubscribe<EventData>() {
-            @Override
-            public void call(Subscriber<? super EventData> subscriber) {
-                try {
-                    Log.i(TAG, "Looking up first event leader");
-                    EventData events = conferenceController.getEvent(eventId);
-                    subscriber.onNext(events);
-                    subscriber.onCompleted();
-                } catch (Exception e) {
-                    subscriber.onError(e);
-                }
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<EventData>() {
-                    @Override
-                    public void call(EventData o) {
-                        Log.i(TAG, "Updating Screen");
-                        updateScreen(o);
-                    }
-                });
-        Log.i(TAG, "Completed the onCreate() method");
     }
 
     private void updateScreen(EventData eventData) {
-        String name = eventData.getEvent_leaders().get(0).getFirst_name() + " " + eventData.getEvent_leaders().get(0).getLast_name();
 
+        String name = null;
+        String name2 = null;
+        if (!eventData.getEvent_leaders().isEmpty()) {
+            name = eventData.getEvent_leaders().get(0).getFirst_name() + " " + eventData.getEvent_leaders().get(0).getLast_name();
+            this.bio1.setText(eventData.getEvent_leaders().get(0).getBiography());
+            this.name1.setText(name);
+
+            if(eventData.getEvent_leaders().size() > 1) {
+                name2 = eventData.getEvent_leaders().get(1).getFirst_name() + " " + eventData.getEvent_leaders().get(1).getLast_name();
+                this.bio2.setText(eventData.getEvent_leaders().get(1).getBiography());
+                this.name2.setText(name2);
+            }
+        }
 
         this.title.setText(eventData.getEvent().getTitle());
         String roomName = "";
-        if(eventData.getRoom() != null)
+        if (eventData.getRoom() != null) {
             roomName = eventData.getRoom().getName();
+        }
         this.location.setText(formatLocation(eventData.getStart_dttm(), eventData.getEnd_dttm(), roomName));
         this.description.setText(eventData.getEvent().getDescription());
-        this.name1.setText(name);
-        this.bio1.setText(eventData.getEvent_leaders().get(0).getBiography());
+
     }
 
     private String formatLocation(String startString, String endString, String room) {
@@ -116,13 +98,6 @@ public class EventDetailActivity extends ActionBarActivity {
         return timeFormatter1.format(startDate) + timeFormatter2.format(endDate) + " in " + room;
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (subscription != null) {
-            subscription.unsubscribe();
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

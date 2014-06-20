@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -24,20 +23,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
-
 /**
  * Created by danmikita on 5/29/14.
  */
 public class FullScheduleFragment extends ListFragment {
-    private static final String TAG = "FullScheduleFragment";
     private ConferenceController conferenceController;
-    private Subscription subscription;
 
     public static FullScheduleFragment newInstance() {
         FullScheduleFragment fullScheduleFragment = new FullScheduleFragment();
@@ -50,30 +40,7 @@ public class FullScheduleFragment extends ListFragment {
 
         this.conferenceController = ((ConferenceApplication) getActivity().getApplication()).getConferenceController();
 
-        subscription = Observable.create(new Observable.OnSubscribe<List<EventData>>() {
-            @Override
-            public void call(Subscriber<? super List<EventData>> subscriber) {
-                try {
-                    Log.i(TAG, "Looking up first event leader");
-                    List<EventData> events = conferenceController.getEvents();
-                    subscriber.onNext(events);
-                    subscriber.onCompleted();
-                } catch (Exception e) {
-                    subscriber.onError(e);
-                }
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<EventData>>() {
-                    @Override
-                    public void call(List<EventData> o) {
-                        Log.i(TAG, "Updating Screen");
-                        setListAdapter(new EventsListAdapter(getActivity(), R.layout.list_view_item, o));
-                    }
-                });
-        Log.i(TAG, "Completed the onCreate() method");
-
+        setListAdapter(new EventsListAdapter(getActivity(), R.layout.list_view_item, conferenceController.getEventData()));
     }
 
     @Override
@@ -81,14 +48,6 @@ public class FullScheduleFragment extends ListFragment {
         Intent detailActivity = new Intent(getActivity(), EventDetailActivity.class);
         detailActivity.putExtra("id", (Integer) v.getTag());
         startActivity(detailActivity);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (subscription != null) {
-            subscription.unsubscribe();
-        }
     }
 
     static class EventHolder {
@@ -126,7 +85,7 @@ public class FullScheduleFragment extends ListFragment {
             if(eventDataList.get(position).getRoom() != null)
                 eventHolder.room.setText(eventDataList.get(position).getRoom().getName());
 
-            if (eventDataList.get(position).getChosen_by_attendee().equals("false"))
+            if (eventDataList.get(position).getChosen_by_attendee() == false)
                 eventHolder.scheduled.setVisibility(View.INVISIBLE);
 
             return convertView;

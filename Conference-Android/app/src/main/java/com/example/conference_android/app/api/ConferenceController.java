@@ -5,15 +5,10 @@ import com.example.conference_android.app.model.EventData;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.ListIterator;
 
 import retrofit.RestAdapter;
 import retrofit.http.GET;
-import retrofit.http.Path;
 
-/**
- * Created by carlushenry on 5/28/14.
- */
 public class ConferenceController {
 
     private List<EventData> eventData;
@@ -21,14 +16,11 @@ public class ConferenceController {
     private interface ApiManagerService {
         @GET("/events.json")
         List<EventData> getEvents();
-
-        @GET("/events/{event_id}.json")
-        EventData getEvent(@Path("event_id") Integer eventId);
     }
 
     public List<EventData> getEvents() {
         final RestAdapter restAdapter = new RestAdapter.Builder()
-                .setEndpoint("http://www.ioextendedgr.com")
+                .setEndpoint("https://conference-schedule-webap.herokuapp.com")
                 .build();
 
         final ApiManagerService apiManager = restAdapter.create(ApiManagerService.class);
@@ -40,39 +32,25 @@ public class ConferenceController {
             }
         });
 
-        this.eventData = eventData;
-
-        return eventData;
-    }
-
-    public List<EventData> getEventData() {
-
-        if(this.eventData == null) {
-            this.eventData = getEvents();
-        }
-
-        return this.eventData;
-    }
-
-    public List<EventData> getScheduledEvents() {
-        final List<EventData> eventData = getEventData();
-
-        ListIterator iterator = eventData.listIterator();
-        while (iterator.hasNext()) {
-            if (((EventData) iterator.next()).getChosen_by_attendee().equals("false")) {
-                iterator.remove();
-            }
-        }
-
         return eventData;
     }
 
     public EventData getEvent(Integer eventId) {
-        ListIterator iterator = this.eventData.listIterator();
-        while (iterator.hasNext()) {
-            EventData event = (EventData) iterator.next();
-            if (event.getId() == eventId) return event;
+
+        for (EventData e : getEventData()) {
+            if (e.getId() == eventId)
+                return e;
         }
+
         return null;
     }
+
+    public List<EventData> getEventData() {
+        return eventData;
+    }
+
+    public void setEventData(List<EventData> eventData) {
+        this.eventData = eventData;
+    }
+
 }
