@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -35,7 +34,6 @@ import rx.schedulers.Schedulers;
  * Created by danmikita on 5/29/14.
  */
 public class FullScheduleFragment extends ListFragment {
-    private static final String TAG = "FullScheduleFragment";
     private ConferenceController conferenceController;
     private Subscription subscription;
 
@@ -54,8 +52,6 @@ public class FullScheduleFragment extends ListFragment {
             @Override
             public void call(Subscriber<? super List<EventData>> subscriber) {
                 try {
-                    Log.i(TAG, "Looking up first event leader");
-                    conferenceController.login("test1", "test1");
                     List<EventData> events = conferenceController.getEvents();
                     subscriber.onNext(events);
                     subscriber.onCompleted();
@@ -69,12 +65,9 @@ public class FullScheduleFragment extends ListFragment {
                 .subscribe(new Action1<List<EventData>>() {
                     @Override
                     public void call(List<EventData> o) {
-                        Log.i(TAG, "Updating Screen");
                         setListAdapter(new EventsListAdapter(getActivity(), R.layout.list_view_item, o));
                     }
                 });
-        Log.i(TAG, "Completed the onCreate() method");
-
     }
 
     @Override
@@ -127,7 +120,7 @@ public class FullScheduleFragment extends ListFragment {
             if(eventDataList.get(position).getRoom() != null)
                 eventHolder.room.setText(eventDataList.get(position).getRoom().getName());
 
-            if (eventDataList.get(position).getChosen_by_attendee().equals("false"))
+            if (eventDataList.get(position).getChosen_by_attendee() == false)
                 eventHolder.scheduled.setVisibility(View.INVISIBLE);
 
             return convertView;

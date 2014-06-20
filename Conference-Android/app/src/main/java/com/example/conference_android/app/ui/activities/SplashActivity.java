@@ -18,8 +18,9 @@ public class SplashActivity extends ActionBarActivity {
 
     private ConferenceController conferenceController;
 
-    private Button continueBtn;
     private Button signInBtn;
+    private Button registerBtn;
+    private Button continueBtn;
 
 
     @Override
@@ -32,22 +33,30 @@ public class SplashActivity extends ActionBarActivity {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        signInBtn = (Button) findViewById(R.id.button);
+        signInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        registerBtn = (Button) findViewById(R.id.button2);
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+//                startActivity(intent);
+            }
+        });
+
         continueBtn = (Button) findViewById(R.id.button3);
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
-            }
-        });
-
-
-        signInBtn = (Button) findViewById(R.id.button);
-        signInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
             }
         });
 

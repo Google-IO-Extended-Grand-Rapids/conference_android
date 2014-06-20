@@ -41,6 +41,13 @@ public class ConferenceController {
         EventData getEvent(@Path("event_id") Integer eventId);
 
         @FormUrlEncoded
+        @POST("/events/{event_id}/register")
+        Response registerForEvent(@Path("event_id") Integer eventId,
+                                  @Field("authenticity_token") String authenticity_token,
+                                  @Field("utf8") String check,
+                                  @retrofit.http.Header("Cookie") String cookie);
+
+        @FormUrlEncoded
         @POST("/login")
         Response login(@Field("username") String username,
                        @Field("password") String password,
@@ -69,21 +76,9 @@ public class ConferenceController {
         return eventData;
     }
 
-    public List<EventData> getEventData() {
-
-        if (this.eventData == null) {
-            this.eventData = getEvents();
-        }
-
-        return this.eventData;
-    }
-
     public List<EventData> getScheduledEvents() {
 
-        if (getEventData() == null)
-            return getScheduledEvents();
-
-        final List<EventData> eventData = getEventData();
+        final List<EventData> eventData = getEvents();
         ListIterator iterator = eventData.listIterator();
         while (iterator.hasNext()) {
             if (((EventData) iterator.next()).getChosen_by_attendee() == false) {
@@ -95,7 +90,7 @@ public class ConferenceController {
     }
 
     public EventData getEvent(Integer eventId) {
-        ListIterator iterator = getEventData().listIterator();
+        ListIterator iterator = this.eventData.listIterator();
         while (iterator.hasNext()) {
             EventData event = (EventData) iterator.next();
             if (event.getId() == eventId) return event;
@@ -103,7 +98,7 @@ public class ConferenceController {
         return null;
     }
 
-    public void login(String username, String password) {
+    public Boolean login(String username, String password) {
         Gson gson = new Gson();
         final RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("https://conference-schedule-webap.herokuapp.com")
@@ -122,6 +117,31 @@ public class ConferenceController {
         } catch (ConversionException e) {
             e.printStackTrace();
         }
+
+        return true;
+    }
+
+    public Boolean registerForEvent(Integer id) {
+        Gson gson = new Gson();
+        final RestAdapter restAdapter = new RestAdapter.Builder()
+                .setEndpoint("https://conference-schedule-webap.herokuapp.com")
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setClient(new OkClient(new OkHttpClient()))
+                .build();
+
+        final ApiManagerService apiManager = restAdapter.create(ApiManagerService.class);
+
+        try {
+            final Response tokenResponse = apiManager.getToken();
+            final Token token = (Token) new GsonConverter(gson).fromBody(tokenResponse.getBody(), Token.class);
+            getCookie(tokenResponse);
+
+            final Response response = apiManager.registerForEvent(id, token.getToken(), "\u2713", cookie);
+        } catch (ConversionException e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
     private void getCookie(Response response) {

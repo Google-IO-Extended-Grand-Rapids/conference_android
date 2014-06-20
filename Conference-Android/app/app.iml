@@ -78,6 +78,7 @@
     <orderEntry type="library" exported="" name="rxjava-android-0.18.3" level="project" />
     <orderEntry type="library" exported="" name="rxjava-core-0.18.3" level="project" />
     <orderEntry type="library" exported="" name="retrofit-1.5.1" level="project" />
+    <orderEntry type="library" exported="" name="play-services-4.0.30" level="project" />
   </component>
 </module>
 

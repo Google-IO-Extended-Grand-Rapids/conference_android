@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.conference_android.app.ConferenceApplication;
@@ -27,7 +28,6 @@ import rx.schedulers.Schedulers;
 
 
 public class EventDetailActivity extends ActionBarActivity {
-    private static final String TAG = "EventDetailActivity";
     private TextView title;
     private TextView location;
     private TextView description;
@@ -35,6 +35,7 @@ public class EventDetailActivity extends ActionBarActivity {
     private TextView name2;
     private TextView bio1;
     private TextView bio2;
+    private Button button;
     private ConferenceController conferenceController;
     private Subscription subscription;
     private Integer eventId;
@@ -59,31 +60,36 @@ public class EventDetailActivity extends ActionBarActivity {
         this.name2 = (TextView) findViewById(R.id.name2);
         this.bio1 = (TextView) findViewById(R.id.bio1);
         this.bio2 = (TextView) findViewById(R.id.bio2);
+        this.button = (Button) findViewById(R.id.button);
 
+        EventData event = conferenceController.getEvent(eventId);
+        updateScreen(event);
 
-        subscription = Observable.create(new Observable.OnSubscribe<EventData>() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void call(Subscriber<? super EventData> subscriber) {
-                try {
-                    Log.i(TAG, "Looking up first event leader");
-                    EventData events = conferenceController.getEvent(eventId);
-                    subscriber.onNext(events);
-                    subscriber.onCompleted();
-                } catch (Exception e) {
-                    subscriber.onError(e);
-                }
-            }
-        })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<EventData>() {
+            public void onClick(View v) {
+                subscription = Observable.create(new Observable.OnSubscribe<Boolean>() {
                     @Override
-                    public void call(EventData o) {
-                        Log.i(TAG, "Updating Screen");
-                        updateScreen(o);
+                    public void call(Subscriber<? super Boolean> subscriber) {
+                        try {
+                            Boolean success = conferenceController.registerForEvent(eventId);
+                            subscriber.onNext(success);
+                            subscriber.onCompleted();
+                        } catch (Exception e) {
+                            subscriber.onError(e);
+                        }
                     }
-                });
-        Log.i(TAG, "Completed the onCreate() method");
+                })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<Boolean>() {
+                            @Override
+                            public void call(Boolean o) {
+
+                            }
+                        });
+            }
+        });
     }
 
     private void updateScreen(EventData eventData) {
@@ -92,12 +98,19 @@ public class EventDetailActivity extends ActionBarActivity {
 
         this.title.setText(eventData.getEvent().getTitle());
         String roomName = "";
-        if(eventData.getRoom() != null)
+        if (eventData.getRoom() != null)
             roomName = eventData.getRoom().getName();
         this.location.setText(formatLocation(eventData.getStart_dttm(), eventData.getEnd_dttm(), roomName));
         this.description.setText(eventData.getEvent().getDescription());
         this.name1.setText(name);
         this.bio1.setText(eventData.getEvent_leaders().get(0).getBiography());
+
+        button.setActivated(true);
+        if (eventData.getChosen_by_attendee()) {
+            button.setText("Remove");
+        } else {
+            button.setText("Add");
+        }
     }
 
     private String formatLocation(String startString, String endString, String room) {
