@@ -38,7 +38,7 @@ public class EventDetailActivity extends ActionBarActivity {
         setContentView(R.layout.activity_detail);
 
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("");
+        actionBar.setTitle(R.string.app_name);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         eventId = getIntent().getExtras().getInt("id");
@@ -76,7 +76,7 @@ public class EventDetailActivity extends ActionBarActivity {
         }
 
         this.title.setText(eventData.getEvent().getTitle());
-        String roomName = "";
+        String roomName = null;
         if (eventData.getRoom() != null) {
             roomName = eventData.getRoom().getName();
         }
@@ -90,7 +90,7 @@ public class EventDetailActivity extends ActionBarActivity {
 
     }
 
-    private String formatLocation(String startString, String endString, String room) {
+    private String formatLocation(String startString, String endString, String roomName) {
         Date startDate = null;
         Date endDate = null;
         try {
@@ -103,7 +103,11 @@ public class EventDetailActivity extends ActionBarActivity {
         SimpleDateFormat timeFormatter1 = new SimpleDateFormat("EEE, h:mm-", Locale.US);
         SimpleDateFormat timeFormatter2 = new SimpleDateFormat("h:mm aaa", Locale.US);
 
-        return timeFormatter1.format(startDate) + timeFormatter2.format(endDate) + " in " + room;
+        if (roomName == null || roomName.trim().length() == 0) {
+            return timeFormatter1.format(startDate) + timeFormatter2.format(endDate);
+        }
+
+        return timeFormatter1.format(startDate) + timeFormatter2.format(endDate) + " in " + roomName;
     }
 
 
