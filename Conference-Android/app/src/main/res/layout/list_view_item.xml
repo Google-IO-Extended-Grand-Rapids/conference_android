@@ -4,6 +4,18 @@
 android:orientation="horizontal" android:layout_width="match_parent"
 android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:text="Wednesday, June 25, 2014"
+        android:textColor="@color/blue"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+
     <RelativeLayout
         android:id="@+id/timeBox"
         android:layout_width="70dp"
@@ -33,6 +45,7 @@ android:layout_height="match_parent">
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="5dp"
+            android:layout_toLeftOf="@+id/scheduled"
             android:text="Volley"
             android:textSize="18sp"/>
         <TextView
@@ -40,6 +53,7 @@ android:layout_height="match_parent">
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
+            android:layout_toLeftOf="@+id/scheduled"
             android:layout_marginTop="2dp"
             android:layout_marginLeft="5dp"
             android:layout_marginBottom="10dp"
@@ -48,13 +62,13 @@ android:layout_height="match_parent">
             android:textSize="14sp"/>
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:id="@+id/scheduled"
             android:layout_marginRight="15dp"
-            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/indicator_in_schedule"/>
+            android:src="@drawable/googlestream_icon"/>
 
     </RelativeLayout>
 

@@ -1,14 +1,14 @@
-package com.example.conference_android.app.ui.activities;
+package com.sagetech.conference_android.app.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
-import com.example.conference_android.app.ConferenceApplication;
-import com.example.conference_android.app.R;
-import com.example.conference_android.app.api.ConferenceController;
-import com.example.conference_android.app.model.EventData;
+import com.sagetech.conference_android.app.ConferenceApplication;
+import com.sagetech.conference_android.app.R;
+import com.sagetech.conference_android.app.api.ConferenceController;
+import com.sagetech.conference_android.app.model.EventData;
 
 import java.util.List;
 

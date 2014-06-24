@@ -1,16 +1,17 @@
-package com.example.conference_android.app.ui.activities;
+package com.sagetech.conference_android.app.ui.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.conference_android.app.ConferenceApplication;
-import com.example.conference_android.app.R;
-import com.example.conference_android.app.api.ConferenceController;
-import com.example.conference_android.app.model.EventData;
+import com.sagetech.conference_android.app.ConferenceApplication;
+import com.sagetech.conference_android.app.R;
+import com.sagetech.conference_android.app.api.ConferenceController;
+import com.sagetech.conference_android.app.model.EventData;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,6 +29,7 @@ public class EventDetailActivity extends ActionBarActivity {
     private TextView name2;
     private TextView bio1;
     private TextView bio2;
+    private ImageView img;
     private Integer eventId;
 
     @Override
@@ -50,6 +52,7 @@ public class EventDetailActivity extends ActionBarActivity {
         this.name2 = (TextView) findViewById(R.id.name2);
         this.bio1 = (TextView) findViewById(R.id.bio1);
         this.bio2 = (TextView) findViewById(R.id.bio2);
+        this.img = (ImageView) findViewById(R.id.scheduled);
 
         EventData event = conferenceController.getEvent(eventId);
         updateScreen(event);
@@ -79,6 +82,11 @@ public class EventDetailActivity extends ActionBarActivity {
         }
         this.location.setText(formatLocation(eventData.getStart_dttm(), eventData.getEnd_dttm(), roomName));
         this.description.setText(eventData.getEvent().getDescription());
+
+        if (eventData.getEvent().getEvent_type().equals("Presentation"))
+            img.setImageResource(R.drawable.presentation_icon);
+        else if (eventData.getEvent().getEvent_type().equals("Code Lab"))
+            img.setImageResource(R.drawable.codelabs_icon);
 
     }
 

@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.conference_android.app" >
+    package="com.sagetech.conference_android.app" >
 
     <application
-        android:name="com.example.conference_android.app.ConferenceApplication"
+        android:name="com.sagetech.conference_android.app.ConferenceApplication"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:logo="@drawable/icon"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/Theme.Googleio" >
         <activity
-            android:name="com.example.conference_android.app.ui.activities.MainActivity"
+            android:name="com.sagetech.conference_android.app.ui.activities.MainActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="com.example.conference_android.app.ui.activities.SplashActivity"
+            android:name="com.sagetech.conference_android.app.ui.activities.SplashActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,14 +23,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.conference_android.app.ui.activities.EventDetailActivity"
+            android:name="com.sagetech.conference_android.app.ui.activities.EventDetailActivity"
             android:label="@string/title_activity_eventdetail"
-            android:parentActivityName="com.example.conference_android.app.ui.activities.MainActivity" >
+            android:parentActivityName="com.sagetech.conference_android.app.ui.activities.MainActivity" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.conference_android.app.MainActivity" />
+                android:value="com.sagetech.conference_android.app.MainActivity" />
 >
         </activity>
 

@@ -3,7 +3,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <fragment android:name="com.example.conference_android.app.ui.fragments.FullScheduleFragment"
+    <fragment android:name="com.sagetech.conference_android.app.ui.fragments.FullScheduleFragment"
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

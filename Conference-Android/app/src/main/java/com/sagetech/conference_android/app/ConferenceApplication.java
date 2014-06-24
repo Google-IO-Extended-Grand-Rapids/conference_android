@@ -1,8 +1,8 @@
-package com.example.conference_android.app;
+package com.sagetech.conference_android.app;
 
 import android.app.Application;
 
-import com.example.conference_android.app.api.ConferenceController;
+import com.sagetech.conference_android.app.api.ConferenceController;
 
 /**
  * Created by carlushenry on 5/28/14.

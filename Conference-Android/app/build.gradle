@@ -10,10 +10,20 @@ android {
         versionCode 1
         versionName "0.0.1"
     }
+
+    signingConfigs {
+        release {
+            storeFile file("keystore.jks")
+            storePassword "sagetech"
+            keyAlias "sagetech"
+            keyPassword "sagetech"
+        }
+    }
+
     buildTypes {
         release {
             runProguard false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
         }
     }
 }

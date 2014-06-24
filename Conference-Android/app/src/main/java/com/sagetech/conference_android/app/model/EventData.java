@@ -1,4 +1,4 @@
-package com.example.conference_android.app.model;
+package com.sagetech.conference_android.app.model;
 
 import com.google.gson.annotations.Expose;
 
@@ -9,6 +9,8 @@ import java.util.List;
  * Created by danmikita on 6/2/14.
  */
 public class EventData {
+
+    private boolean header;
 
     @Expose
     private Integer id;
@@ -79,6 +81,14 @@ public class EventData {
 
     public void setChosen_by_attendee(Boolean chosen_by_attendee) {
         this.chosen_by_attendee = chosen_by_attendee;
+    }
+
+    public boolean isHeader() {
+        return header;
+    }
+
+    public void setHeader(boolean header) {
+        this.header = header;
     }
 
     public static class Event {

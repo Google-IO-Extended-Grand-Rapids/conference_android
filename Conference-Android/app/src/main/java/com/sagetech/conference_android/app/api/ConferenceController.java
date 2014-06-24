@@ -1,6 +1,6 @@
-package com.example.conference_android.app.api;
+package com.sagetech.conference_android.app.api;
 
-import com.example.conference_android.app.model.EventData;
+import com.sagetech.conference_android.app.model.EventData;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,7 +32,34 @@ public class ConferenceController {
             }
         });
 
+        for (EventData e : eventData) {
+            e.setHeader(false);
+        }
+
+        addHeaders(eventData);
+
         return eventData;
+    }
+
+    private void addHeaders(List<EventData> eventData) {
+
+        EventData day1 = new EventData();
+        day1.setHeader(true);
+        day1.setStart_dttm("Wednesday, June 25, 2014");
+
+        EventData day2 = new EventData();
+        day2.setHeader(true);
+        day2.setStart_dttm("Thursday, June 26, 2014");
+
+        eventData.add(0, day1);
+
+        for (int i = 1; i < eventData.size(); i++) {
+            if (eventData.get(i).getStart_dttm().contains("2014-06-26")) {
+                eventData.add(i, day2);
+                break;
+            }
+        }
+
     }
 
     public EventData getEvent(Integer eventId) {

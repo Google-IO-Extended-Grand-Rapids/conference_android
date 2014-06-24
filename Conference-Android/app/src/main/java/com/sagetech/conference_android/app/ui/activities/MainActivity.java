@@ -1,10 +1,10 @@
-package com.example.conference_android.app.ui.activities;
+package com.sagetech.conference_android.app.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
-import com.example.conference_android.app.R;
+import com.sagetech.conference_android.app.R;
 
 
 public class MainActivity extends ActionBarActivity {
