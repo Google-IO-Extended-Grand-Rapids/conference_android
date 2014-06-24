@@ -16,7 +16,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         final ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("");
+        actionBar.setTitle(R.string.app_name);
     }
 
 }
