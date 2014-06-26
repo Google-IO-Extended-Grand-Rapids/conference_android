@@ -2,13 +2,14 @@ package com.sagetech.conference_android.app.model;
 
 import com.google.gson.annotations.Expose;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by danmikita on 6/2/14.
  */
-public class EventData {
+public class EventData implements Serializable {
 
     private boolean header;
 
