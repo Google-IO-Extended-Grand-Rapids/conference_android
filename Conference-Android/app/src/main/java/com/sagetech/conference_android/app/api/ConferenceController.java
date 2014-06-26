@@ -1,5 +1,7 @@
 package com.sagetech.conference_android.app.api;
 
+import android.util.Log;
+
 import com.sagetech.conference_android.app.model.EventData;
 
 import java.util.Collections;
@@ -8,9 +10,13 @@ import java.util.List;
 
 import retrofit.RestAdapter;
 import retrofit.http.GET;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.Subscription;
 
 public class ConferenceController {
-
+    private static final String TAG = "ConferenceController";
     private List<EventData> eventData;
 
     private interface ApiManagerService {
@@ -18,11 +24,27 @@ public class ConferenceController {
         List<EventData> getEvents();
     }
 
+    public Observable<List<EventData>> getEventsObservable() {
+        return Observable.create(new Observable.OnSubscribe<List<EventData>>() {
+            @Override
+            public void call(Subscriber<? super List<EventData>> subscriber) {
+                try {
+                    subscriber.onNext(getEvents());
+                    subscriber.onCompleted();
+                } catch (Exception e) {
+                    subscriber.onError(e);
+                }
+
+            }
+        });
+    }
+
     public List<EventData> getEvents() {
         final RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("https://conference-schedule-webap.herokuapp.com")
                 .build();
 
+        Log.i(TAG, "Calling the API...");
         final ApiManagerService apiManager = restAdapter.create(ApiManagerService.class);
         final List<EventData> eventData = apiManager.getEvents();
 
