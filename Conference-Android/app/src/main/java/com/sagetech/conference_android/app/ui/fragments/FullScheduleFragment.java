@@ -23,11 +23,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.observables.AndroidObservable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+
 /**
  * Created by danmikita on 5/29/14.
  */
 public class FullScheduleFragment extends ListFragment {
     private ConferenceController conferenceController;
+    private Observable<List<EventData>> cachedGetEventsObservable;
+    private EventsListAdapter eventListAdapter;
 
     public static FullScheduleFragment newInstance() {
         FullScheduleFragment fullScheduleFragment = new FullScheduleFragment();
@@ -39,8 +47,32 @@ public class FullScheduleFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         this.conferenceController = ((ConferenceApplication) getActivity().getApplication()).getConferenceController();
+        cachedGetEventsObservable = ((ConferenceApplication) getActivity().getApplication()).getCachedGetEventsObservable();
+        this.eventListAdapter = new EventsListAdapter(getActivity(), R.layout.list_view_item);
+        setListAdapter(this.eventListAdapter);
+        AndroidObservable.bindFragment(this, cachedGetEventsObservable)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<List<EventData>>() {
+                    @Override
+                    public void onCompleted() {
 
-        setListAdapter(new EventsListAdapter(getActivity(), R.layout.list_view_item, conferenceController.getEventData()));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<EventData> eventDatas) {
+                        conferenceController.setEventData(eventDatas);
+                        eventListAdapter.clear();
+                        eventListAdapter.addAll(eventDatas);
+                        eventListAdapter.notifyDataSetChanged();
+                    }
+                });
+
     }
 
     @Override
@@ -61,12 +93,10 @@ public class FullScheduleFragment extends ListFragment {
     // ***** LIST ADAPTER [START] ***** //
     private class EventsListAdapter extends ArrayAdapter<EventData> {
         private int layoutResourceId;
-        List<EventData> eventDataList;
 
-        public EventsListAdapter(Context context, int resource, List<EventData> eventDataList) {
-            super(context, resource, eventDataList);
+        public EventsListAdapter(Context context, int resource) {
+            super(context, resource);
             this.layoutResourceId = resource;
-            this.eventDataList = eventDataList;
         }
 
         @Override
@@ -81,7 +111,9 @@ public class FullScheduleFragment extends ListFragment {
             eventHolder.day = (TextView) convertView.findViewById(R.id.day);
             eventHolder.scheduled = (ImageView) convertView.findViewById(R.id.scheduled);
 
-            if (eventDataList.get(position).isHeader()) {
+            EventData currItem = getItem(position);
+
+            if (currItem.isHeader()) {
 
                 eventHolder.time.setVisibility(View.INVISIBLE);
                 eventHolder.title.setVisibility(View.INVISIBLE);
@@ -89,20 +121,20 @@ public class FullScheduleFragment extends ListFragment {
                 eventHolder.scheduled.setVisibility(View.INVISIBLE);
                 eventHolder.day.setVisibility(View.VISIBLE);
 
-                eventHolder.day.setText(eventDataList.get(position).getStart_dttm());
+                eventHolder.day.setText(currItem.getStart_dttm());
 
             } else {
-                convertView.setTag(eventDataList.get(position).getId());
+                convertView.setTag(currItem.getId());
 
-                eventHolder.time.setText(formatDate(eventDataList.get(position).getStart_dttm()));
+                eventHolder.time.setText(formatDate(currItem.getStart_dttm()));
 
-                eventHolder.title.setText(eventDataList.get(position).getEvent().getTitle());
-                if (eventDataList.get(position).getRoom() != null)
-                    eventHolder.room.setText(eventDataList.get(position).getRoom().getName());
+                eventHolder.title.setText(currItem.getEvent().getTitle());
+                if (currItem.getRoom() != null)
+                    eventHolder.room.setText(currItem.getRoom().getName());
 
-                if (eventDataList.get(position).getEvent().getEvent_type().equals("Presentation"))
+                if (currItem.getEvent().getEvent_type().equals("Presentation"))
                     eventHolder.scheduled.setImageResource(R.drawable.presentation_icon);
-                else if (eventDataList.get(position).getEvent().getEvent_type().equals("Code Lab"))
+                else if (currItem.getEvent().getEvent_type().equals("Code Lab"))
                     eventHolder.scheduled.setImageResource(R.drawable.codelabs_icon);
             }
 
