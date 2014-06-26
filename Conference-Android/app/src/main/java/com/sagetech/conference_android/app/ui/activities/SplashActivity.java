@@ -25,7 +25,6 @@ import rx.schedulers.Schedulers;
 public class SplashActivity extends ActionBarActivity {
 
     private static final String TAG = "SplashActivity";
-    private ConferenceController conferenceController;
     private Subscription subscription;
 
     @Override
@@ -33,14 +32,16 @@ public class SplashActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        conferenceController = ((ConferenceApplication) getApplication()).getConferenceController();
+        Observable<List<EventData>> cachedGetEventsObservable = ((ConferenceApplication) getApplication()).getCachedGetEventsObservable();
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        subscription = Observable.just("1")
+        subscription = AndroidObservable.bindActivity(this, cachedGetEventsObservable)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
                 .delay(5, TimeUnit.SECONDS)
-                .subscribe(new Subscriber<String>() {
+                .subscribe(new Subscriber<List<EventData>>() {
                     @Override
                     public void onCompleted() {
                         Log.i(TAG, "onCompleted");
@@ -55,7 +56,7 @@ public class SplashActivity extends ActionBarActivity {
                     }
 
                     @Override
-                    public void onNext(String s) {
+                    public void onNext(List<EventData> s) {
                         Log.i(TAG, "On Next");
                     }
                 });

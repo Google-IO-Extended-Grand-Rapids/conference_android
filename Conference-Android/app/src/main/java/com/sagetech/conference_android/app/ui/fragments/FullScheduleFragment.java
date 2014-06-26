@@ -25,6 +25,7 @@ import java.util.Locale;
 
 import rx.Observable;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.observables.AndroidObservable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -34,8 +35,7 @@ import rx.schedulers.Schedulers;
  */
 public class FullScheduleFragment extends ListFragment {
     private ConferenceController conferenceController;
-    private Observable<List<EventData>> cachedGetEventsObservable;
-    private EventsListAdapter eventListAdapter;
+    private Subscription subscription;
 
     public static FullScheduleFragment newInstance() {
         FullScheduleFragment fullScheduleFragment = new FullScheduleFragment();
@@ -47,10 +47,10 @@ public class FullScheduleFragment extends ListFragment {
         super.onCreate(savedInstanceState);
 
         this.conferenceController = ((ConferenceApplication) getActivity().getApplication()).getConferenceController();
-        cachedGetEventsObservable = ((ConferenceApplication) getActivity().getApplication()).getCachedGetEventsObservable();
-        this.eventListAdapter = new EventsListAdapter(getActivity(), R.layout.list_view_item);
-        setListAdapter(this.eventListAdapter);
-        AndroidObservable.bindFragment(this, cachedGetEventsObservable)
+        Observable<List<EventData>> cachedGetEventsObservable = ((ConferenceApplication) getActivity().getApplication()).getCachedGetEventsObservable();
+        final EventsListAdapter eventListAdapter = new EventsListAdapter(getActivity(), R.layout.list_view_item);
+        setListAdapter(eventListAdapter);
+        this.subscription = AndroidObservable.bindFragment(this, cachedGetEventsObservable)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<EventData>>() {
@@ -152,5 +152,11 @@ public class FullScheduleFragment extends ListFragment {
             SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm aaa", Locale.US);
             return timeFormatter.format(date);
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        subscription.unsubscribe();
     }
 }

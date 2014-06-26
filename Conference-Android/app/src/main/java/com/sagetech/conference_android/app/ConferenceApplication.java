@@ -8,6 +8,7 @@ import com.sagetech.conference_android.app.model.EventData;
 import java.util.List;
 
 import rx.Observable;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by carlushenry on 5/28/14.
