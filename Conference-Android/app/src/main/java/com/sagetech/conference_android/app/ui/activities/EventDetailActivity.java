@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.Locale;
 
 
-public class EventDetailActivity extends ActionBarActivity {
+public class EventDetailActivity extends InjectableActionBarActivity {
     private ConferenceController conferenceController;
 
     private TextView title;

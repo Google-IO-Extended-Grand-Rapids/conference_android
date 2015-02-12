@@ -33,7 +33,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by danmikita on 5/29/14.
  */
-public class FullScheduleFragment extends ListFragment {
+public class FullScheduleFragment extends InjectibleListFragment {
     private ConferenceController conferenceController;
     private Subscription subscription;
 

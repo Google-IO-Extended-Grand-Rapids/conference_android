@@ -22,7 +22,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class SplashActivity extends ActionBarActivity {
+public class SplashActivity extends InjectableActionBarActivity {
 
     private static final String TAG = "SplashActivity";
     private Subscription subscription;

@@ -7,7 +7,7 @@ import android.support.v7.app.ActionBarActivity;
 import com.sagetech.conference_android.app.R;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends InjectableActionBarActivity {
 
 
     @Override
