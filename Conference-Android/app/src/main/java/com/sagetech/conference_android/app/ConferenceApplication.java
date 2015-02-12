@@ -2,12 +2,15 @@ package com.sagetech.conference_android.app;
 
 import android.app.Application;
 import android.content.Context;
+import android.util.Log;
 
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.EventData;
 import com.sagetech.conference_android.app.util.ConferenceModule;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import dagger.ObjectGraph;
 import rx.Observable;
@@ -17,16 +20,14 @@ import rx.Observable;
  */
 public class ConferenceApplication extends Application {
     private ObjectGraph objectGraph;
-    private ConferenceController conferenceController;
-    private Observable<List<EventData>> cachedGetEventsObservable;
+    @Inject ConferenceController conferenceController;
+    @Inject Observable<List<EventData>> cachedGetEventsObservable;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         buildObjectGraphAndInject();
-        this.conferenceController = new ConferenceController();
-        this.cachedGetEventsObservable = conferenceController.getEventsObservable().cache();
     }
 
     public void buildObjectGraphAndInject() {
