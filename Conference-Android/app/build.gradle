@@ -12,6 +12,14 @@ android {
     }
 
     signingConfigs {
+
+        debug {
+            storeFile file("google_io_debug.jks")
+            keyAlias "google_io"
+            storePassword "googleio"
+            keyPassword "googleio"
+        }
+
         release {
             storeFile file("keystore.jks")
             storePassword "sagetech"
@@ -21,7 +29,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField "String", "API_BASE_URL", "\"http://localhost:8080/api\""
+        }
         release {
+            buildConfigField "String", "API_BASE_URL", "\"http://178.0.2.3:8080/api\""
             signingConfig signingConfigs.release
         }
     }
