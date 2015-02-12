@@ -18,9 +18,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
 
-public class EventDetailActivity extends ActionBarActivity {
-    private ConferenceController conferenceController;
+
+public class EventDetailActivity extends InjectableActionBarActivity {
+    @Inject
+    ConferenceController conferenceController;
 
     private TextView title;
     private TextView location;
@@ -42,8 +45,6 @@ public class EventDetailActivity extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         eventId = getIntent().getExtras().getInt("id");
-
-        this.conferenceController = ((ConferenceApplication) getApplication()).getConferenceController();
 
         this.title = (TextView) findViewById(R.id.title);
         this.location = (TextView) findViewById(R.id.location);

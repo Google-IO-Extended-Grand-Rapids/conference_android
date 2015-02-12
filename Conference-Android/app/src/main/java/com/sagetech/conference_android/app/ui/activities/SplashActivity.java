@@ -14,6 +14,8 @@ import com.sagetech.conference_android.app.model.EventData;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -22,17 +24,19 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class SplashActivity extends ActionBarActivity {
+public class SplashActivity extends InjectableActionBarActivity {
 
     private static final String TAG = "SplashActivity";
     private Subscription subscription;
 
+    @Inject
+    Observable<List<EventData>> cachedGetEventsObservable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
 
-        Observable<List<EventData>> cachedGetEventsObservable = ((ConferenceApplication) getApplication()).getCachedGetEventsObservable();
+        setContentView(R.layout.activity_splash);
 
         final ActionBar actionBar = getSupportActionBar();
         actionBar.hide();

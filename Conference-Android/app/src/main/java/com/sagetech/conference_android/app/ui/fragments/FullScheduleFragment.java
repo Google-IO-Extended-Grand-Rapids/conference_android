@@ -23,6 +23,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
@@ -33,8 +35,13 @@ import rx.schedulers.Schedulers;
 /**
  * Created by danmikita on 5/29/14.
  */
-public class FullScheduleFragment extends ListFragment {
-    private ConferenceController conferenceController;
+public class FullScheduleFragment extends InjectibleListFragment {
+    @Inject
+    ConferenceController conferenceController;
+
+    @Inject
+    Observable<List<EventData>> cachedGetEventsObservable;
+
     private Subscription subscription;
 
     public static FullScheduleFragment newInstance() {
@@ -46,8 +53,6 @@ public class FullScheduleFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.conferenceController = ((ConferenceApplication) getActivity().getApplication()).getConferenceController();
-        Observable<List<EventData>> cachedGetEventsObservable = ((ConferenceApplication) getActivity().getApplication()).getCachedGetEventsObservable();
         final EventsListAdapter eventListAdapter = new EventsListAdapter(getActivity(), R.layout.list_view_item);
         setListAdapter(eventListAdapter);
         this.subscription = AndroidObservable.bindFragment(this, cachedGetEventsObservable)
