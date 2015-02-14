@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 
@@ -59,6 +60,8 @@ public class EventDetailActivity extends InjectableActionBarActivity {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.app_name);
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        ButterKnife.inject(this);
 
         eventId = getIntent().getExtras().getInt("id");
 
