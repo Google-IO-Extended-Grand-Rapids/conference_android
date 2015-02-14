@@ -36,21 +36,26 @@ android {
 
         release {
             storeFile file("keystore.jks")
-            storePassword "sagetech"
-            keyAlias "sagetech"
-            keyPassword "sagetech"
         }
     }
 
     buildTypes {
         debug {
             buildConfigField "String", "API_BASE_URL", "\"http://localhost:8080/api\""
+            signingConfig signingConfigs.debug
         }
         release {
             buildConfigField "String", "API_BASE_URL", "\"http://178.0.2.3:8080/api\""
             signingConfig signingConfigs.release
         }
     }
+}
+
+def runTasks = gradle.startParameter.taskNames
+if ('assemble' in runTasks || 'assembleRelease' in runTasks) {
+    android.signingConfigs.release.storePassword = System.console().readPassword('\nKeyStore Password: ')
+    android.signingConfigs.release.keyAlias = System.console().readPassword('Alias Name: ')
+    android.signingConfigs.release.keyPassword = System.console().readPassword('Alias Password: ')
 }
 
 dependencies {
