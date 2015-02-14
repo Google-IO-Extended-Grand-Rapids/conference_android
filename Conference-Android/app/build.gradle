@@ -54,8 +54,9 @@ android {
 
 def runTasks = gradle.startParameter.taskNames
 if ('assemble' in runTasks || 'assembleRelease' in runTasks) {
-    android.signingConfigs.release.storePassword = System.console().readPassword('\nKeyStore Password: ')
-    android.signingConfigs.release.keyPassword = System.console().readPassword('Alias Password: ')
+    def passwd = new String(System.console().readPassword('\nKeyStore Password: '))
+    android.signingConfigs.release.storePassword = passwd
+    android.signingConfigs.release.keyPassword = passwd
 }
 
 dependencies {
