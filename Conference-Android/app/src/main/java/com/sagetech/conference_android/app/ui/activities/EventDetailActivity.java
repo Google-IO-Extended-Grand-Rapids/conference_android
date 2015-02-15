@@ -3,12 +3,10 @@ package com.sagetech.conference_android.app.ui.activities;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sagetech.conference_android.app.ConferenceApplication;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.EventData;
@@ -20,19 +18,38 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+
 
 public class EventDetailActivity extends InjectableActionBarActivity {
     @Inject
     ConferenceController conferenceController;
 
-    private TextView title;
-    private TextView location;
-    private TextView description;
-    private TextView name1;
-    private TextView name2;
-    private TextView bio1;
-    private TextView bio2;
-    private ImageView img;
+    @InjectView(R.id.title)
+    TextView title;
+
+    @InjectView(R.id.location)
+    TextView location;
+
+    @InjectView(R.id.description)
+    TextView description;
+
+    @InjectView(R.id.name1)
+    TextView name1;
+
+    @InjectView(R.id.name2)
+    TextView name2;
+
+    @InjectView(R.id.bio1)
+    TextView bio1;
+
+    @InjectView(R.id.bio2)
+    TextView bio2;
+
+    @InjectView(R.id.scheduled)
+    ImageView img;
+
     private Integer eventId;
 
     @Override
@@ -44,20 +61,12 @@ public class EventDetailActivity extends InjectableActionBarActivity {
         actionBar.setTitle(R.string.app_name);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        eventId = getIntent().getExtras().getInt("id");
+        ButterKnife.inject(this);
 
-        this.title = (TextView) findViewById(R.id.title);
-        this.location = (TextView) findViewById(R.id.location);
-        this.description = (TextView) findViewById(R.id.description);
-        this.name1 = (TextView) findViewById(R.id.name1);
-        this.name2 = (TextView) findViewById(R.id.name2);
-        this.bio1 = (TextView) findViewById(R.id.bio1);
-        this.bio2 = (TextView) findViewById(R.id.bio2);
-        this.img = (ImageView) findViewById(R.id.scheduled);
+        eventId = getIntent().getExtras().getInt("id");
 
         EventData event = conferenceController.getEvent(eventId);
         updateScreen(event);
-
     }
 
     private void updateScreen(EventData eventData) {
@@ -69,7 +78,7 @@ public class EventDetailActivity extends InjectableActionBarActivity {
             this.bio1.setText(eventData.getEvent_leaders().get(0).getBiography());
             this.name1.setText(name);
 
-            if(eventData.getEvent_leaders().size() > 1) {
+            if (eventData.getEvent_leaders().size() > 1) {
                 name2 = eventData.getEvent_leaders().get(1).getFirst_name() + " " + eventData.getEvent_leaders().get(1).getLast_name();
                 this.bio2.setText(eventData.getEvent_leaders().get(1).getBiography());
                 this.name2.setText(name2);
