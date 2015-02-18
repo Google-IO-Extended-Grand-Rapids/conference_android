@@ -69,7 +69,6 @@ public class EventDetailActivity extends InjectableActionBarActivity {
         EventData event = conferenceController.getEvent(eventId);
         updateScreen(event);
 
-        Timber.tag("EventDetailActivity - LifeCycle");
         Timber.d("onCreate");
     }
 
