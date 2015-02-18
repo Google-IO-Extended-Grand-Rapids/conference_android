@@ -20,6 +20,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import timber.log.Timber;
 
 
 public class EventDetailActivity extends InjectableActionBarActivity {
@@ -67,6 +68,8 @@ public class EventDetailActivity extends InjectableActionBarActivity {
 
         EventData event = conferenceController.getEvent(eventId);
         updateScreen(event);
+
+        Timber.d("onCreate");
     }
 
     private void updateScreen(EventData eventData) {

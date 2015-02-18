@@ -2,7 +2,6 @@ package com.sagetech.conference_android.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.EventData;
@@ -14,6 +13,10 @@ import javax.inject.Inject;
 
 import dagger.ObjectGraph;
 import rx.Observable;
+import timber.log.Timber;
+
+import static timber.log.Timber.DebugTree;
+import static timber.log.Timber.HollowTree;
 
 /**
  * Created by carlushenry on 5/28/14.
@@ -28,6 +31,12 @@ public class ConferenceApplication extends Application {
         super.onCreate();
 
         buildObjectGraphAndInject();
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new DebugTree());
+        } else {
+            Timber.plant(new HollowTree());
+        }
     }
 
     public void buildObjectGraphAndInject() {
