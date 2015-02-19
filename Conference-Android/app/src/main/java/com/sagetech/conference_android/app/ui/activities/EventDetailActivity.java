@@ -57,6 +57,8 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
 
     private Integer eventId;
 
+    EventDetailActivityPresenter presenter = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +72,7 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
         Timber.d("onCreate");
 
         eventId = getIntent().getExtras().getInt("id");
-        EventDetailActivityPresenter presenter = new EventDetailActivityPresenter(this, conferenceController, eventId);
+        presenter = new EventDetailActivityPresenter(this, conferenceController, eventId);
         presenter.initialize();
     }
 
@@ -110,6 +112,12 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
         }
 
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
     }
 
     @Override

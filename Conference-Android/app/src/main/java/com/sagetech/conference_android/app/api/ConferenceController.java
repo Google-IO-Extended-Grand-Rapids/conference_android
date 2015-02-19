@@ -1,10 +1,13 @@
 package com.sagetech.conference_android.app.api;
 
+import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.EventData;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import retrofit.RestAdapter;
 import retrofit.http.GET;
@@ -13,6 +16,13 @@ import rx.Subscriber;
 import timber.log.Timber;
 
 public class ConferenceController {
+
+    private final ConferenceApi conferenceApi;
+
+    public ConferenceController(ConferenceApi conferenceApi) {
+        this.conferenceApi = conferenceApi;
+    }
+
     private List<EventData> eventData;
 
     private interface ApiManagerService {
@@ -33,6 +43,10 @@ public class ConferenceController {
 
             }
         });
+    }
+
+    public Observable<ConferenceSessionData> getConferenceSessionDataById(Long id) {
+        return conferenceApi.getConfereneSessionById(id);
     }
 
     public List<EventData> getEvents() {

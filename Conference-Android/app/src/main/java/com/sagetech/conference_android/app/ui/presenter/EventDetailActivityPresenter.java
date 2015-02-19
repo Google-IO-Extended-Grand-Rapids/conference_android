@@ -1,14 +1,15 @@
 package com.sagetech.conference_android.app.ui.presenter;
 
 import com.sagetech.conference_android.app.api.ConferenceController;
+import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.EventData;
 import com.sagetech.conference_android.app.ui.viewModel.EventDetailView;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by carlushenry on 2/19/15.
@@ -19,6 +20,8 @@ public class EventDetailActivityPresenter {
     private final ConferenceController conferenceController;
     private final Integer eventId;
     private final EventDetailViewBuilder eventDetailViewBuilder;
+    private Subscription subscription;
+
 
     public EventDetailActivityPresenter(IEventDetailActivity eventDetailActivity, ConferenceController conferenceController, Integer eventId) {
         this.eventDetailActivity = eventDetailActivity;
@@ -28,9 +31,41 @@ public class EventDetailActivityPresenter {
     }
 
     public void initialize() {
+        Observable<ConferenceSessionData> conferenceSessionObservable = conferenceController.getConferenceSessionDataById(51L);
+        subscription = conferenceSessionObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new PopulateEventDetailViewSubscriber());
+    }
+
+    private void populateConferenceSessionData(ConferenceSessionData conferenceSessionData) {
         EventData event = conferenceController.getEvent(eventId);
         EventDetailView eventDetailView = eventDetailViewBuilder.toEventDetailView(event);
         eventDetailActivity.populateWithEventDetailView(eventDetailView);
+    }
+
+    public void onDestroy() {
+        subscription.unsubscribe();
+    }
+
+
+    private class PopulateEventDetailViewSubscriber extends Subscriber<ConferenceSessionData> {
+        private ConferenceSessionData conferenceSessionData;
+
+        @Override
+        public void onCompleted() {
+            populateConferenceSessionData(conferenceSessionData);
+        }
+
+        @Override
+        public void onError(Throwable e) {
+
+        }
+
+        @Override
+        public void onNext(ConferenceSessionData conferenceSessionData) {
+            this.conferenceSessionData = conferenceSessionData;
+        }
     }
 
 }
