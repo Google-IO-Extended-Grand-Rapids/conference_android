@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.EventData;
+import com.sagetech.conference_android.app.ui.presenter.EventDetailActivityPresenter;
+import com.sagetech.conference_android.app.ui.presenter.IEventDetailActivity;
+import com.sagetech.conference_android.app.ui.viewModel.EventDetailView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,7 +26,7 @@ import butterknife.InjectView;
 import timber.log.Timber;
 
 
-public class EventDetailActivity extends InjectableActionBarActivity {
+public class EventDetailActivity extends InjectableActionBarActivity implements IEventDetailActivity {
     @Inject
     ConferenceController conferenceController;
 
@@ -63,13 +66,11 @@ public class EventDetailActivity extends InjectableActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.inject(this);
+        Timber.d("onCreate");
 
         eventId = getIntent().getExtras().getInt("id");
-
-        EventData event = conferenceController.getEvent(eventId);
-        updateScreen(event);
-
-        Timber.d("onCreate");
+        EventDetailActivityPresenter presenter = new EventDetailActivityPresenter(this, conferenceController, eventId);
+        presenter.populateScreen();
     }
 
     private void updateScreen(EventData eventData) {
@@ -133,5 +134,10 @@ public class EventDetailActivity extends InjectableActionBarActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void populateWithEventDetailView(EventDetailView eventDetailView) {
+
     }
 }
