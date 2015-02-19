@@ -9,6 +9,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -31,11 +32,21 @@ public class EventDetailActivityPresenter {
     }
 
     public void initialize() {
-        Observable<ConferenceSessionData> conferenceSessionObservable = conferenceController.getConferenceSessionDataById(51L)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
+        Observable<ConferenceSessionData> conferenceSessionObservable = conferenceController.getConferenceSessionDataById(51L);
+        conferenceSessionObservable.flatMap(new Func1<ConferenceSessionData, Observable<?>>() {
+            @Override
+            public Observable<?> call(ConferenceSessionData conferenceSessionData) {
+                // create observable for presenter data
+                // create observable for room data
+
+                // combine both of these observables (probably with zip or flatmap) http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/
+                return null;
+            }
+        });
 
         subscription = conferenceSessionObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new PopulateEventDetailViewSubscriber());
     }
 
