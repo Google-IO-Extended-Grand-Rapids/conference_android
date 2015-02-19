@@ -4,15 +4,16 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.google.common.collect.Lists;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.model.ConferenceData;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -38,10 +39,13 @@ public class ConferencesActivity extends ActionBarActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        //TODO: stubbing in for now
-        mAdapter = new ConferencesAdapter(Lists.newArrayList(new ConferenceData()));
+        //TODO: stubbing in an empty  for now
+        ConferenceData data = new ConferenceData();
+        data.setName("TEST CONFERENCE");
+        List<ConferenceData> datas = new ArrayList<ConferenceData>();
+        datas.add(data);
+        mAdapter = new ConferencesAdapter(datas);
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
 
@@ -74,8 +78,8 @@ public class ConferencesActivity extends ActionBarActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
-            public TextView mTextView;
-            public ViewHolder(TextView v) {
+            public View mTextView;
+            public ViewHolder(View v) {
                 super(v);
                 mTextView = v;
             }
@@ -87,7 +91,11 @@ public class ConferencesActivity extends ActionBarActivity {
 
         @Override
         public ConferencesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return null;
+            View v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.conference_list_view_item, parent, false);
+
+            ViewHolder vh = new ViewHolder(v);
+            return vh;
         }
 
         @Override
