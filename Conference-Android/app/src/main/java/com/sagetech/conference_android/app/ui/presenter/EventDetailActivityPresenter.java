@@ -39,8 +39,7 @@ public class EventDetailActivityPresenter {
     }
 
     private void populateConferenceSessionData(ConferenceSessionData conferenceSessionData) {
-        EventData event = conferenceController.getEvent(eventId);
-        EventDetailView eventDetailView = eventDetailViewBuilder.toEventDetailView(event);
+        EventDetailView eventDetailView = eventDetailViewBuilder.toEventDetailView(conferenceSessionData);
         eventDetailActivity.populateWithEventDetailView(eventDetailView);
     }
 
