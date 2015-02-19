@@ -2,6 +2,7 @@ package com.sagetech.conference_android.app.api;
 
 import android.util.Log;
 
+import com.sagetech.conference_android.app.model.ConferenceData;
 import com.sagetech.conference_android.app.model.EventData;
 
 import java.util.Collections;
@@ -11,18 +12,27 @@ import java.util.List;
 import retrofit.RestAdapter;
 import retrofit.http.GET;
 import rx.Observable;
-import rx.Observer;
 import rx.Subscriber;
-import rx.Subscription;
 
 public class ConferenceController {
     private static final String TAG = "ConferenceController";
+    private static final RestAdapter apiRestAdapter = new RestAdapter.Builder()
+            .setEndpoint("http://104.236.204.59:8080/api")
+            .build();
+
     private List<EventData> eventData;
+    private List<ConferenceData> conferenceData;
+
+    private interface  ApiConferenceManagerService {
+        @GET("/conference")
+        List<ConferenceData> getConferenceData();
+    }
 
     private interface ApiManagerService {
         @GET("/events.json")
         List<EventData> getEvents();
     }
+
 
     public Observable<List<EventData>> getEventsObservable() {
         return Observable.create(new Observable.OnSubscribe<List<EventData>>() {
@@ -37,6 +47,13 @@ public class ConferenceController {
 
             }
         });
+    }
+
+    public List<ConferenceData> getConferences() {
+        final ApiConferenceManagerService conferenceApi = apiRestAdapter.create(ApiConferenceManagerService.class);
+        final List<ConferenceData> conferenceData = conferenceApi.getConferenceData();
+
+        return conferenceData;
     }
 
     public List<EventData> getEvents() {

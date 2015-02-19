@@ -69,6 +69,6 @@ dependencies {
     provided 'com.squareup.dagger:dagger-compiler:1.2.2'
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.jakewharton.timber:timber:2.5.1'
-
+    compile 'com.android.support:recyclerview-v7:21.0.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
