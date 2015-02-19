@@ -17,6 +17,7 @@ import com.sagetech.conference_android.app.ui.viewModel.EventDetailView;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import javax.inject.Inject;
@@ -70,8 +71,59 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
 
         eventId = getIntent().getExtras().getInt("id");
         EventDetailActivityPresenter presenter = new EventDetailActivityPresenter(this, conferenceController, eventId);
-        presenter.populateScreen();
+        presenter.initialize();
     }
+
+    @Override
+    public void populateWithEventDetailView(EventDetailView eventDetailView) {
+        populatePresenters(eventDetailView.getPresenters());
+        populateEventInfo(eventDetailView);
+
+    }
+
+    private void populatePresenters(List<EventDetailView.EventDetailPresenterView> presenters) {
+        if (presenters == null || presenters.isEmpty()) {
+            return;
+        }
+        // at most, we can only have two presenters.  Since we are not using a list view
+        // we have to explicitly set the values
+        for (i=0; i < presenters.size(); i++) {
+            EventDetailView.EventDetailPresenterView currPresenter = presenters.get(i);
+            TextView bio = (i == 0 ? bio1 : bio2);
+            TextView name = (i == 0 ? name1 : name2);
+
+            bio.setText(currPresenter.getBiography());
+            name.setText(currPresenter.getFullName());
+        }
+    }
+
+
+    private void populateEventInfo(EventDetailView eventDetailView) {
+        this.title.setText(eventDetailView.getTitle());
+        this.location.setText(eventDetailView.getLocationAndStartTime());
+        this.description.setText(eventDetailView.getDescription());
+
+        if (EventDetailView.EventType.PRESENTATION == eventDetailView.getEventType()) {
+            img.setImageResource(R.drawable.presentation_icon);
+        } else if (EventDetailView.EventType.CODE_LABS == eventDetailView.getEventType()) {
+            img.setImageResource(R.drawable.codelabs_icon);
+        }
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+/*
 
     private void updateScreen(EventData eventData) {
 
@@ -123,21 +175,6 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
 
         return timeFormatter1.format(startDate) + timeFormatter2.format(endDate) + " in " + roomName;
     }
+*/
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void populateWithEventDetailView(EventDetailView eventDetailView) {
-
-    }
 }

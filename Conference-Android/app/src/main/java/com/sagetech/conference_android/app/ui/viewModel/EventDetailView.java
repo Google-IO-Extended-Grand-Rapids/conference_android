@@ -10,7 +10,7 @@ import java.util.Locale;
  */
 public class EventDetailView {
 
-    private enum EventType {
+    public enum EventType {
         PRESENTATION, CODE_LABS
     }
 
@@ -22,7 +22,7 @@ public class EventDetailView {
     private Date endDttm;
     private EventType eventType;
 
-    private String getLocationAndStartTime() {
+    public String getLocationAndStartTime() {
         SimpleDateFormat timeFormatter1 = new SimpleDateFormat("EEE, h:mm-", Locale.US);
         SimpleDateFormat timeFormatter2 = new SimpleDateFormat("h:mm aaa", Locale.US);
 
