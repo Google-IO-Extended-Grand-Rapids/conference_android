@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.model.ConferenceData;
@@ -41,9 +42,15 @@ public class ConferencesActivity extends ActionBarActivity {
 
         //TODO: stubbing in an empty  for now
         ConferenceData data = new ConferenceData();
-        data.setName("TEST CONFERENCE");
+        data.setName("TEST CONFERENCE 1");
+
+        ConferenceData data2 = new ConferenceData();
+        data2.setName("TEST CONFERENCE 2");
+
+
         List<ConferenceData> datas = new ArrayList<ConferenceData>();
         datas.add(data);
+        datas.add(data2);
         mAdapter = new ConferencesAdapter(datas);
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -100,7 +107,9 @@ public class ConferencesActivity extends ActionBarActivity {
 
         @Override
         public void onBindViewHolder(ConferencesAdapter.ViewHolder holder, int position) {
+            TextView txt = (TextView)holder.itemView.findViewById(R.id.name);
 
+            txt.setText(conferenceDatas.get(position).getName());
         }
 
         @Override
