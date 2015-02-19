@@ -13,7 +13,6 @@ import rx.Subscriber;
 import timber.log.Timber;
 
 public class ConferenceController {
-    private static final String TAG = "ConferenceController";
     private List<EventData> eventData;
 
     private interface ApiManagerService {
