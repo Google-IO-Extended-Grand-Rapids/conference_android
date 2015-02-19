@@ -31,10 +31,11 @@ public class EventDetailActivityPresenter {
     }
 
     public void initialize() {
-        Observable<ConferenceSessionData> conferenceSessionObservable = conferenceController.getConferenceSessionDataById(51L);
-        subscription = conferenceSessionObservable
+        Observable<ConferenceSessionData> conferenceSessionObservable = conferenceController.getConferenceSessionDataById(51L)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread());
+
+        subscription = conferenceSessionObservable
                 .subscribe(new PopulateEventDetailViewSubscriber());
     }
 
