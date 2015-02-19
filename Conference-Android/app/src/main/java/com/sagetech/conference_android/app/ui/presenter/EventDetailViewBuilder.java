@@ -1,11 +1,13 @@
 package com.sagetech.conference_android.app.ui.presenter;
 
+import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.EventData;
 import com.sagetech.conference_android.app.ui.viewModel.EventDetailView;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -14,18 +16,24 @@ import java.util.List;
  */
 public class EventDetailViewBuilder {
 
-    public EventDetailView toEventDetailView(EventData eventData) {
+    public EventDetailView toEventDetailView(ConferenceSessionData eventData) {
         EventDetailView dto = new EventDetailView();
-        EventData.Event event = eventData.getEvent();
-        dto.setDescription(event.getDescription());
-        dto.setEndDttm(toDate(eventData.getEnd_dttm()));
-        dto.setEventType(toEventType(event));
-        dto.setPresenters(toPresenters(eventData));
-        dto.setRoomName((eventData.getRoom() == null ? null : eventData.getRoom().getName()));
-        dto.setStartDttm(toDate(eventData.getStart_dttm()));
-        dto.setTitle(event.getTitle());
+        dto.setDescription(eventData.getFullDesc());
+        dto.setStartDttm(eventData.getStartDttm());
+        dto.setEndDttm(addMinutes(dto.getStartDttm(), eventData.getDurationMinutes()));
+        dto.setTitle(eventData.getName());
+        dto.setPresenters(null); // TODO
+        dto.setEventType(null); // TODO
+        dto.setRoomName(null); // TODO
 
         return dto;
+    }
+
+    private Date addMinutes(Date date, Integer durationMinutes) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.add(Calendar.MINUTE, durationMinutes);
+        return cal.getTime();
     }
 
     private List<EventDetailView.EventDetailPresenterView> toPresenters(EventData eventData) {
