@@ -2,16 +2,18 @@ package com.sagetech.conference_android.app.ui.presenter;
 
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
-import com.sagetech.conference_android.app.model.EventData;
 import com.sagetech.conference_android.app.model.PresenterData;
 import com.sagetech.conference_android.app.model.RoomData;
 import com.sagetech.conference_android.app.ui.viewModel.EventDetailView;
+
+import java.util.List;
 
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
+import rx.functions.Func3;
 import rx.schedulers.Schedulers;
 
 /**
@@ -35,15 +37,13 @@ public class EventDetailActivityPresenter {
 
     public void initialize() {
 
-
-        Observable<EventDetailView> eventDetailViewObservable = null;
-
-        //A
-        Observable<ConferenceSessionData> conferenceSessionObservable =
-                conferenceController.getConferenceSessionDataById(51L);
+        // A - we only want to call this data one time...therefore we are caching
+        final Observable<ConferenceSessionData> conferenceSessionObservable =
+                conferenceController.getConferenceSessionDataById(51L).cache();
 
 
-        Observable<PresenterData> presenterObservable =
+        // B - retrieve all of the presenters for this
+        Observable<List<PresenterData>> presenterObservable =
                 conferenceSessionObservable.flatMap(new Func1<ConferenceSessionData, Observable<Long>>() {
                     @Override
                     public Observable<Long> call(ConferenceSessionData conferenceSessionData) {
@@ -54,8 +54,9 @@ public class EventDetailActivityPresenter {
                     public Observable<PresenterData> call(Long presenterId) {
                         return conferenceController.getPresenterById(presenterId);
                     }
-                });
+                }).toList();
 
+        // C - retrieve the specific room
         Observable<RoomData> roomDataObservable =
                 conferenceSessionObservable.flatMap(new Func1<ConferenceSessionData, Observable<RoomData>>() {
                     @Override
@@ -64,14 +65,9 @@ public class EventDetailActivityPresenter {
                     }
                 });
 
-
-        conferenceSessionObservable.flatMap(new Func1<ConferenceSessionData, Observable<?>>() {
+        Observable<EventDetailView> eventDetailViewObservable = Observable.zip(conferenceSessionObservable, presenterObservable, roomDataObservable, new Func3<ConferenceSessionData, List<PresenterData>, RoomData, EventDetailView>() {
             @Override
-            public Observable<?> call(ConferenceSessionData conferenceSessionData) {
-                // create observable for presenter data
-                // create observable for room data
-
-                // combine both of these observables (probably with zip or flatmap) http://blog.danlew.net/2014/09/22/grokking-rxjava-part-2/
+            public EventDetailView call(ConferenceSessionData confSessionData, List<PresenterData> presentDataList, RoomData roomData) {
                 return null;
             }
         });
