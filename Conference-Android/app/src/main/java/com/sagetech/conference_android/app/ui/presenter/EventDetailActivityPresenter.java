@@ -3,6 +3,8 @@ package com.sagetech.conference_android.app.ui.presenter;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.EventData;
+import com.sagetech.conference_android.app.model.PresenterData;
+import com.sagetech.conference_android.app.model.RoomData;
 import com.sagetech.conference_android.app.ui.viewModel.EventDetailView;
 
 import rx.Observable;
@@ -32,7 +34,37 @@ public class EventDetailActivityPresenter {
     }
 
     public void initialize() {
-        Observable<ConferenceSessionData> conferenceSessionObservable = conferenceController.getConferenceSessionDataById(51L);
+
+
+        Observable<EventDetailView> eventDetailViewObservable = null;
+
+        //A
+        Observable<ConferenceSessionData> conferenceSessionObservable =
+                conferenceController.getConferenceSessionDataById(51L);
+
+
+        Observable<PresenterData> presenterObservable =
+                conferenceSessionObservable.flatMap(new Func1<ConferenceSessionData, Observable<Long>>() {
+                    @Override
+                    public Observable<Long> call(ConferenceSessionData conferenceSessionData) {
+                        return Observable.from(conferenceSessionData.getPresenterIds());
+                    }
+                }).flatMap(new Func1<Long, Observable<PresenterData>>() {
+                    @Override
+                    public Observable<PresenterData> call(Long presenterId) {
+                        return conferenceController.getPresenterById(presenterId);
+                    }
+                });
+
+        Observable<RoomData> roomDataObservable =
+                conferenceSessionObservable.flatMap(new Func1<ConferenceSessionData, Observable<RoomData>>() {
+                    @Override
+                    public Observable<RoomData> call(ConferenceSessionData conferenceSessionData) {
+                        return conferenceController.getRoomById(conferenceSessionData.getRoomId());
+                    }
+                });
+
+
         conferenceSessionObservable.flatMap(new Func1<ConferenceSessionData, Observable<?>>() {
             @Override
             public Observable<?> call(ConferenceSessionData conferenceSessionData) {
