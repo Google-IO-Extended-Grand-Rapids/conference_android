@@ -15,6 +15,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.functions.Func3;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by carlushenry on 2/19/15.
@@ -61,50 +62,46 @@ public class EventDetailActivityPresenter {
                 conferenceSessionObservable.flatMap(new Func1<ConferenceSessionData, Observable<RoomData>>() {
                     @Override
                     public Observable<RoomData> call(ConferenceSessionData conferenceSessionData) {
-                        return conferenceController.getRoomById(conferenceSessionData.getRoomId());
+                        try {
+//                            return conferenceController.getRoomById(conferenceSessionData.getRoomId());
+                            Timber.i("Starting...");
+                        } catch (Exception e) {
+                            Timber.e(String.format("Error occurred finding room: %d", conferenceSessionData.getRoomId()), e);
+                        }
+                        return Observable.just(new RoomData());
                     }
                 });
 
         Observable<EventDetailView> eventDetailViewObservable = Observable.zip(conferenceSessionObservable, presenterObservable, roomDataObservable, new Func3<ConferenceSessionData, List<PresenterData>, RoomData, EventDetailView>() {
             @Override
-            public EventDetailView call(ConferenceSessionData confSessionData, List<PresenterData> presentDataList, RoomData roomData) {
-                return null;
+            public EventDetailView call(ConferenceSessionData confSessionData, List<PresenterData> presenterDataList, RoomData roomData) {
+                return eventDetailViewBuilder.toEventDetailView(confSessionData, presenterDataList, roomData);
             }
         });
 
-        subscription = conferenceSessionObservable
+        subscription = eventDetailViewObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new PopulateEventDetailViewSubscriber());
-    }
+                .subscribe(new Subscriber<EventDetailView>() {
+                    @Override
+                    public void onCompleted() {
 
-    private void populateConferenceSessionData(ConferenceSessionData conferenceSessionData) {
-        EventDetailView eventDetailView = eventDetailViewBuilder.toEventDetailView(conferenceSessionData);
-        eventDetailActivity.populateWithEventDetailView(eventDetailView);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.d("Error occurred...");
+                    }
+
+                    @Override
+                    public void onNext(EventDetailView eventDetailView) {
+                        eventDetailActivity.populateWithEventDetailView(eventDetailView);
+                    }
+                });
     }
 
     public void onDestroy() {
         subscription.unsubscribe();
-    }
-
-
-    private class PopulateEventDetailViewSubscriber extends Subscriber<ConferenceSessionData> {
-        private ConferenceSessionData conferenceSessionData;
-
-        @Override
-        public void onCompleted() {
-            populateConferenceSessionData(conferenceSessionData);
-        }
-
-        @Override
-        public void onError(Throwable e) {
-
-        }
-
-        @Override
-        public void onNext(ConferenceSessionData conferenceSessionData) {
-            this.conferenceSessionData = conferenceSessionData;
-        }
     }
 
 }

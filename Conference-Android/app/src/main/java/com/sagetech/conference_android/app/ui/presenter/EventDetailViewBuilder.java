@@ -2,6 +2,8 @@ package com.sagetech.conference_android.app.ui.presenter;
 
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.EventData;
+import com.sagetech.conference_android.app.model.PresenterData;
+import com.sagetech.conference_android.app.model.RoomData;
 import com.sagetech.conference_android.app.ui.viewModel.EventDetailView;
 
 import java.text.ParsePosition;
@@ -16,7 +18,7 @@ import java.util.List;
  */
 public class EventDetailViewBuilder {
 
-    public EventDetailView toEventDetailView(ConferenceSessionData eventData) {
+    public EventDetailView toEventDetailView(ConferenceSessionData eventData, List<PresenterData> presenterDataList, RoomData roomData) {
         EventDetailView dto = new EventDetailView();
         dto.setDescription(eventData.getFullDesc());
         dto.setStartDttm(eventData.getStartDttm());
