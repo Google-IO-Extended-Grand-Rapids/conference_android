@@ -58,6 +58,10 @@ public class ConferenceController {
         return conferenceApi.getConferenceSessionById(id);
     }
 
+    public Observable<List<ConferenceSessionData>> getConferenceSessionsById(Long conferenceId) {
+        return conferenceApi.getConferenceSessionsById(conferenceId);
+    }
+
     public Observable<PresenterData> getPresenterById(Long id) {
         return conferenceApi.getPresenterById(id);
     }
