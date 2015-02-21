@@ -14,6 +14,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.functions.Func3;
+import rx.observables.BlockingObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -37,8 +38,33 @@ public class EventDetailActivityPresenter {
     }
 
     public void initialize() {
+        Observable<EventDetailView> eventDetailViewObservable = createEventDetailViewObservable(eventId);
 
+
+        subscription = eventDetailViewObservable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<EventDetailView>() {
+                    @Override
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Timber.d("Error occurred...");
+                    }
+
+                    @Override
+                    public void onNext(EventDetailView eventDetailView) {
+                        eventDetailActivity.populateWithEventDetailView(eventDetailView);
+                    }
+                });
+
+    }
+
+    private Observable<EventDetailView> createEventDetailViewObservable(Integer eventId) {
         // A - we only want to call this data one time...therefore we are caching
+        // FIXME this should use eventId, but we have to wait until we are being passed valid values.
         final Observable<ConferenceSessionData> conferenceSessionObservable =
                 conferenceController.getConferenceSessionDataById(51L).cache();
 
@@ -77,32 +103,13 @@ public class EventDetailActivityPresenter {
                     }
                 });
 
-        Observable<EventDetailView> eventDetailViewObservable = Observable.zip(conferenceSessionObservable, presenterObservable, roomDataObservable, new Func3<ConferenceSessionData, List<PresenterData>, RoomData, EventDetailView>() {
+        // Combine all of the observers results together into one EventDetailView
+        return Observable.zip(conferenceSessionObservable, presenterObservable, roomDataObservable, new Func3<ConferenceSessionData, List<PresenterData>, RoomData, EventDetailView>() {
             @Override
             public EventDetailView call(ConferenceSessionData confSessionData, List<PresenterData> presenterDataList, RoomData roomData) {
                 return eventDetailViewBuilder.toEventDetailView(confSessionData, presenterDataList, roomData);
             }
         });
-
-        subscription = eventDetailViewObservable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<EventDetailView>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Timber.d("Error occurred...");
-                    }
-
-                    @Override
-                    public void onNext(EventDetailView eventDetailView) {
-                        eventDetailActivity.populateWithEventDetailView(eventDetailView);
-                    }
-                });
     }
 
     public void onDestroy() {
