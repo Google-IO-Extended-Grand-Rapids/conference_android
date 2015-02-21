@@ -13,7 +13,7 @@ import rx.Observable;
  */
 public interface ConferenceApi {
     @GET("/api/conferenceSession/{id}")
-    public Observable<ConferenceSessionData> getConfereneSessionById(@Path("id") Long id);
+    public Observable<ConferenceSessionData> getConferenceSessionById(@Path("id") Long id);
 
     @GET("/api/presenter/{id}")
     Observable<PresenterData> getPresenterById(@Path("id") Long id);
