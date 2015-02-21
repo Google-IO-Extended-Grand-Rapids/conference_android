@@ -1,0 +1,53 @@
+package com.sagetech.conference_android.app.ui.presenter;
+
+import com.sagetech.conference_android.app.api.ConferenceController;
+import com.sagetech.conference_android.app.model.ConferenceData;
+
+import java.util.List;
+
+import rx.Observable;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
+import timber.log.Timber;
+
+/**
+ * Created by jrobertson on 2/21/15.
+ */
+public class ConferenceListActivityPresenter {
+
+    private ConferenceController conferenceController;
+    private Subscription subscription;
+    private IConferenceListActivity conferenceListActivity;
+
+    public ConferenceListActivityPresenter(ConferenceController conferenceController, IConferenceListActivity activity) {
+        this.conferenceController = conferenceController;
+        this.conferenceListActivity = activity;
+    }
+
+    public void initialize() {
+
+        Observable<List<ConferenceData>> conferenceDataObservable = conferenceController.getConferencesData();
+
+        subscription = conferenceDataObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<List<ConferenceData>>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Timber.d("Error occurred...");
+
+            }
+
+            @Override
+            public void onNext(List<ConferenceData> conferenceDatas) {
+                conferenceListActivity.populateConferences(conferenceDatas);
+
+            }
+        });
+
+    }
+}

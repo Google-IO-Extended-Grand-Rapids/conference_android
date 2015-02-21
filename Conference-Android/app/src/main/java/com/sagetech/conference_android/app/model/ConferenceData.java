@@ -6,8 +6,8 @@ package com.sagetech.conference_android.app.model;
 public class ConferenceData {
     private Integer id;
     private String name;
-    private String short_desc;
-    private String full_desc;
+    private String shortDesc;
+    private String fullDesc;
 
     public Integer getId() {
         return id;
@@ -25,20 +25,19 @@ public class ConferenceData {
         this.name = name;
     }
 
-    public String getShort_desc() {
-        return short_desc;
+    public String getShortDesc() {
+        return shortDesc;
     }
 
-    public void setShort_desc(String short_desc) {
-        this.short_desc = short_desc;
+    public void setShortDesc(String shortDesc) {
+        this.shortDesc = shortDesc;
     }
 
-    public String getFull_desc() {
-        return full_desc;
+    public String getFullDesc() {
+        return fullDesc;
     }
 
-    public void setFull_desc(String full_desc) {
-        this.full_desc = full_desc;
+    public void setFullDesc(String fullDesc) {
+        this.fullDesc = fullDesc;
     }
-
 }

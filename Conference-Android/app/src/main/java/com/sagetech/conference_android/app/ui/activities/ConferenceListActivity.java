@@ -1,7 +1,6 @@
 package com.sagetech.conference_android.app.ui.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,47 +11,33 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
+import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceData;
+import com.sagetech.conference_android.app.ui.presenter.ConferenceListActivityPresenter;
+import com.sagetech.conference_android.app.ui.presenter.IConferenceListActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import rx.Observable;
-import rx.Subscription;
+import javax.inject.Inject;
 
-public class ConferencesActivity extends ActionBarActivity {
+public class ConferenceListActivity extends InjectableActionBarActivity implements IConferenceListActivity {
+
+    @Inject
+    ConferenceController conferenceController;
+
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    Observable<List<ConferenceData>> cachedGetConferencesObservable;
-
-    private Subscription subscription;
+    private ConferenceListActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conferences);
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.confView);
-        mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        //TODO: stubbing in an empty  for now
-        ConferenceData data = new ConferenceData();
-        data.setName("TEST CONFERENCE 1");
-
-        ConferenceData data2 = new ConferenceData();
-        data2.setName("TEST CONFERENCE 2");
-
-
-        List<ConferenceData> datas = new ArrayList<ConferenceData>();
-        datas.add(data);
-        datas.add(data2);
-        mAdapter = new ConferencesAdapter(datas);
-        mRecyclerView.setAdapter(mAdapter);
+        presenter = new ConferenceListActivityPresenter(conferenceController, this);
+        presenter.initialize();
     }
 
 
@@ -78,10 +63,22 @@ public class ConferencesActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void populateConferences(List<ConferenceData> datas) {
+        mRecyclerView = (RecyclerView)findViewById(R.id.confView);
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new ConferencesAdapter(datas);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
 
     public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.ViewHolder> {
 
-        private List<ConferenceData> conferenceDatas;
+        List<ConferenceData> conferenceDatas;
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
