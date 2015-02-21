@@ -50,7 +50,7 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
     @InjectView(R.id.scheduled)
     ImageView img;
 
-    private Integer eventId;
+    private Long eventId;
 
     EventDetailActivityPresenter presenter = null;
 
@@ -66,7 +66,7 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
         ButterKnife.inject(this);
         Timber.d("onCreate");
 
-        eventId = getIntent().getExtras().getInt("id");
+        eventId = getIntent().getExtras().getLong("id");
         presenter = new EventDetailActivityPresenter(this, conferenceController, eventId);
         presenter.initialize();
     }

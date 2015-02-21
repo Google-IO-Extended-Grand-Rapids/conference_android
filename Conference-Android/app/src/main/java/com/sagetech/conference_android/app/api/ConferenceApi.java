@@ -16,14 +16,17 @@ import rx.Observable;
  */
 public interface ConferenceApi {
     @GET("/api/conference")
-    public Observable<List<ConferenceData>> getConferenceData();
+    Observable<List<ConferenceData>> getConferenceData();
 
     @GET("/api/conferenceSession/{id}")
-    public Observable<ConferenceSessionData> getConfereneSessionById(@Path("id") Long id);
+    Observable<ConferenceSessionData> getConfereneSessionById(@Path("id") Long id);
 
     @GET("/api/presenter/{id}")
     Observable<PresenterData> getPresenterById(@Path("id") Long id);
 
     @GET("/api/room/{id}")
     Observable<RoomData> getRoomById(@Path("id") Long id);
+
+    @GET("/api/conference/{id}/conferenceSessions")
+    Observable<List<ConferenceSessionData>> getConferenceSessionsById(@Path("id") Long id);
 }

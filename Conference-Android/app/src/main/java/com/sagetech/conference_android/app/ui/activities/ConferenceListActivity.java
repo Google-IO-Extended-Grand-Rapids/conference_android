@@ -36,6 +36,12 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conferences);
 
+        mRecyclerView = (RecyclerView)findViewById(R.id.confView);
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
         presenter = new ConferenceListActivityPresenter(conferenceController, this);
         presenter.initialize();
     }
@@ -65,12 +71,6 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
 
     @Override
     public void populateConferences(List<ConferenceData> datas) {
-        mRecyclerView = (RecyclerView)findViewById(R.id.confView);
-        mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
         mAdapter = new ConferencesAdapter(datas);
         mRecyclerView.setAdapter(mAdapter);
     }

@@ -31,7 +31,6 @@
         <activity
             android:name=".ui.activities.SplashActivity"
             android:label="@string/app_name" >
-
         </activity>
         <activity
             android:name=".ui.activities.EventDetailActivity"
@@ -47,6 +46,11 @@
         <activity
             android:name=".ui.activities.ConferenceListActivity"
             android:label="@string/title_activity_conferences" >
+        </activity>
+
+        <activity
+            android:name=".ui.activities.ConferenceSessionListActivity"
+            android:label="@string/title_activity_conference_sessions" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

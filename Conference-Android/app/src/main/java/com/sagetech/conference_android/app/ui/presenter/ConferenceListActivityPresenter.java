@@ -45,7 +45,6 @@ public class ConferenceListActivityPresenter {
             @Override
             public void onNext(List<ConferenceData> conferenceDatas) {
                 conferenceListActivity.populateConferences(conferenceDatas);
-
             }
         });
 
