@@ -63,12 +63,17 @@ public class EventDetailActivityPresenter {
                     @Override
                     public Observable<RoomData> call(ConferenceSessionData conferenceSessionData) {
                         try {
-//                            return conferenceController.getRoomById(conferenceSessionData.getRoomId());
-                            Timber.i("Starting...");
+                            return conferenceController.getRoomById(conferenceSessionData.getRoomId());
                         } catch (Exception e) {
                             Timber.e(String.format("Error occurred finding room: %d", conferenceSessionData.getRoomId()), e);
                         }
                         return Observable.just(new RoomData());
+                    }
+                }).onErrorReturn(new Func1<Throwable, RoomData>() {
+                    @Override
+                    public RoomData call(Throwable throwable) {
+                        Timber.w("Exception thrown when trying to retrieve RoomData.  Will default to empty RoomData", throwable);
+                        return new RoomData();
                     }
                 });
 
