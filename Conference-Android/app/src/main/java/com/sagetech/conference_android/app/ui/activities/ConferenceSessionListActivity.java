@@ -29,6 +29,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -43,7 +44,6 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
     @Inject
     ConferenceController conferenceController;
-
 
     @InjectView(R.id.confView)
     RecyclerView mRecyclerView;
@@ -112,10 +112,10 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     }
 
     public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSessionsAdapter.ViewHolder> {
-
-        List<ConferenceSessionData> conferenceSessionDatas;
+        private final List<ConferenceSessionData> conferenceSessionDatas;
 
         private final String TIME_FORMAT = "h:mm a";
+        private final String DAY_FORMAT = "EEEE, MMMM dd, yyyy";
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
@@ -142,11 +142,26 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         public void onBindViewHolder(ConferenceSessionsAdapter.ViewHolder holder, int position) {
             holder.itemView.setTag(conferenceSessionDatas.get(position).getId());
 
-            TextView title = (TextView) holder.itemView.findViewById(R.id.title);
+            TextView day = getTextViewById(holder, R.id.day);
+            day.setText(toDay(conferenceSessionDatas.get(position).getStartDttm()));
+
+            TextView time = getTextViewById(holder, R.id.time);
+            time.setText(toTime(conferenceSessionDatas.get(position).getStartDttm()));
+
+            TextView title = getTextViewById(holder, R.id.title);
             title.setText(conferenceSessionDatas.get(position).getName());
 
-            TextView time = (TextView) holder.itemView.findViewById(R.id.time);
-            time.setText(toTime(conferenceSessionDatas.get(position).getStartDttm()));
+            TextView room = getTextViewById(holder, R.id.room);
+            room.setText("112E"); //TODO -- set to real value once roomdata is available
+        }
+
+        private TextView getTextViewById(ConferenceSessionsAdapter.ViewHolder holder, int id) {
+            return (TextView) holder.itemView.findViewById(id);
+        }
+
+        private String toDay(Date date) {
+            SimpleDateFormat sdf = new SimpleDateFormat(DAY_FORMAT, Locale.US);
+            return sdf.format(date);
         }
 
         @Override
