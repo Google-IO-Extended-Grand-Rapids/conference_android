@@ -60,7 +60,7 @@ if ('assemble' in runTasks || 'assembleRelease' in runTasks) {
 }
 
 dependencies {
-    compile 'com.netflix.rxjava:rxjava-android:0.20.7'
+    compile 'io.reactivex:rxandroid:0.24.0'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp:2.2.0'
     compile 'com.android.support:appcompat-v7:21.0.3'
