@@ -4,4 +4,13 @@
     <color name="grey_light">#EEEEEE</color>
     <color name="grey_dark">#ABA8A8</color>
     <color name="blue">#03A9F4</color>
+    <color name="blue_dark">#3481f0</color>
+    <color name="red">#ee333a</color>
+
+    <color name="text_color_dark">#6d6d6d</color>
+    <color name="text_color_light">#ababab</color>
+    <color name="text_color_highlight">@color/blue</color>
+
+    <color name="branding_color_primary">@color/blue</color>
+    <color name="branding_color_primary_dark">@color/blue_dark</color>
 </resources>

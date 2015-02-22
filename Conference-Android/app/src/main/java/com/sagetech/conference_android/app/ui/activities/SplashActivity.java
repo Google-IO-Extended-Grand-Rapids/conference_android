@@ -3,12 +3,9 @@ package com.sagetech.conference_android.app.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
-import com.sagetech.conference_android.app.ConferenceApplication;
 import com.sagetech.conference_android.app.R;
-import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.EventData;
 
 import java.util.List;
@@ -19,9 +16,8 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class SplashActivity extends InjectableActionBarActivity {
@@ -41,7 +37,7 @@ public class SplashActivity extends InjectableActionBarActivity {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-        subscription = AndroidObservable.bindActivity(this, cachedGetEventsObservable)
+        subscription = AppObservable.bindActivity(this, cachedGetEventsObservable)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .delay(5, TimeUnit.SECONDS)

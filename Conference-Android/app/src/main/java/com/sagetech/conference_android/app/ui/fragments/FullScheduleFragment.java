@@ -3,7 +3,6 @@ package com.sagetech.conference_android.app.ui.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -11,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.sagetech.conference_android.app.ConferenceApplication;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.EventData;
@@ -28,7 +26,7 @@ import javax.inject.Inject;
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
-import rx.android.observables.AndroidObservable;
+import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -55,7 +53,7 @@ public class FullScheduleFragment extends InjectibleListFragment {
 
         final EventsListAdapter eventListAdapter = new EventsListAdapter(getActivity(), R.layout.list_view_item);
         setListAdapter(eventListAdapter);
-        this.subscription = AndroidObservable.bindFragment(this, cachedGetEventsObservable)
+        this.subscription = AppObservable.bindFragment(this, cachedGetEventsObservable)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<List<EventData>>() {
