@@ -21,10 +21,10 @@ public class EventDetailView {
     private Date startDttm;
     private Date endDttm;
     private EventType eventType;
+    private SimpleDateFormat timeFormatter1 = new SimpleDateFormat("EEE, h:mm-", Locale.US);
+    private SimpleDateFormat timeFormatter2 = new SimpleDateFormat("h:mm aaa", Locale.US);
 
     public String getLocationAndStartTime() {
-        SimpleDateFormat timeFormatter1 = new SimpleDateFormat("EEE, h:mm-", Locale.US);
-        SimpleDateFormat timeFormatter2 = new SimpleDateFormat("h:mm aaa", Locale.US);
 
         String locationAndStartTime = null;
 
