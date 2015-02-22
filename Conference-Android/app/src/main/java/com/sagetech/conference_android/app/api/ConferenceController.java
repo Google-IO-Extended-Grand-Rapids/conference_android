@@ -1,8 +1,9 @@
 package com.sagetech.conference_android.app.api;
 
-import android.util.Log;
-
+import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.EventData;
+import com.sagetech.conference_android.app.model.PresenterData;
+import com.sagetech.conference_android.app.model.RoomData;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -11,12 +12,17 @@ import java.util.List;
 import retrofit.RestAdapter;
 import retrofit.http.GET;
 import rx.Observable;
-import rx.Observer;
 import rx.Subscriber;
-import rx.Subscription;
+import timber.log.Timber;
 
 public class ConferenceController {
-    private static final String TAG = "ConferenceController";
+
+    private final ConferenceApi conferenceApi;
+
+    public ConferenceController(ConferenceApi conferenceApi) {
+        this.conferenceApi = conferenceApi;
+    }
+
     private List<EventData> eventData;
 
     private interface ApiManagerService {
@@ -39,12 +45,24 @@ public class ConferenceController {
         });
     }
 
+    public Observable<ConferenceSessionData> getConferenceSessionDataById(Long id) {
+        return conferenceApi.getConferenceSessionById(id);
+    }
+
+    public Observable<PresenterData> getPresenterById(Long id) {
+        return conferenceApi.getPresenterById(id);
+    }
+
+    public Observable<RoomData> getRoomById(Long id) {
+        return conferenceApi.getRoomById(id);
+    }
+
     public List<EventData> getEvents() {
         final RestAdapter restAdapter = new RestAdapter.Builder()
                 .setEndpoint("https://conference-schedule-webap.herokuapp.com")
                 .build();
 
-        Log.i(TAG, "Calling the API...");
+        Timber.i("Calling the API...");
         final ApiManagerService apiManager = restAdapter.create(ApiManagerService.class);
         final List<EventData> eventData = apiManager.getEvents();
 
