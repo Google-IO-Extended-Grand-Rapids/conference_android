@@ -21,6 +21,11 @@ import com.sagetech.conference_android.app.ui.listener.RecyclerItemClickListener
 import com.sagetech.conference_android.app.ui.presenter.ConferenceListActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceListActivity;
 import timber.log.Timber;
+
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import java.util.List;
 
 import javax.inject.Inject;
@@ -92,6 +97,8 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
         List<ConferenceSessionData> conferenceSessionDatas;
 
+        private final String TIME_FORMAT = "h:mm a";
+
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
             public ViewHolder(View v) {
@@ -120,6 +127,8 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             TextView title = (TextView) holder.itemView.findViewById(R.id.title);
             title.setText(conferenceSessionDatas.get(position).getName());
 
+            TextView time = (TextView) holder.itemView.findViewById(R.id.time);
+            time.setText(toTime(conferenceSessionDatas.get(position).getStartDttm()));
         }
 
         @Override
@@ -127,5 +136,9 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             return conferenceSessionDatas.size();
         }
 
+        private String toTime(Date date) {
+            SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
+            return sdf.format(date);
+        }
     }
 }
