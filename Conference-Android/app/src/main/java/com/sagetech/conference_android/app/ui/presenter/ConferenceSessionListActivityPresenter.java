@@ -29,7 +29,7 @@ public class ConferenceSessionListActivityPresenter {
     }
 
     public void initialize() {
-        Observable<List<ConferenceSessionData>> conferenceDataObservable = conferenceController.getConferenceSessionsById(1L);
+        Observable<List<ConferenceSessionData>> conferenceDataObservable = conferenceController.getConferenceSessionsById(conferenceId);
 
         subscription = conferenceDataObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<List<ConferenceSessionData>>() {
             @Override

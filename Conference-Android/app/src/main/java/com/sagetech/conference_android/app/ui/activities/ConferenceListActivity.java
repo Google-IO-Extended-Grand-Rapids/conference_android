@@ -13,12 +13,15 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceData;
+import com.sagetech.conference_android.app.ui.listener.RecyclerItemClickListener;
 import com.sagetech.conference_android.app.ui.presenter.ConferenceListActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceListActivity;
 
 import java.util.List;
 
 import javax.inject.Inject;
+
+import timber.log.Timber;
 
 public class ConferenceListActivity extends InjectableActionBarActivity implements IConferenceListActivity {
 
@@ -41,6 +44,15 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mRecyclerView.addOnItemTouchListener(
+                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override public void onItemClick(View view, int position) {
+
+                        Timber.e(String.format("View Clicked: %s", view.getTag()));
+                    }
+                })
+        );
 
         presenter = new ConferenceListActivityPresenter(conferenceController, this);
         presenter.initialize();
@@ -99,13 +111,14 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
                     .inflate(R.layout.conference_list_view_item, parent, false);
 
             ViewHolder vh = new ViewHolder(v);
+
             return vh;
         }
 
         @Override
         public void onBindViewHolder(ConferencesAdapter.ViewHolder holder, int position) {
             TextView txt = (TextView)holder.itemView.findViewById(R.id.name);
-
+            holder.itemView.setTag(conferenceDatas.get(position).getId());
             txt.setText(conferenceDatas.get(position).getName());
         }
 
