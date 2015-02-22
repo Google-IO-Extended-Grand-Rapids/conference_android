@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Googleio" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarItemBackground">@drawable/selectable_background_googleio</item>
+        <item name="popupMenuStyle">@style/PopupMenu.Googleio</item>
+        <item name="dropDownListViewStyle">@style/DropDownListView.Googleio</item>
+        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Googleio</item>
+        <item name="actionDropDownStyle">@style/DropDownNav.Googleio</item>
+        <item name="actionBarStyle">@style/ActionBar.Solid.Googleio</item>
+        <item name="actionModeBackground">@drawable/cab_background_top_googleio</item>
+        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_googleio</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Googleio</item>
+        <item name="colorPrimary">@color/branding_color_primary</item>
+        <item name="colorPrimaryDark">@color/branding_color_primary_dark</item>
+    </style>
+
+</resources>

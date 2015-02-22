@@ -19,18 +19,6 @@
 
 <resources>
 
-    <style name="Theme.Googleio" parent="Theme.AppCompat.Light">
-        <item name="actionBarItemBackground">@drawable/selectable_background_googleio</item>
-        <item name="popupMenuStyle">@style/PopupMenu.Googleio</item>
-        <item name="dropDownListViewStyle">@style/DropDownListView.Googleio</item>
-        <item name="actionBarTabStyle">@style/ActionBarTabStyle.Googleio</item>
-        <item name="actionDropDownStyle">@style/DropDownNav.Googleio</item>
-        <item name="actionBarStyle">@style/ActionBar.Solid.Googleio</item>
-        <item name="actionModeBackground">@drawable/cab_background_top_googleio</item>
-        <item name="actionModeSplitBackground">@drawable/cab_background_bottom_googleio</item>
-        <item name="actionModeCloseButtonStyle">@style/ActionButton.CloseMode.Googleio</item>
-    </style>
-
     <style name="ActionBar.Solid.Googleio" parent="Widget.AppCompat.Light.ActionBar.Solid">
         <item name="background">@drawable/ab_solid_googleio</item>
         <item name="backgroundStacked">@drawable/ab_stacked_solid_googleio</item>
