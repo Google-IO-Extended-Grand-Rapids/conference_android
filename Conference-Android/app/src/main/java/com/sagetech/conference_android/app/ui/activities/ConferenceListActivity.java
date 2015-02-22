@@ -1,5 +1,6 @@
 package com.sagetech.conference_android.app.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +22,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import timber.log.Timber;
 
 public class ConferenceListActivity extends InjectableActionBarActivity implements IConferenceListActivity {
@@ -28,7 +31,9 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     @Inject
     ConferenceController conferenceController;
 
-    private RecyclerView mRecyclerView;
+    @InjectView(R.id.confView)
+    RecyclerView mRecyclerView;
+
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -39,7 +44,8 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conferences);
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.confView);
+        ButterKnife.inject(this);
+
         mRecyclerView.setHasFixedSize(true);
 
         mLayoutManager = new LinearLayoutManager(this);
@@ -49,7 +55,11 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
                 new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
                     @Override public void onItemClick(View view, int position) {
 
-                        Timber.e(String.format("View Clicked: %s", view.getTag()));
+                        Timber.d(String.format("View Clicked: %s", view.getTag()));
+
+                        Intent conferenceSessionListIntent = new Intent(view.getContext(), ConferenceSessionListActivity.class);
+                        conferenceSessionListIntent.putExtra("id", (Integer) view.getTag());
+                        startActivity(conferenceSessionListIntent);
                     }
                 })
         );

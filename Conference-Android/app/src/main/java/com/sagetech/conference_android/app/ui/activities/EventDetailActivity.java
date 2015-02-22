@@ -84,7 +84,7 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
         }
         // at most, we can only have two presenters.  Since we are not using a list view
         // we have to explicitly set the values
-        for (int i=0; i < presenters.size(); i++) {
+        for (int i = 0; i < presenters.size(); i++) {
             EventDetailView.EventDetailPresenterView currPresenter = presenters.get(i);
             TextView bio = (i == 0 ? bio1 : bio2);
             TextView name = (i == 0 ? name1 : name2);
