@@ -49,4 +49,8 @@ public class ConferenceSessionListActivityPresenter {
             }
         });
     }
+
+    public void onDestroy() {
+        subscription.unsubscribe();
+    }
 }

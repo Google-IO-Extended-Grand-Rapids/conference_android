@@ -41,7 +41,7 @@
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.sagetech.conference_android.app.MainActivity" />
+                android:value="com.sagetech.conference_android.app.ui.activities.MainActivity" />
 >
         </activity>
         <activity
@@ -49,14 +49,14 @@
             android:label="@string/title_activity_conferences" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
             android:name=".ui.activities.ConferenceSessionListActivity"
-            android:label="@string/title_activity_conference_sessions" >
+            android:label="@string/title_activity_conference_sessions"
+            android:parentActivityName=".ui.activities.MainActivity" >
         </activity>
     </application>
 
