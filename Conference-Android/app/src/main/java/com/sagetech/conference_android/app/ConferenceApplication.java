@@ -30,13 +30,13 @@ public class ConferenceApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        buildObjectGraphAndInject();
-
         if (BuildConfig.DEBUG) {
             Timber.plant(new DebugTree());
         } else {
             Timber.plant(new HollowTree());
         }
+
+        buildObjectGraphAndInject();
     }
 
     public void buildObjectGraphAndInject() {
