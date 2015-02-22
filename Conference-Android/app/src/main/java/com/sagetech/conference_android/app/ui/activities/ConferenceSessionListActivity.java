@@ -13,7 +13,11 @@ import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.ui.presenter.ConferenceSessionListActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionActivity;
-
+import com.sagetech.conference_android.app.model.ConferenceData;
+import com.sagetech.conference_android.app.ui.listener.RecyclerItemClickListener;
+import com.sagetech.conference_android.app.ui.presenter.ConferenceListActivityPresenter;
+import com.sagetech.conference_android.app.ui.presenter.IConferenceListActivity;
+import timber.log.Timber;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,6 +26,7 @@ import javax.inject.Inject;
  * Created by adam on 2/21/15.
  */
 public class ConferenceSessionListActivity extends InjectableActionBarActivity implements IConferenceSessionActivity {
+
     @Inject
     ConferenceController conferenceController;
 
@@ -76,14 +81,15 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
                     .inflate(R.layout.conference_sesssion_list_view, parent, false);
 
             ViewHolder vh = new ViewHolder(v);
+
             return vh;
         }
 
         @Override
         public void onBindViewHolder(ConferenceSessionsAdapter.ViewHolder holder, int position) {
             TextView txt = (TextView)holder.itemView.findViewById(R.id.name);
-
-            txt.setText(conferenceSessionDatas.get(position).getName());
+            holder.itemView.setTag(conferenceDatas.get(position).getId());
+            txt.setText(conferenceDatas.get(position).getName());
         }
 
         @Override

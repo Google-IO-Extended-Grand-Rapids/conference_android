@@ -46,16 +46,16 @@
         <activity
             android:name=".ui.activities.ConferencesActivity"
             android:label="@string/title_activity_conferences" >
-        </activity>
-
-        <activity
-            android:name=".ui.activities.ConferenceSessionListActivity"
-            android:label="@string/title_activity_conference_sessions" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.activities.ConferenceSessionListActivity"
+            android:label="@string/title_activity_conference_sessions" >
         </activity>
     </application>
 
