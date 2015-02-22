@@ -44,7 +44,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conferences);
 
-        getActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         ButterKnife.inject(this);
 

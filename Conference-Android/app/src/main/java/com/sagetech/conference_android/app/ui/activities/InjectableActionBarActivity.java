@@ -19,6 +19,7 @@ public class InjectableActionBarActivity extends ActionBarActivity {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.app_name);
 
+
         ConferenceApplication app = ConferenceApplication.get(this);
         app.inject(this);
     }

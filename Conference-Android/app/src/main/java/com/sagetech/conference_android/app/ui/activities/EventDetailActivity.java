@@ -63,7 +63,7 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.inject(this);
         Timber.d("onCreate");
