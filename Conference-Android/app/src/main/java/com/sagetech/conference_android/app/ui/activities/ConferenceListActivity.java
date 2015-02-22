@@ -2,6 +2,7 @@ package com.sagetech.conference_android.app.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -43,6 +44,10 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conferences);
+
+        final ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.app_name);
+        actionBar.setDisplayHomeAsUpEnabled(false);
 
         ButterKnife.inject(this);
 
@@ -104,10 +109,9 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
-            public View mTextView;
+
             public ViewHolder(View v) {
                 super(v);
-                mTextView = v;
             }
         }
 
