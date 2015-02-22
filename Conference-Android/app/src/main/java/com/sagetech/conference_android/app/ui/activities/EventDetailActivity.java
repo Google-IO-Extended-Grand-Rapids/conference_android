@@ -2,7 +2,6 @@ package com.sagetech.conference_android.app.ui.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -64,9 +63,7 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.app_name);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.inject(this);
         Timber.d("onCreate");
