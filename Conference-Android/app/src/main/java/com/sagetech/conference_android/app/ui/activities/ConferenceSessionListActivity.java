@@ -106,7 +106,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         @Override
         public ConferenceSessionsAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View v = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.conference_sesssion_list_view, parent, false);
+                    .inflate(R.layout.list_view_item, parent, false);
 
             ViewHolder vh = new ViewHolder(v);
 
@@ -115,9 +115,11 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
         @Override
         public void onBindViewHolder(ConferenceSessionsAdapter.ViewHolder holder, int position) {
-            TextView txt = (TextView) holder.itemView.findViewById(R.id.name);
             holder.itemView.setTag(conferenceSessionDatas.get(position).getId());
-            txt.setText(conferenceSessionDatas.get(position).getName());
+
+            TextView title = (TextView) holder.itemView.findViewById(R.id.title);
+            title.setText(conferenceSessionDatas.get(position).getName());
+
         }
 
         @Override
