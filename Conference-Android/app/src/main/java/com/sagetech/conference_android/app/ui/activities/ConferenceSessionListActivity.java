@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
-import com.sagetech.conference_android.app.ui.listener.RecyclerItemClickListener;
 import com.sagetech.conference_android.app.ui.presenter.ConferenceSessionListActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionActivity;
 
@@ -39,7 +38,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     @InjectView(R.id.confView)
     RecyclerView mRecyclerView;
 
-    private RecyclerView.Adapter mAdapter;
+    private ConferenceSessionsAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private ConferenceSessionListActivityPresenter presenter = null;
     private Integer conferenceId;
@@ -47,6 +46,16 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     @Override
     public void populateConferenceSessions(List<ConferenceSessionData> conferenceSessions) {
         mAdapter = new ConferenceSessionsAdapter(conferenceSessions);
+        mAdapter.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Timber.d(String.format("View Clicked: %s", view.getTag()));
+
+                Intent eventDetailIntent = new Intent(view.getContext(), EventDetailActivity.class);
+                eventDetailIntent.putExtra("id", (Long)view.getTag());
+                startActivity(eventDetailIntent);
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -64,21 +73,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-
-                        Timber.d(String.format("View Clicked: %s", view.getTag()));
-
-                        Intent eventDetailIntent = new Intent(view.getContext(), EventDetailActivity.class);
-                        eventDetailIntent.putExtra("id", (Long)view.getTag());
-                        startActivity(eventDetailIntent);
-                    }
-                })
-        );
-
         conferenceId = getIntent().getExtras().getInt("id");
-
         presenter = new ConferenceSessionListActivityPresenter(this, conferenceController, Long.valueOf(conferenceId));
         presenter.initialize();
     }
@@ -102,6 +97,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
     public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSessionsAdapter.ViewHolder> {
         private final List<ConferenceSessionData> conferenceSessions;
+        private View.OnClickListener onClickListener;
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             private final SimpleDateFormat DAY_FORMATTER = new SimpleDateFormat("EEEE, MMMM dd, yyyy", Locale.US);
@@ -137,6 +133,10 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             public void setRoom(final String room) {
                 this.roomView.setText(room);
             }
+
+            public void setOnClickListener(View.OnClickListener onClickListener) {
+                super.itemView.setOnClickListener(onClickListener);
+            }
         }
 
         public ConferenceSessionsAdapter(List<ConferenceSessionData> conferenceSessions) {
@@ -158,6 +158,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             holder.setTime(getItem(position).getStartDttm());
             holder.setTitle(getItem(position).getName());
             holder.setRoom("112E"); //TODO -- set to real value once room data is available
+            holder.setOnClickListener(this.onClickListener);
         }
 
         @Override
@@ -167,6 +168,10 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
         public ConferenceSessionData getItem(int position) {
             return conferenceSessions.get(position);
+        }
+
+        public void setOnClickListener(View.OnClickListener onClickListener) {
+            this.onClickListener = onClickListener;
         }
     }
 }
