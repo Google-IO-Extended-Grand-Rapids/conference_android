@@ -2,7 +2,6 @@ package com.sagetech.conference_android.app.ui.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -55,7 +54,7 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
     @InjectView(R.id.scheduled)
     ImageView img;
 
-    private Integer eventId;
+    private Long eventId;
 
     EventDetailActivityPresenter presenter = null;
 
@@ -64,14 +63,12 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.app_name);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ButterKnife.inject(this);
         Timber.d("onCreate");
 
-        eventId = getIntent().getExtras().getInt("id");
+        eventId = getIntent().getExtras().getLong("id");
         presenter = new EventDetailActivityPresenter(this, conferenceController, eventId);
         presenter.initialize();
     }
@@ -89,7 +86,7 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
         }
         // at most, we can only have two presenters.  Since we are not using a list view
         // we have to explicitly set the values
-        for (int i=0; i < presenters.size(); i++) {
+        for (int i = 0; i < presenters.size(); i++) {
             EventDetailView.EventDetailPresenterView currPresenter = presenters.get(i);
             TextView bio = (i == 0 ? bio1 : bio2);
             TextView name = (i == 0 ? name1 : name2);

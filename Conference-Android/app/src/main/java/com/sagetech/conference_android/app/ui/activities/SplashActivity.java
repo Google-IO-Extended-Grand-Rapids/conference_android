@@ -45,7 +45,7 @@ public class SplashActivity extends InjectableActionBarActivity {
                     @Override
                     public void onCompleted() {
                         Log.i(TAG, "onCompleted");
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ConferenceListActivity.class);
                         startActivity(intent);
                         finish();
                     }

@@ -1,5 +1,6 @@
 package com.sagetech.conference_android.app.api;
 
+import com.sagetech.conference_android.app.model.ConferenceData;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.EventData;
 import com.sagetech.conference_android.app.model.PresenterData;
@@ -24,11 +25,18 @@ public class ConferenceController {
     }
 
     private List<EventData> eventData;
+    private List<ConferenceData> conferenceData;
+
+    private interface  ApiConferenceManagerService {
+        @GET("/conference")
+        List<ConferenceData> getConferenceData();
+    }
 
     private interface ApiManagerService {
         @GET("/events.json")
         List<EventData> getEvents();
     }
+
 
     public Observable<List<EventData>> getEventsObservable() {
         return Observable.create(new Observable.OnSubscribe<List<EventData>>() {
@@ -45,8 +53,13 @@ public class ConferenceController {
         });
     }
 
+
     public Observable<ConferenceSessionData> getConferenceSessionDataById(Long id) {
         return conferenceApi.getConferenceSessionById(id);
+    }
+
+    public Observable<List<ConferenceSessionData>> getConferenceSessionsById(Long conferenceId) {
+        return conferenceApi.getConferenceSessionsById(conferenceId);
     }
 
     public Observable<PresenterData> getPresenterById(Long id) {

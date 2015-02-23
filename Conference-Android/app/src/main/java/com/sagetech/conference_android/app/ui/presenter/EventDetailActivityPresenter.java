@@ -25,12 +25,12 @@ public class EventDetailActivityPresenter {
 
     private final IEventDetailActivity eventDetailActivity;
     private final ConferenceController conferenceController;
-    private final Integer eventId;
+    private final Long eventId;
     private final EventDetailViewBuilder eventDetailViewBuilder;
     private Subscription subscription;
 
 
-    public EventDetailActivityPresenter(IEventDetailActivity eventDetailActivity, ConferenceController conferenceController, Integer eventId) {
+    public EventDetailActivityPresenter(IEventDetailActivity eventDetailActivity, ConferenceController conferenceController, Long eventId) {
         this.eventDetailActivity = eventDetailActivity;
         this.conferenceController = conferenceController;
         this.eventId = eventId;
@@ -66,7 +66,7 @@ public class EventDetailActivityPresenter {
         // A - we only want to call this data one time...therefore we are caching
         // FIXME this should use eventId, but we have to wait until we are being passed valid values.
         final Observable<ConferenceSessionData> conferenceSessionObservable =
-                conferenceController.getConferenceSessionDataById(51L).cache();
+                conferenceController.getConferenceSessionDataById(eventId).cache();
 
 
         // B - retrieve all of the presenters for this
