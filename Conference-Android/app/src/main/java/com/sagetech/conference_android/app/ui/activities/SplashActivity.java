@@ -3,12 +3,9 @@ package com.sagetech.conference_android.app.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
-import com.sagetech.conference_android.app.ConferenceApplication;
 import com.sagetech.conference_android.app.R;
-import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.EventData;
 
 import java.util.List;
@@ -21,7 +18,6 @@ import rx.Subscriber;
 import rx.Subscription;
 import rx.android.observables.AndroidObservable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 public class SplashActivity extends InjectableActionBarActivity {
@@ -49,7 +45,7 @@ public class SplashActivity extends InjectableActionBarActivity {
                     @Override
                     public void onCompleted() {
                         Log.i(TAG, "onCompleted");
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ConferenceListActivity.class);
                         startActivity(intent);
                         finish();
                     }
