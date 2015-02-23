@@ -105,14 +105,41 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
     public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSessionsAdapter.ViewHolder> {
         private final List<ConferenceSessionData> conferenceSessionDatas;
-
         private final String TIME_FORMAT = "h:mm a";
         private final String DAY_FORMAT = "EEEE, MMMM dd, yyyy";
+        private final SimpleDateFormat DAY_FORMATTER = new SimpleDateFormat(DAY_FORMAT, Locale.US);
+        private final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat(TIME_FORMAT);
 
         public class ViewHolder extends RecyclerView.ViewHolder {
+            @InjectView(R.id.day) public TextView dayView;
+            @InjectView(R.id.time) public TextView timeView;
+            @InjectView(R.id.title) public TextView titleView;
+            @InjectView(R.id.room) public TextView roomView;
+
             // each data item is just a string in this case
             public ViewHolder(View v) {
                 super(v);
+                ButterKnife.inject(this, v);
+            }
+
+            public void setTag(Object tag) {
+                this.itemView.setTag(tag);
+            }
+
+            public void setTitle(final String title) {
+                this.titleView.setText(title);
+            }
+
+            public void setDay(final Date date) {
+                this.dayView.setText(DAY_FORMATTER.format(date));
+            }
+
+            public void setTime(final Date time) {
+                this.timeView.setText(TIME_FORMATTER.format(time));
+            }
+
+            public void setRoom(final String room) {
+                this.roomView.setText(room);
             }
         }
 
@@ -131,28 +158,15 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
         @Override
         public void onBindViewHolder(ConferenceSessionsAdapter.ViewHolder holder, int position) {
-            holder.itemView.setTag(conferenceSessionDatas.get(position).getId());
-
-            TextView day = getTextViewById(holder, R.id.day);
-            day.setText(toDay(conferenceSessionDatas.get(position).getStartDttm()));
-
-            TextView time = getTextViewById(holder, R.id.time);
-            time.setText(toTime(conferenceSessionDatas.get(position).getStartDttm()));
-
-            TextView title = getTextViewById(holder, R.id.title);
-            title.setText(conferenceSessionDatas.get(position).getName());
-
-            TextView room = getTextViewById(holder, R.id.room);
-            room.setText("112E"); //TODO -- set to real value once roomdata is available
-        }
-
-        private TextView getTextViewById(ConferenceSessionsAdapter.ViewHolder holder, int id) {
-            return (TextView) holder.itemView.findViewById(id);
+            holder.setTag(conferenceSessionDatas.get(position).getId());
+            holder.setDay(conferenceSessionDatas.get(position).getStartDttm());
+            holder.setTime(conferenceSessionDatas.get(position).getStartDttm());
+            holder.setTitle(conferenceSessionDatas.get(position).getName());
+            holder.setRoom("112E"); //TODO -- set to real value once roomdata is available
         }
 
         private String toDay(Date date) {
-            SimpleDateFormat sdf = new SimpleDateFormat(DAY_FORMAT, Locale.US);
-            return sdf.format(date);
+            return DAY_FORMATTER.format(date);
         }
 
         @Override
@@ -161,8 +175,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         }
 
         private String toTime(Date date) {
-            SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT);
-            return sdf.format(date);
+            return TIME_FORMATTER.format(date);
         }
     }
 }
