@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceData;
-import com.sagetech.conference_android.app.ui.listener.RecyclerItemClickListener;
 import com.sagetech.conference_android.app.ui.presenter.ConferenceListActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceListActivity;
 
@@ -34,7 +33,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     @InjectView(R.id.confView)
     RecyclerView mRecyclerView;
 
-    private RecyclerView.Adapter mAdapter;
+    private ConferencesAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private ConferenceListActivityPresenter presenter;
@@ -52,19 +51,6 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-
-        mRecyclerView.addOnItemTouchListener(
-                new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override public void onItemClick(View view, int position) {
-
-                        Timber.d(String.format("View Clicked: %s", view.getTag()));
-
-                        Intent conferenceSessionListIntent = new Intent(view.getContext(), ConferenceSessionListActivity.class);
-                        conferenceSessionListIntent.putExtra("id", (Integer) view.getTag());
-                        startActivity(conferenceSessionListIntent);
-                    }
-                })
-        );
 
         presenter = new ConferenceListActivityPresenter(conferenceController, this);
         presenter.initialize();
@@ -96,6 +82,16 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     @Override
     public void populateConferences(List<ConferenceData> datas) {
         mAdapter = new ConferencesAdapter(datas);
+        mAdapter.setItemOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Timber.d(String.format("View Clicked: %s", view.getTag()));
+
+                Intent conferenceSessionListIntent = new Intent(view.getContext(), ConferenceSessionListActivity.class);
+                conferenceSessionListIntent.putExtra("id", (Integer) view.getTag());
+                startActivity(conferenceSessionListIntent);
+            }
+        });
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -103,6 +99,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.ViewHolder> {
 
         List<ConferenceData> conferenceDatas;
+        private View.OnClickListener mItemOnClickListener;
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
@@ -114,6 +111,10 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
 
         public ConferencesAdapter(List<ConferenceData> conferenceDatas) {
             this.conferenceDatas = conferenceDatas;
+        }
+
+        public void setItemOnClickListener(View.OnClickListener listener) {
+            mItemOnClickListener = listener;
         }
 
         @Override
@@ -130,6 +131,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         public void onBindViewHolder(ConferencesAdapter.ViewHolder holder, int position) {
             TextView txt = (TextView)holder.itemView.findViewById(R.id.name);
             holder.itemView.setTag(conferenceDatas.get(position).getId());
+            holder.itemView.setOnClickListener(mItemOnClickListener);
             txt.setText(conferenceDatas.get(position).getName());
         }
 
