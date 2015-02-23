@@ -34,7 +34,6 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     RecyclerView mRecyclerView;
 
     private ConferencesAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     private ConferenceListActivityPresenter presenter;
 
@@ -48,9 +47,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         ButterKnife.inject(this);
 
         mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         presenter = new ConferenceListActivityPresenter(conferenceController, this);
         presenter.initialize();
@@ -82,39 +79,36 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     @Override
     public void populateConferences(List<ConferenceData> datas) {
         mAdapter = new ConferencesAdapter(datas);
-        mAdapter.setItemOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Timber.d(String.format("View Clicked: %s", view.getTag()));
-
-                Intent conferenceSessionListIntent = new Intent(view.getContext(), ConferenceSessionListActivity.class);
-                conferenceSessionListIntent.putExtra("id", (Integer) view.getTag());
-                startActivity(conferenceSessionListIntent);
-            }
-        });
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    private void launchConferenceSessionsListActivity(long conferenceId) {
+        Timber.d(String.format("Conference Selected: %s", conferenceId));
+
+        Intent conferenceSessionListIntent = new Intent(this, ConferenceSessionListActivity.class);
+        conferenceSessionListIntent.putExtra("id", conferenceId);
+        startActivity(conferenceSessionListIntent);
+    }
 
     public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.ViewHolder> {
 
         List<ConferenceData> conferenceDatas;
-        private View.OnClickListener mItemOnClickListener;
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            // each data item is just a string in this case
+            @InjectView(R.id.name) public TextView nameView;
 
-            public ViewHolder(View v) {
-                super(v);
+            public ViewHolder(View view) {
+                super(view);
+                ButterKnife.inject(this, view);
+            }
+
+            public void setName(String name) {
+                nameView.setText(name);
             }
         }
 
         public ConferencesAdapter(List<ConferenceData> conferenceDatas) {
             this.conferenceDatas = conferenceDatas;
-        }
-
-        public void setItemOnClickListener(View.OnClickListener listener) {
-            mItemOnClickListener = listener;
         }
 
         @Override
@@ -127,12 +121,21 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
             return vh;
         }
 
+        public ConferenceData getItem(int position) {
+            return conferenceDatas.get(position);
+        }
+
         @Override
         public void onBindViewHolder(ConferencesAdapter.ViewHolder holder, int position) {
-            TextView txt = (TextView)holder.itemView.findViewById(R.id.name);
-            holder.itemView.setTag(conferenceDatas.get(position).getId());
-            holder.itemView.setOnClickListener(mItemOnClickListener);
-            txt.setText(conferenceDatas.get(position).getName());
+            holder.setName(getItem(position).getName());
+
+            final long conferenceId = getItemId(position);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    launchConferenceSessionsListActivity(conferenceId);
+                }
+            });
         }
 
         @Override
@@ -140,5 +143,9 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
             return conferenceDatas.size();
         }
 
+        @Override
+        public long getItemId(int position) {
+            return getItem(position).getId();
+        }
     }
 }

@@ -41,23 +41,12 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     RecyclerView mRecyclerView;
 
     private ConferenceSessionsAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
     private ConferenceSessionListActivityPresenter presenter = null;
-    private Integer conferenceId;
+    private Long conferenceId;
 
     @Override
     public void populateConferenceSessions(List<ConferenceSessionData> conferenceSessions) {
         mAdapter = new ConferenceSessionsAdapter(conferenceSessions);
-        mAdapter.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Timber.d(String.format("View Clicked: %s", view.getTag()));
-
-                Intent eventDetailIntent = new Intent(view.getContext(), EventDetailActivity.class);
-                eventDetailIntent.putExtra("id", (Long)view.getTag());
-                startActivity(eventDetailIntent);
-            }
-        });
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -71,12 +60,10 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         ButterKnife.inject(this);
 
         mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        conferenceId = getIntent().getExtras().getInt("id");
-        presenter = new ConferenceSessionListActivityPresenter(this, conferenceController, Long.valueOf(conferenceId));
+        conferenceId = getIntent().getExtras().getLong("id");
+        presenter = new ConferenceSessionListActivityPresenter(this, conferenceController, conferenceId);
         presenter.initialize();
     }
 
@@ -97,13 +84,20 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         presenter.onDestroy();
     }
 
+    private void launchEventDetailActivity(long sessionId) {
+        Timber.d(String.format("Session Selected: %s", sessionId));
+
+        Intent eventDetailIntent = new Intent(this, EventDetailActivity.class);
+        eventDetailIntent.putExtra("id", sessionId);
+        startActivity(eventDetailIntent);
+    }
+
     public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSessionsAdapter.ViewHolder> {
         private final List<ConferenceSessionData> conferenceSessions;
-        private View.OnClickListener onClickListener;
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             private final SimpleDateFormat DAY_FORMATTER = new SimpleDateFormat("EEEE, MMMM dd, yyyy", Locale.US);
-            private final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("h:mm a");
+            private final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("h:mm a", Locale.US);
 
             @InjectView(R.id.day) public TextView dayView;
             @InjectView(R.id.time) public TextView timeView;
@@ -114,10 +108,6 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             public ViewHolder(View v) {
                 super(v);
                 ButterKnife.inject(this, v);
-            }
-
-            public void setTag(Object tag) {
-                super.itemView.setTag(tag);
             }
 
             public void setTitle(final String title) {
@@ -135,10 +125,6 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             public void setRoom(final String room) {
                 this.roomView.setText(room);
             }
-
-            public void setOnClickListener(View.OnClickListener onClickListener) {
-                super.itemView.setOnClickListener(onClickListener);
-            }
         }
 
         public ConferenceSessionsAdapter(List<ConferenceSessionData> conferenceSessions) {
@@ -155,12 +141,23 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
         @Override
         public void onBindViewHolder(ConferenceSessionsAdapter.ViewHolder holder, int position) {
-            holder.setTag(getItem(position).getId());
             holder.setDay(getItem(position).getStartDttm());
             holder.setTime(getItem(position).getStartDttm());
             holder.setTitle(getItem(position).getName());
             holder.setRoom("112E"); //TODO -- set to real value once room data is available
-            holder.setOnClickListener(this.onClickListener);
+
+            final long sessionId = getItemId(position);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    launchEventDetailActivity(sessionId);
+                }
+            });
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return getItem(position).getId();
         }
 
         @Override
@@ -170,10 +167,6 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
         public ConferenceSessionData getItem(int position) {
             return conferenceSessions.get(position);
-        }
-
-        public void setOnClickListener(View.OnClickListener onClickListener) {
-            this.onClickListener = onClickListener;
         }
     }
 }
