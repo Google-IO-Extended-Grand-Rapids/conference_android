@@ -124,7 +124,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             return conferenceSessions.get(position);
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             private final SimpleDateFormat DAY_FORMATTER = new SimpleDateFormat("EEEE, MMMM dd, yyyy", Locale.US);
             private final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("h:mm a", Locale.US);
 
@@ -138,6 +138,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             public ViewHolder(View v) {
                 super(v);
                 ButterKnife.inject(this, v);
+                v.setOnClickListener(this);
             }
 
             public void setTitle(final String title) {
@@ -162,14 +163,11 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
                 setTime(conferenceSessionData.getStartDttm());
                 setTitle(conferenceSessionData.getName());
                 setRoom("112E"); //TODO -- set to real value once room data is available
+            }
 
-                final long sessionId = conferenceSessionData.getId();
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        launchEventDetailActivity(sessionId);
-                    }
-                });
+            @Override
+            public void onClick(View v) {
+                launchEventDetailActivity(conferenceSessionData.getId());
             }
         }
     }
