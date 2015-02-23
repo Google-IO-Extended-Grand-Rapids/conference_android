@@ -94,19 +94,6 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
 
         List<ConferenceData> conferenceDatas;
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            @InjectView(R.id.name) public TextView nameView;
-
-            public ViewHolder(View view) {
-                super(view);
-                ButterKnife.inject(this, view);
-            }
-
-            public void setName(String name) {
-                nameView.setText(name);
-            }
-        }
-
         public ConferencesAdapter(List<ConferenceData> conferenceDatas) {
             this.conferenceDatas = conferenceDatas;
         }
@@ -127,15 +114,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
 
         @Override
         public void onBindViewHolder(ConferencesAdapter.ViewHolder holder, int position) {
-            holder.setName(getItem(position).getName());
-
-            final long conferenceId = getItemId(position);
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    launchConferenceSessionsListActivity(conferenceId);
-                }
-            });
+            holder.setConferenceData(getItem(position));
         }
 
         @Override
@@ -146,6 +125,33 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         @Override
         public long getItemId(int position) {
             return getItem(position).getId();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            @InjectView(R.id.name) public TextView nameView;
+            private ConferenceData conferenceData;
+
+            public ViewHolder(View view) {
+                super(view);
+                ButterKnife.inject(this, view);
+            }
+
+            public void setName(String name) {
+                nameView.setText(name);
+            }
+
+            public void setConferenceData(ConferenceData conferenceData) {
+                this.conferenceData = conferenceData;
+                setName(conferenceData.getName());
+
+                final long conferenceId = conferenceData.getId();
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        launchConferenceSessionsListActivity(conferenceId);
+                    }
+                });
+            }
         }
     }
 }
