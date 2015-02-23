@@ -17,16 +17,9 @@ import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.ui.listener.RecyclerItemClickListener;
 import com.sagetech.conference_android.app.ui.presenter.ConferenceSessionListActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionActivity;
-import com.sagetech.conference_android.app.model.ConferenceData;
-import com.sagetech.conference_android.app.ui.listener.RecyclerItemClickListener;
-import com.sagetech.conference_android.app.ui.presenter.ConferenceListActivityPresenter;
-import com.sagetech.conference_android.app.ui.presenter.IConferenceListActivity;
-import timber.log.Timber;
-
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import java.util.List;
 import java.util.Locale;
 
@@ -34,6 +27,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import retrofit.http.HEAD;
 import timber.log.Timber;
 
 /**
@@ -53,8 +47,8 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     private Integer conferenceId;
 
     @Override
-    public void populateConferenceSessions(List<ConferenceSessionData> datas) {
-        mAdapter = new ConferenceSessionsAdapter(datas);
+    public void populateConferenceSessions(List<ConferenceSessionData> conferenceSessions) {
+        mAdapter = new ConferenceSessionsAdapter(conferenceSessions);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -109,13 +103,12 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     }
 
     public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSessionsAdapter.ViewHolder> {
-        private final List<ConferenceSessionData> conferenceSessionDatas;
-        private final String TIME_FORMAT = "h:mm a";
-        private final String DAY_FORMAT = "EEEE, MMMM dd, yyyy";
-        private final SimpleDateFormat DAY_FORMATTER = new SimpleDateFormat(DAY_FORMAT, Locale.US);
-        private final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat(TIME_FORMAT);
+        private final List<ConferenceSessionData> conferenceSessions;
 
         public class ViewHolder extends RecyclerView.ViewHolder {
+            private final SimpleDateFormat DAY_FORMATTER = new SimpleDateFormat("EEEE, MMMM dd, yyyy", Locale.US);
+            private final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("h:mm a");
+
             @InjectView(R.id.day) public TextView dayView;
             @InjectView(R.id.time) public TextView timeView;
             @InjectView(R.id.title) public TextView titleView;
@@ -128,7 +121,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             }
 
             public void setTag(Object tag) {
-                this.itemView.setTag(tag);
+                super.itemView.setTag(tag);
             }
 
             public void setTitle(final String title) {
@@ -148,8 +141,8 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             }
         }
 
-        public ConferenceSessionsAdapter(List<ConferenceSessionData> conferenceSessionDatas) {
-            this.conferenceSessionDatas = conferenceSessionDatas;
+        public ConferenceSessionsAdapter(List<ConferenceSessionData> conferenceSessions) {
+            this.conferenceSessions = conferenceSessions;
         }
 
         @Override
@@ -157,31 +150,25 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
             View v = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_view_item, parent, false);
 
-            ViewHolder vh = new ViewHolder(v);
-
-            return vh;
+            return new ViewHolder(v);
         }
 
         @Override
         public void onBindViewHolder(ConferenceSessionsAdapter.ViewHolder holder, int position) {
-            holder.setTag(conferenceSessionDatas.get(position).getId());
-            holder.setDay(conferenceSessionDatas.get(position).getStartDttm());
-            holder.setTime(conferenceSessionDatas.get(position).getStartDttm());
-            holder.setTitle(conferenceSessionDatas.get(position).getName());
-            holder.setRoom("112E"); //TODO -- set to real value once roomdata is available
-        }
-
-        private String toDay(Date date) {
-            return DAY_FORMATTER.format(date);
+            holder.setTag(getItem(position).getId());
+            holder.setDay(getItem(position).getStartDttm());
+            holder.setTime(getItem(position).getStartDttm());
+            holder.setTitle(getItem(position).getName());
+            holder.setRoom("112E"); //TODO -- set to real value once room data is available
         }
 
         @Override
         public int getItemCount() {
-            return conferenceSessionDatas.size();
+            return conferenceSessions.size();
         }
 
-        private String toTime(Date date) {
-            return TIME_FORMATTER.format(date);
+        public ConferenceSessionData getItem(int position) {
+            return conferenceSessions.get(position);
         }
     }
 }
