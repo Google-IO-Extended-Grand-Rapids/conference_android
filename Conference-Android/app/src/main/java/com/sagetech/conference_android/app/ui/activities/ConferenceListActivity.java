@@ -127,13 +127,14 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
             return getItem(position).getId();
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
+        public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             @InjectView(R.id.name) public TextView nameView;
             private ConferenceData conferenceData;
 
             public ViewHolder(View view) {
                 super(view);
                 ButterKnife.inject(this, view);
+                view.setOnClickListener(this);
             }
 
             public void setName(String name) {
@@ -143,14 +144,11 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
             public void setConferenceData(ConferenceData conferenceData) {
                 this.conferenceData = conferenceData;
                 setName(conferenceData.getName());
+            }
 
-                final long conferenceId = conferenceData.getId();
-                itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        launchConferenceSessionsListActivity(conferenceId);
-                    }
-                });
+            @Override
+            public void onClick(View v) {
+                launchConferenceSessionsListActivity(conferenceData.getId());
             }
         }
     }
