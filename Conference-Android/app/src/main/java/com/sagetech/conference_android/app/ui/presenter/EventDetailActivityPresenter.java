@@ -14,7 +14,6 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.functions.Func3;
-import rx.observables.BlockingObservable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -62,7 +61,7 @@ public class EventDetailActivityPresenter {
 
     }
 
-    private Observable<EventDetailView> createEventDetailViewObservable(Integer eventId) {
+    private Observable<EventDetailView> createEventDetailViewObservable(Long eventId) {
         // A - we only want to call this data one time...therefore we are caching
         // FIXME this should use eventId, but we have to wait until we are being passed valid values.
         final Observable<ConferenceSessionData> conferenceSessionObservable =

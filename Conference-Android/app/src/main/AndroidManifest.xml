@@ -50,7 +50,7 @@
 >
         </activity>
         <activity
-            android:name=".ui.activities.ConferencesActivity"
+            android:name=".ui.activities.ConferenceListActivity"
             android:label="@string/title_activity_conferences" >
 
         </activity>
