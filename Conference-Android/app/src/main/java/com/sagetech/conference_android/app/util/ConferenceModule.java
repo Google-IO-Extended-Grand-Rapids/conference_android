@@ -13,6 +13,8 @@ import com.sagetech.conference_android.app.ConferenceApplication;
 import com.sagetech.conference_android.app.api.ConferenceApi;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.EventData;
+import com.sagetech.conference_android.app.ui.activities.ConferenceListActivity;
+import com.sagetech.conference_android.app.ui.activities.ConferenceSessionListActivity;
 import com.sagetech.conference_android.app.ui.activities.EventDetailActivity;
 import com.sagetech.conference_android.app.ui.activities.MainActivity;
 import com.sagetech.conference_android.app.ui.activities.SplashActivity;
@@ -33,6 +35,8 @@ import rx.Observable;
 @Module(
         injects = {
                 ConferenceApplication.class,
+                ConferenceListActivity.class,
+                ConferenceSessionListActivity.class,
                 SplashActivity.class,
                 MainActivity.class,
                 FullScheduleFragment.class,

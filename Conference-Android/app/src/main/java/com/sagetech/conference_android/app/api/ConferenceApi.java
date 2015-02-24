@@ -1,8 +1,11 @@
 package com.sagetech.conference_android.app.api;
 
+import com.sagetech.conference_android.app.model.ConferenceData;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.PresenterData;
 import com.sagetech.conference_android.app.model.RoomData;
+
+import java.util.List;
 
 import retrofit.http.GET;
 import retrofit.http.Path;
@@ -13,11 +16,17 @@ import rx.Observable;
  */
 public interface ConferenceApi {
     @GET("/api/conferenceSession/{id}")
-    public Observable<ConferenceSessionData> getConferenceSessionById(@Path("id") Long id);
+    Observable<ConferenceSessionData> getConferenceSessionById(@Path("id") Long id);
+
+    @GET("/api/conference")
+    Observable<List<ConferenceData>> getConferenceData();
 
     @GET("/api/presenter/{id}")
     Observable<PresenterData> getPresenterById(@Path("id") Long id);
 
     @GET("/api/room/{id}")
     Observable<RoomData> getRoomById(@Path("id") Long id);
+
+    @GET("/api/conference/{id}/conferenceSessions")
+    Observable<List<ConferenceSessionData>> getConferenceSessionsById(@Path("id") Long id);
 }
