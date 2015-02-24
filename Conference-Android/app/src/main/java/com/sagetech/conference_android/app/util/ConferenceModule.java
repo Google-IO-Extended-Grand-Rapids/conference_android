@@ -9,6 +9,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.sagetech.conference_android.app.BuildConfig;
 import com.sagetech.conference_android.app.ConferenceApplication;
 import com.sagetech.conference_android.app.api.ConferenceApi;
 import com.sagetech.conference_android.app.api.ConferenceController;
@@ -69,14 +70,14 @@ public final class ConferenceModule {
                 })
                 .create();
 
-        String url = "http://104.236.204.59:8080";
+
         RestAdapter restAdapter = new RestAdapter.Builder().setLogLevel(RestAdapter.LogLevel.FULL).setLog(new RestAdapter.Log() {
 
             public void log(String arg0) {
                 System.out.println(arg0);
             }
 
-        }).setEndpoint(url).setConverter(new GsonConverter(gson)).build();
+        }).setEndpoint(BuildConfig.API_BASE_URL).setConverter(new GsonConverter(gson)).build();
         return restAdapter.create(ConferenceApi.class);
     }
 
