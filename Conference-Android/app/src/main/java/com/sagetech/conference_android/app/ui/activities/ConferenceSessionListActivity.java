@@ -26,7 +26,6 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import retrofit.http.HEAD;
 import timber.log.Timber;
 
 /**

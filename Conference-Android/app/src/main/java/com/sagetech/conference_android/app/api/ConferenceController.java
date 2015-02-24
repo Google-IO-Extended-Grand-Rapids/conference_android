@@ -53,6 +53,9 @@ public class ConferenceController {
         });
     }
 
+    public Observable<List<ConferenceData>> getConferencesData() {
+        return conferenceApi.getConferenceData();
+    }
 
     public Observable<ConferenceSessionData> getConferenceSessionDataById(Long id) {
         return conferenceApi.getConferenceSessionById(id);
