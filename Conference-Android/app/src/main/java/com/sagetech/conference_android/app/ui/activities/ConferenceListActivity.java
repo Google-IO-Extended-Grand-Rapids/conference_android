@@ -129,6 +129,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
 
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             @InjectView(R.id.name) public TextView nameView;
+            @InjectView(R.id.cityAndState) public TextView cityAndStateView;
             private ConferenceData conferenceData;
 
             public ViewHolder(View view) {
@@ -140,10 +141,14 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
             public void setName(String name) {
                 nameView.setText(name);
             }
+            public void setCityAndState(String cityAndState) {
+                cityAndStateView.setText(cityAndState);
+            }
 
             public void setConferenceData(ConferenceData conferenceData) {
                 this.conferenceData = conferenceData;
                 setName(conferenceData.getName());
+                setCityAndState("Detroit, MI");
             }
 
             @Override
