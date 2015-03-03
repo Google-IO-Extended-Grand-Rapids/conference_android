@@ -7,10 +7,12 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200px"
-        android:scaleType="fitStart"
+        android:id="@+id/conferenceImage"
+        android:layout_width="512px"
+        android:layout_height="512px"
+        android:scaleType="center"
         android:adjustViewBounds="true"
+        android:layout_gravity="center"
         android:background="@drawable/googlestream_icon"/>
 
     <TextView

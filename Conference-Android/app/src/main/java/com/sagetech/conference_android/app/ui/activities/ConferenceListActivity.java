@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
@@ -130,6 +131,8 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             @InjectView(R.id.name) public TextView nameView;
             @InjectView(R.id.cityAndState) public TextView cityAndStateView;
+            @InjectView(R.id.conferenceImage) public ImageView conferenceImageView;
+
             private ConferenceData conferenceData;
 
             public ViewHolder(View view) {
@@ -149,6 +152,22 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
                 this.conferenceData = conferenceData;
                 setName(conferenceData.getName());
                 setCityAndState("Detroit, MI");
+                setImage();
+            }
+
+            private void setImage() {
+                int resId = R.drawable.codelabs_icon;
+                int modValue = conferenceData.getId() % 3;
+
+                if (modValue == 0) {
+                    resId = R.drawable.codelabs_icon;
+                } else if (modValue == 1) {
+                    resId = R.drawable.googlestream_icon;
+                } else if (modValue == 2) {
+                    resId = R.drawable.presentation_icon;
+                }
+
+                this.conferenceImageView.setImageResource(resId);
             }
 
             @Override
