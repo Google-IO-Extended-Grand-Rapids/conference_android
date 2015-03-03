@@ -40,7 +40,7 @@ public class SplashActivity extends InjectableActionBarActivity {
         subscription = AppObservable.bindActivity(this, cachedGetEventsObservable)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .delay(5, TimeUnit.SECONDS)
+                .delay(2, TimeUnit.SECONDS)
                 .subscribe(new Subscriber<List<EventData>>() {
                     @Override
                     public void onCompleted() {
