@@ -139,6 +139,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
                 super(view);
                 ButterKnife.inject(this, view);
                 view.setOnClickListener(this);
+                conferenceImageView.setOnClickListener(this);
             }
 
             public void setName(String name) {
@@ -147,6 +148,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
             public void setCityAndState(String cityAndState) {
                 cityAndStateView.setText(cityAndState);
             }
+
 
             public void setConferenceData(ConferenceData conferenceData) {
                 this.conferenceData = conferenceData;

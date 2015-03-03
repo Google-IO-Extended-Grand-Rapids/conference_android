@@ -2,35 +2,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:focusable="true"
     android:clickable="true"
+    android:focusable="true"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/conferenceImage"
-        android:layout_width="512px"
-        android:layout_height="512px"
-        android:scaleType="center"
-        android:adjustViewBounds="true"
-        android:layout_gravity="center"
-        android:background="@drawable/googlestream_icon"/>
-
-    <TextView
-        android:id="@+id/name"
+    <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:text="Google I/O"
-        android:textSize="18sp"
-        />
+        android:layout_gravity="center"
+        card_view:cardCornerRadius="4dp"
+        card_view:cardElevation="30dp">
 
-    <TextView
-        android:id="@+id/cityAndState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="Grand Rapids, MI"/>
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/conferenceImage"
+                android:layout_width="512px"
+                android:layout_height="512px"
+                android:layout_gravity="center"
+                android:adjustViewBounds="true"
+                android:background="@drawable/googlestream_icon"
+                android:scaleType="center" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="10dp"
+                android:text="Google I/O"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/cityAndState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Grand Rapids, MI" />
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
 </LinearLayout>
