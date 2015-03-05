@@ -103,6 +103,14 @@
                     android:text="Image 6"
                     android:id="@+id/button6" />
             </GridLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Questions"
+                android:id="@+id/textView6"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="25dp" />
         </LinearLayout>
     </ScrollView>
 
