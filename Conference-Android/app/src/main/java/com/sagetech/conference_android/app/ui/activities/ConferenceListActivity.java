@@ -132,14 +132,14 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
             @InjectView(R.id.name) public TextView nameView;
             @InjectView(R.id.cityAndState) public TextView cityAndStateView;
             @InjectView(R.id.conferenceImage) public ImageView conferenceImageView;
+            @InjectView(R.id.conferenceLayout) public View conferenceLayout;
 
             private ConferenceData conferenceData;
 
             public ViewHolder(View view) {
                 super(view);
                 ButterKnife.inject(this, view);
-                view.setOnClickListener(this);
-                conferenceImageView.setOnClickListener(this);
+                conferenceLayout.setOnClickListener(this);
             }
 
             public void setName(String name) {
