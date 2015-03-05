@@ -27,20 +27,83 @@
         android:textColor="@color/white"
         android:paddingBottom="10dp" />
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend, odio a vehicula venenatis, nisi nisi commodo arcu, a iaculis nunc purus non orci. Maecenas ac tempor enim. Pellentesque vel enim arcu. Nunc aliquet augue sed consectetur posuere. Mauris congue quam id neque dictum, sed placerat nunc ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean maximus fermentum odio, placerat placerat turpis aliquet eu. Duis finibus tristique mauris vel malesuada. Donec nec ipsum sem."
-        android:id="@+id/textView4"
-        android:padding="15dp" />
+        android:id="@+id/scrollView2" >
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:id="@+id/btnRegister"
-        android:layout_gravity="center_horizontal"
-        android:background="#2876B1"
-        android:width="200dp" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend, odio a vehicula venenatis, nisi nisi commodo arcu, a iaculis nunc purus non orci. Maecenas ac tempor enim. Pellentesque vel enim arcu. Nunc aliquet augue sed consectetur posuere. Mauris congue quam id neque dictum, sed placerat nunc ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean maximus fermentum odio, placerat placerat turpis aliquet eu. Duis finibus tristique mauris vel malesuada. Donec nec ipsum sem."
+                android:id="@+id/textView4"
+                android:padding="15dp" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:id="@+id/btnRegister"
+                android:layout_gravity="center_horizontal"
+                android:background="#2876B1"
+                android:width="200dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thanks to our sponsors"
+                android:id="@+id/textView5"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="15dp" />
+
+            <GridLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:rowCount="2"
+                android:columnCount="3">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="image1"
+                    android:id="@+id/button" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="image 2"
+                    android:id="@+id/button2" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="image 3"
+                    android:id="@+id/button3" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Image 4"
+                    android:id="@+id/button4" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="image 5"
+                    android:id="@+id/button5" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Image 6"
+                    android:id="@+id/button6" />
+            </GridLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
