@@ -13,17 +13,13 @@ import com.sagetech.conference_android.app.BuildConfig;
 import com.sagetech.conference_android.app.ConferenceApplication;
 import com.sagetech.conference_android.app.api.ConferenceApi;
 import com.sagetech.conference_android.app.api.ConferenceController;
-import com.sagetech.conference_android.app.model.EventData;
 import com.sagetech.conference_android.app.ui.activities.ConferenceListActivity;
 import com.sagetech.conference_android.app.ui.activities.ConferenceSessionListActivity;
 import com.sagetech.conference_android.app.ui.activities.EventDetailActivity;
-import com.sagetech.conference_android.app.ui.activities.MainActivity;
 import com.sagetech.conference_android.app.ui.activities.SplashActivity;
-import com.sagetech.conference_android.app.ui.fragments.FullScheduleFragment;
 
 import java.lang.reflect.Type;
 import java.util.Date;
-import java.util.List;
 
 import javax.inject.Singleton;
 
@@ -31,7 +27,7 @@ import dagger.Module;
 import dagger.Provides;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
-import rx.Observable;
+import timber.log.Timber;
 
 @Module(
         injects = {
@@ -39,8 +35,6 @@ import rx.Observable;
                 ConferenceListActivity.class,
                 ConferenceSessionListActivity.class,
                 SplashActivity.class,
-                MainActivity.class,
-                FullScheduleFragment.class,
                 EventDetailActivity.class
         }, library = true
 )
@@ -73,7 +67,7 @@ public final class ConferenceModule {
         RestAdapter restAdapter = new RestAdapter.Builder().setLogLevel(RestAdapter.LogLevel.FULL).setLog(new RestAdapter.Log() {
 
             public void log(String arg0) {
-                System.out.println(arg0);
+                Timber.i(arg0);
             }
 
         }).setEndpoint(BuildConfig.API_BASE_URL).setConverter(new GsonConverter(gson)).build();
@@ -84,12 +78,6 @@ public final class ConferenceModule {
     @Singleton
     ConferenceController provideConferenceController(ConferenceApi conferenceApi) {
         return new ConferenceController(conferenceApi);
-    }
-
-    @Provides
-    @Singleton
-    Observable<List<EventData>> provideCachedGetEventsObservable(ConferenceController conferenceController) {
-        return conferenceController.getEventsObservable().cache();
     }
 
 }
