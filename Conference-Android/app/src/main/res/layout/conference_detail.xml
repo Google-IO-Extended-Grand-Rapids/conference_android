@@ -3,4 +3,44 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="300px"
+        android:id="@+id/conferenceImageView" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Google I/O"
+        android:id="@+id/textView2"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:background="#5F6FCA" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="May 23 - 24 2015"
+        android:id="@+id/textView3"
+        android:paddingLeft="10dp"
+        android:background="#5F6FCA"
+        android:textColor="@color/white"
+        android:paddingBottom="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend, odio a vehicula venenatis, nisi nisi commodo arcu, a iaculis nunc purus non orci. Maecenas ac tempor enim. Pellentesque vel enim arcu. Nunc aliquet augue sed consectetur posuere. Mauris congue quam id neque dictum, sed placerat nunc ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean maximus fermentum odio, placerat placerat turpis aliquet eu. Duis finibus tristique mauris vel malesuada. Donec nec ipsum sem."
+        android:id="@+id/textView4"
+        android:padding="15dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:id="@+id/btnRegister"
+        android:layout_gravity="center_horizontal"
+        android:background="#2876B1"
+        android:width="200dp" />
+
 </LinearLayout>
