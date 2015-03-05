@@ -31,12 +31,11 @@
         <activity
             android:name=".ui.activities.SplashActivity"
             android:label="@string/app_name" >
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".ui.activities.EventDetailActivity"
@@ -52,13 +51,15 @@
         <activity
             android:name=".ui.activities.ConferenceListActivity"
             android:label="@string/title_activity_conferences" >
-
         </activity>
-
         <activity
             android:name=".ui.activities.ConferenceSessionListActivity"
             android:label="@string/title_activity_conference_sessions"
             android:parentActivityName=".ui.activities.MainActivity" >
+        </activity>
+        <activity
+            android:name=".ui.activities.ConferenceDetailActivity"
+            android:label="@string/title_activity_conference_detail" >
         </activity>
     </application>
 

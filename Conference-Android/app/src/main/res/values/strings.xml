@@ -8,5 +8,6 @@
     <string name="title_activity_sign_in">SignInActivity</string>
     <string name="title_activity_conferences">ConferencesActivity</string>
     <string name="title_activity_conference_sessions">ConferenceSessionsActivity</string>
+    <string name="title_activity_conference_detail">ConferenceDetailActivity</string>
 
 </resources>
