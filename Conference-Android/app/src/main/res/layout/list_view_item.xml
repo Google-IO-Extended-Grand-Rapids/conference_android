@@ -45,7 +45,9 @@ android:layout_height="match_parent">
             android:layout_marginTop="@dimen/list_view_item_text_marginTop"
             android:layout_marginLeft="@dimen/list_view_item_text_marginLeft"
             android:text="Introduction and Keynote"
+            android:textStyle="bold"
             android:textSize="18sp"/>
+
 
         <TextView
             android:layout_width="match_parent"
