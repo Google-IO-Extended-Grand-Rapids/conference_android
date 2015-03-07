@@ -85,7 +85,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private void launchConferenceSessionsListActivity(long conferenceId) {
+    private void launchConferenceSessionsListActivity(int conferenceId) {
         Timber.d(String.format("Conference Selected: %s", conferenceId));
 
         Intent conferenceSessionListIntent = new Intent(this, ConferenceDetailActivity.class);
