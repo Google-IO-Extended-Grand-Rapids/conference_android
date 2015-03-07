@@ -19,10 +19,10 @@ import timber.log.Timber;
 public class ConferenceSessionListActivityPresenter {
     private IConferenceSessionActivity conferenceSessionListActivity;
     private ConferenceController conferenceController;
-    private Long conferenceId;
+    private Integer conferenceId;
     private Subscription subscription;
 
-    public ConferenceSessionListActivityPresenter(IConferenceSessionActivity conferenceSessionListActivity, ConferenceController conferenceController, Long conferenceId) {
+    public ConferenceSessionListActivityPresenter(IConferenceSessionActivity conferenceSessionListActivity, ConferenceController conferenceController, Integer conferenceId) {
         this.conferenceSessionListActivity = conferenceSessionListActivity;
         this.conferenceController = conferenceController;
         this.conferenceId = conferenceId;

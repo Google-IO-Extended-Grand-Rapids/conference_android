@@ -35,7 +35,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
     private ConferenceSessionsAdapter mAdapter;
     private ConferenceSessionListActivityPresenter presenter = null;
-    private Long conferenceId;
+    private Integer conferenceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +49,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        conferenceId = getIntent().getExtras().getLong("id");
+        conferenceId = getIntent().getIntExtra("id", 0);
         presenter = new ConferenceSessionListActivityPresenter(this, conferenceController, conferenceId);
         presenter.initialize();
     }
