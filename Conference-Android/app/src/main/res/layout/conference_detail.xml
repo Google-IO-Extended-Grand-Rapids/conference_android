@@ -64,8 +64,8 @@
                 android:id="@+id/txtThankSponsorsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginLeft="@dimen/conference_detail_marginLeft"
+                android:layout_marginTop="@dimen/conference_detail_marginTop"
                 tools:text="Thanks to our sponsors"
                 android:text="Thanks to our sponsors" />
 
@@ -122,8 +122,8 @@
                 android:id="@+id/txtQuestionsText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginLeft="@dimen/conference_detail_marginLeft"
+                android:layout_marginTop="@dimen/conference_detail_marginTop"
                 tools:text="Questions?"
                 android:text="Questions?" />
 
@@ -131,9 +131,7 @@
                 android:id="@+id/txtContactText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_marginTop="10dp"
+                android:layout_margin="@dimen/conference_detail_marginLeft"
                 tools:text="Contact: Mahmoud Ahmadinejad"
                 android:text="Contact: Mahmoud Ahmadinejad"/>
         </LinearLayout>
