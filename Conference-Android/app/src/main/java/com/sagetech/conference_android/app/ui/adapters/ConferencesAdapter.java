@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
@@ -19,8 +20,9 @@ import butterknife.InjectView;
  */
 public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.ViewHolder> {
 
-    List<ConferenceData> conferenceDatas;
     private ConferencesOnClickListener onClickListener;
+    private List<ConferenceData> conferenceDatas;
+
 
     public interface ConferencesOnClickListener {
         public void clicked(Integer conferenceId);
@@ -62,21 +64,47 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @InjectView(R.id.name) public TextView nameView;
+        @InjectView(R.id.cityAndState) public TextView cityAndStateView;
+        @InjectView(R.id.conferenceImage) public ImageView conferenceImageView;
+        @InjectView(R.id.conferenceLayout) public View conferenceLayout;
+
         private ConferenceData conferenceData;
 
         public ViewHolder(View view) {
             super(view);
             ButterKnife.inject(this, view);
-            view.setOnClickListener(this);
+            conferenceLayout.setOnClickListener(this);
         }
 
         public void setName(String name) {
             nameView.setText(name);
         }
+        public void setCityAndState(String cityAndState) {
+            cityAndStateView.setText(cityAndState);
+        }
+
 
         public void setConferenceData(ConferenceData conferenceData) {
             this.conferenceData = conferenceData;
             setName(conferenceData.getName());
+            setCityAndState("Detroit, MI");
+            setImage();
+        }
+
+        private void setImage() {
+            //TODO This is to be replaced with the real images per conference when that is ready
+            int resId = R.drawable.codelabs_icon;
+            int modValue = conferenceData.getId() % 3;
+
+            if (modValue == 0) {
+                resId = R.drawable.codelabs_icon;
+            } else if (modValue == 1) {
+                resId = R.drawable.googlestream_icon;
+            } else if (modValue == 2) {
+                resId = R.drawable.presentation_icon;
+            }
+
+            this.conferenceImageView.setImageResource(resId);
         }
 
         @Override

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
@@ -95,4 +96,5 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     public void clicked(Integer conferenceId) {
         launchConferenceSessionsListActivity(conferenceId);
     }
+
 }
