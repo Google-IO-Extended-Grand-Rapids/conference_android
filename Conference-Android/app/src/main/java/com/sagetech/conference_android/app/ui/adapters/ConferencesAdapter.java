@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
-import com.sagetech.conference_android.app.model.ConferenceData;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceDataViewModel;
 
 import java.util.List;
 
@@ -21,14 +21,14 @@ import butterknife.InjectView;
 public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.ViewHolder> {
 
     private ConferencesOnClickListener onClickListener;
-    private List<ConferenceData> conferenceDatas;
+    private List<ConferenceDataViewModel> conferenceDatas;
 
 
     public interface ConferencesOnClickListener {
         public void clicked(Integer conferenceId);
     }
 
-    public ConferencesAdapter(List<ConferenceData> conferenceDatas, ConferencesOnClickListener conferencesOnClickListener) {
+    public ConferencesAdapter(List<ConferenceDataViewModel> conferenceDatas, ConferencesOnClickListener conferencesOnClickListener) {
         this.conferenceDatas = conferenceDatas;
         this.onClickListener = conferencesOnClickListener;
     }
@@ -43,7 +43,7 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
         return vh;
     }
 
-    public ConferenceData getItem(int position) {
+    public ConferenceDataViewModel getItem(int position) {
         return conferenceDatas.get(position);
     }
 
@@ -68,7 +68,7 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
         @InjectView(R.id.conferenceImage) public ImageView conferenceImageView;
         @InjectView(R.id.conferenceLayout) public View conferenceLayout;
 
-        private ConferenceData conferenceData;
+        private ConferenceDataViewModel conferenceData;
 
         public ViewHolder(View view) {
             super(view);
@@ -84,10 +84,10 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
         }
 
 
-        public void setConferenceData(ConferenceData conferenceData) {
+        public void setConferenceData(ConferenceDataViewModel conferenceData) {
             this.conferenceData = conferenceData;
             setName(conferenceData.getName());
-            setCityAndState("Detroit, MI");
+            setCityAndState(conferenceData.getCityAndState());
             setImage();
         }
 
