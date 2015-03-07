@@ -17,12 +17,12 @@ import timber.log.Timber;
  * Created by adam on 2/21/15.
  */
 public class ConferenceSessionListActivityPresenter {
-    private ConferenceSessionListActivity conferenceSessionListActivity;
+    private IConferenceSessionActivity conferenceSessionListActivity;
     private ConferenceController conferenceController;
-    private Long conferenceId;
+    private Integer conferenceId;
     private Subscription subscription;
 
-    public ConferenceSessionListActivityPresenter(ConferenceSessionListActivity conferenceSessionListActivity, ConferenceController conferenceController, Long conferenceId) {
+    public ConferenceSessionListActivityPresenter(IConferenceSessionActivity conferenceSessionListActivity, ConferenceController conferenceController, Integer conferenceId) {
         this.conferenceSessionListActivity = conferenceSessionListActivity;
         this.conferenceController = conferenceController;
         this.conferenceId = conferenceId;

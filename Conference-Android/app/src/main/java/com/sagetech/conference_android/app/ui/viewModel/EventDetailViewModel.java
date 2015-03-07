@@ -8,7 +8,7 @@ import java.util.Locale;
 /**
  * Created by carlushenry on 2/19/15.
  */
-public class EventDetailView {
+public class EventDetailViewModel {
 
     public enum EventType {
         PRESENTATION, CODE_LABS

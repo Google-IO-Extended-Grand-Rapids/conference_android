@@ -8,16 +8,11 @@ import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.api.ConferenceController;
-import com.sagetech.conference_android.app.model.EventData;
 import com.sagetech.conference_android.app.ui.presenter.EventDetailActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IEventDetailActivity;
-import com.sagetech.conference_android.app.ui.viewModel.EventDetailView;
+import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -74,20 +69,20 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
     }
 
     @Override
-    public void populateWithEventDetailView(EventDetailView eventDetailView) {
-        populatePresenters(eventDetailView.getPresenters());
-        populateEventInfo(eventDetailView);
+    public void populateWithEventDetailView(EventDetailViewModel eventDetailViewModel) {
+        populatePresenters(eventDetailViewModel.getPresenters());
+        populateEventInfo(eventDetailViewModel);
 
     }
 
-    private void populatePresenters(List<EventDetailView.EventDetailPresenterView> presenters) {
+    private void populatePresenters(List<EventDetailViewModel.EventDetailPresenterView> presenters) {
         if (presenters == null || presenters.isEmpty()) {
             return;
         }
         // at most, we can only have two presenters.  Since we are not using a list view
         // we have to explicitly set the values
         for (int i = 0; i < presenters.size(); i++) {
-            EventDetailView.EventDetailPresenterView currPresenter = presenters.get(i);
+            EventDetailViewModel.EventDetailPresenterView currPresenter = presenters.get(i);
             TextView bio = (i == 0 ? bio1 : bio2);
             TextView name = (i == 0 ? name1 : name2);
 
@@ -97,14 +92,14 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
     }
 
 
-    private void populateEventInfo(EventDetailView eventDetailView) {
-        this.title.setText(eventDetailView.getTitle());
-        this.location.setText(eventDetailView.getLocationAndStartTime());
-        this.description.setText(eventDetailView.getDescription());
+    private void populateEventInfo(EventDetailViewModel eventDetailViewModel) {
+        this.title.setText(eventDetailViewModel.getTitle());
+        this.location.setText(eventDetailViewModel.getLocationAndStartTime());
+        this.description.setText(eventDetailViewModel.getDescription());
 
-        if (EventDetailView.EventType.PRESENTATION == eventDetailView.getEventType()) {
+        if (EventDetailViewModel.EventType.PRESENTATION == eventDetailViewModel.getEventType()) {
             img.setImageResource(R.drawable.presentation_icon);
-        } else if (EventDetailView.EventType.CODE_LABS == eventDetailView.getEventType()) {
+        } else if (EventDetailViewModel.EventType.CODE_LABS == eventDetailViewModel.getEventType()) {
             img.setImageResource(R.drawable.codelabs_icon);
         }
 

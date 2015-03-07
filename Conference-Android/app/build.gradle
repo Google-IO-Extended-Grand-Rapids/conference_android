@@ -42,7 +42,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "API_BASE_URL", "\"http://localhost:8080\""
+            buildConfigField "String", "API_BASE_URL", "\"http://104.236.204.59:8080\""
             signingConfig signingConfigs.debug
         }
         release {
@@ -70,5 +70,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.jakewharton.timber:timber:2.5.1'
     compile 'com.android.support:recyclerview-v7:21.0.0'
+    compile 'com.android.support:cardview-v7:21.0.0'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

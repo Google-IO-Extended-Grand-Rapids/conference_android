@@ -1,13 +1,10 @@
 package com.sagetech.conference_android.app.ui.presenter;
 
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
-import com.sagetech.conference_android.app.model.EventData;
 import com.sagetech.conference_android.app.model.PresenterData;
 import com.sagetech.conference_android.app.model.RoomData;
-import com.sagetech.conference_android.app.ui.viewModel.EventDetailView;
+import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
 
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -18,8 +15,8 @@ import java.util.List;
  */
 public class EventDetailViewBuilder {
 
-    public EventDetailView toEventDetailView(ConferenceSessionData eventData, List<PresenterData> presenterDataList, RoomData roomData) {
-        EventDetailView dto = new EventDetailView();
+    public EventDetailViewModel toEventDetailView(ConferenceSessionData eventData, List<PresenterData> presenterDataList, RoomData roomData) {
+        EventDetailViewModel dto = new EventDetailViewModel();
         dto.setDescription(eventData.getFullDesc());
         dto.setStartDttm(eventData.getStartDttm());
         dto.setEndDttm(addMinutes(dto.getStartDttm(), eventData.getDurationMinutes()));
@@ -31,9 +28,9 @@ public class EventDetailViewBuilder {
         return dto;
     }
 
-    private List<EventDetailView.EventDetailPresenterView> toPresenters(List<PresenterData> presenterDataList) {
+    private List<EventDetailViewModel.EventDetailPresenterView> toPresenters(List<PresenterData> presenterDataList) {
 
-        List<EventDetailView.EventDetailPresenterView> presenterList = new ArrayList<EventDetailView.EventDetailPresenterView>();
+        List<EventDetailViewModel.EventDetailPresenterView> presenterList = new ArrayList<EventDetailViewModel.EventDetailPresenterView>();
 
         for (PresenterData currPresenter : presenterDataList) {
             presenterList.add(toPresenter(currPresenter));
@@ -43,8 +40,8 @@ public class EventDetailViewBuilder {
         return presenterList;
     }
 
-    private EventDetailView.EventDetailPresenterView toPresenter(PresenterData currPresenter) {
-        EventDetailView.EventDetailPresenterView presenter = new EventDetailView().new EventDetailPresenterView();
+    private EventDetailViewModel.EventDetailPresenterView toPresenter(PresenterData currPresenter) {
+        EventDetailViewModel.EventDetailPresenterView presenter = new EventDetailViewModel().new EventDetailPresenterView();
 
         presenter.setFirstName(currPresenter.getId() + "");
         presenter.setLastName(currPresenter.getUserId());

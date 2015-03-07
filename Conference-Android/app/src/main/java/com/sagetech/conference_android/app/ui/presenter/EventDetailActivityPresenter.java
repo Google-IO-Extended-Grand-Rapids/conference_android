@@ -4,7 +4,7 @@ import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.PresenterData;
 import com.sagetech.conference_android.app.model.RoomData;
-import com.sagetech.conference_android.app.ui.viewModel.EventDetailView;
+import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
 
 import java.util.List;
 
@@ -37,13 +37,13 @@ public class EventDetailActivityPresenter {
     }
 
     public void initialize() {
-        Observable<EventDetailView> eventDetailViewObservable = createEventDetailViewObservable(eventId);
+        Observable<EventDetailViewModel> eventDetailViewObservable = createEventDetailViewObservable(eventId);
 
 
         subscription = eventDetailViewObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<EventDetailView>() {
+                .subscribe(new Subscriber<EventDetailViewModel>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -54,14 +54,14 @@ public class EventDetailActivityPresenter {
                     }
 
                     @Override
-                    public void onNext(EventDetailView eventDetailView) {
-                        eventDetailActivity.populateWithEventDetailView(eventDetailView);
+                    public void onNext(EventDetailViewModel eventDetailViewModel) {
+                        eventDetailActivity.populateWithEventDetailView(eventDetailViewModel);
                     }
                 });
 
     }
 
-    private Observable<EventDetailView> createEventDetailViewObservable(Long eventId) {
+    private Observable<EventDetailViewModel> createEventDetailViewObservable(Long eventId) {
         // A - we only want to call this data one time...therefore we are caching
         // FIXME this should use eventId, but we have to wait until we are being passed valid values.
         final Observable<ConferenceSessionData> conferenceSessionObservable =
@@ -102,10 +102,10 @@ public class EventDetailActivityPresenter {
                     }
                 });
 
-        // Combine all of the observers results together into one EventDetailView
-        return Observable.zip(conferenceSessionObservable, presenterObservable, roomDataObservable, new Func3<ConferenceSessionData, List<PresenterData>, RoomData, EventDetailView>() {
+        // Combine all of the observers results together into one EventDetailViewModel
+        return Observable.zip(conferenceSessionObservable, presenterObservable, roomDataObservable, new Func3<ConferenceSessionData, List<PresenterData>, RoomData, EventDetailViewModel>() {
             @Override
-            public EventDetailView call(ConferenceSessionData confSessionData, List<PresenterData> presenterDataList, RoomData roomData) {
+            public EventDetailViewModel call(ConferenceSessionData confSessionData, List<PresenterData> presenterDataList, RoomData roomData) {
                 return eventDetailViewBuilder.toEventDetailView(confSessionData, presenterDataList, roomData);
             }
         });
