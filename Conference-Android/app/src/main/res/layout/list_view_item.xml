@@ -8,8 +8,8 @@ android:layout_height="match_parent">
         android:id="@+id/day"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginTop="@dimen/list_view_item_text_marginTop"
+        android:layout_marginLeft="@dimen/list_view_item_text_marginLeft"
         android:text="Wednesday, June 25, 2014"
         android:textColor="@color/blue"
         android:textSize="16sp"
@@ -17,58 +17,66 @@ android:layout_height="match_parent">
         android:visibility="gone"/>
 
     <RelativeLayout
-        android:id="@+id/timeBox"
-        android:layout_width="70dp"
+        android:id="@+id/iconBox"
+        android:layout_width="@dimen/list_view_item_icon_box_layout_width"
         android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/ab_background_textured_gray">
+        android:layout_alignParentLeft="true">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/time"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="5dp"
-            android:text="7:30 AM"
-            android:textColor="@color/text_color_light"
-            android:textSize="14sp"/>
+        <ImageView
+            android:layout_width="@dimen/list_view_item_image_layout_width"
+            android:layout_height="@dimen/list_view_item_image_layout_height"
+            android:id="@+id/iconType"
+            android:layout_marginTop="@dimen/list_view_item_image_marginTop"
+            android:layout_marginRight="@dimen/list_view_item_image_marginRight"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/icon_sessiontype_c"/>
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/timeBox">
+        android:layout_alignRight="@+id/iconBox" >
 
         <TextView
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="5dp"
-            android:layout_toLeftOf="@+id/scheduled"
-            android:text="Volley"
+            android:layout_marginTop="@dimen/list_view_item_text_marginTop"
+            android:layout_marginLeft="@dimen/list_view_item_text_marginLeft"
+            android:text="Introduction and Keynote"
             android:textSize="18sp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:layout_below="@+id/title"
+            android:layout_marginTop="@dimen/list_view_item_text_padding"
+            android:layout_marginLeft="@dimen/list_view_item_text_padding"
+            android:text="9 - 11:30 a.m."
+            android:textColor="@color/text_color_light"
+            android:textSize="14sp"/>
+
         <TextView
             android:id="@+id/room"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title"
-            android:layout_toLeftOf="@+id/scheduled"
-            android:layout_marginTop="2dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginBottom="10dp"
-            android:text="TBD"
+            android:layout_below="@+id/time"
+            android:layout_marginTop="@dimen/list_view_item_text_padding"
+            android:layout_marginLeft="@dimen/list_view_item_text_padding"
+            android:text="Loosemore Auditorium"
             android:textColor="@color/text_color_light"
             android:textSize="14sp"/>
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:id="@+id/scheduled"
-            android:layout_marginRight="15dp"
-            android:layout_centerVertical="true"
+            android:id="@+id/pin"
+            android:layout_marginTop="@dimen/list_view_item_image_marginTop"
+            android:layout_marginRight="@dimen/list_view_item_image_marginRight"
             android:layout_alignParentRight="true"
-            android:src="@drawable/googlestream_icon"/>
+            android:src="@drawable/ic_pin"/>
 
     </RelativeLayout>
 
