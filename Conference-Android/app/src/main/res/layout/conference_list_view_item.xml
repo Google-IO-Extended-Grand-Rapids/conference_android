@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +12,7 @@
     card_view:cardCornerRadius="4dp"
     card_view:cardElevation="30dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:id="@+id/conferenceLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,8 +22,8 @@
 
         <ImageView
             android:id="@+id/conferenceImage"
-            android:layout_width="512px"
-            android:layout_height="512px"
+            android:layout_width="@dimen/conference_list_image_layout_width"
+            android:layout_height="@dimen/conference_list_image_layout_height"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
             android:background="@drawable/googlestream_icon"
@@ -34,7 +36,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="10dp"
-            android:text="Google I/O"
+            tools:text="Google I/O"
             android:textSize="18sp" />
 
         <TextView
@@ -42,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="Grand Rapids, MI" />
+            tools:text="Grand Rapids, MI" />
 
 
     </LinearLayout>

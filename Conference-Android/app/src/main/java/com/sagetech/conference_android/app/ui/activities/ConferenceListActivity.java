@@ -158,6 +158,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
             }
 
             private void setImage() {
+                //TODO This is to be replaced with the real images per conference when that is ready
                 int resId = R.drawable.codelabs_icon;
                 int modValue = conferenceData.getId() % 3;
 
