@@ -1,0 +1,36 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtConferenceName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_dark"
+        android:padding="@dimen/conference_detail_conf_name_padding"
+        android:text="Google I/O"
+        tools:text="Google I/O"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/txtConferenceDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@color/purple_dark"
+        android:padding="@dimen/conference_detail_conf_name_padding"
+        android:text="May 25 - 24 2015"
+        tools:text="May 23 - 24 2015"
+        android:textColor="@color/white" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/confView"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

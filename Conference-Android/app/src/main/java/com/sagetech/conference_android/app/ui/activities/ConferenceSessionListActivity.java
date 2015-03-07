@@ -40,7 +40,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_conferences);
+        setContentView(R.layout.activity_conference_session_items);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

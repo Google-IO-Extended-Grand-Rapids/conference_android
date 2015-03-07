@@ -6,6 +6,8 @@
     <color name="blue">#03A9F4</color>
     <color name="blue_dark">#3481f0</color>
     <color name="red">#ee333a</color>
+    <color name="purple_light">#AAB8DB</color>
+    <color name="purple_dark">#5F6FCA</color>
 
     <color name="text_color_dark">#6d6d6d</color>
     <color name="text_color_light">#ababab</color>
@@ -17,4 +19,6 @@
     <!-- Conference Detail Screen (conference_detail_) -->
     <color name="conference_detail_title_background">#5F6FCA</color>
     <color name="conference_detail_register_button">#2876B1</color>
+
+
 </resources>
