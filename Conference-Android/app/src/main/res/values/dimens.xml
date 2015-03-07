@@ -19,7 +19,7 @@
     <dimen name="list_view_item_text_padding">5dp</dimen>
     <dimen name="list_view_item_image_marginTop">11dp</dimen>
     <dimen name="list_view_item_image_marginRight">15dp</dimen>
-    <dimen name="list_view_item_icon_box_layout_width">70dp</dimen>
+    <dimen name="list_view_item_icon_box_layout_width">71dp</dimen>
     <dimen name="list_view_item_image_layout_height">50dp</dimen>
     <dimen name="list_view_item_image_layout_width">50dp</dimen>
 
