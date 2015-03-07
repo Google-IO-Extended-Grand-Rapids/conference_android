@@ -87,7 +87,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     private void launchConferenceSessionsListActivity(long conferenceId) {
         Timber.d(String.format("Conference Selected: %s", conferenceId));
 
-        Intent conferenceSessionListIntent = new Intent(this, ConferenceSessionListActivity.class);
+        Intent conferenceSessionListIntent = new Intent(this, ConferenceDetailActivity.class);
         conferenceSessionListIntent.putExtra("id", conferenceId);
         startActivity(conferenceSessionListIntent);
     }

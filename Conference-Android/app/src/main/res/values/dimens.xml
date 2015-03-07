@@ -5,4 +5,16 @@
     <dimen name="conference_list_image_layout_width">150dp</dimen>
     <dimen name="conference_list_image_layout_height">150dp</dimen>
 
+
+
+
+
+    <!-- Conference Detail Screen (conference_detail_) -->
+    <dimen name="conference_detail_image_layout_height">333px</dimen>
+    <dimen name="conference_detail_conf_name_padding">10dp</dimen>
+    <dimen name="conference_detail_padding">15dp</dimen>
+    <dimen name="conference_detail_marginLeft">15dp</dimen>
+    <dimen name="conference_detail_marginTop">25dp</dimen>
+    <dimen name="conference_detail_register_button_width">200dp</dimen>
+
     </resources>

@@ -13,4 +13,8 @@
 
     <color name="branding_color_primary">@color/blue</color>
     <color name="branding_color_primary_dark">@color/blue_dark</color>
+
+    <!-- Conference Detail Screen (conference_detail_) -->
+    <color name="conference_detail_title_background">#5F6FCA</color>
+    <color name="conference_detail_register_button">#2876B1</color>
 </resources>
