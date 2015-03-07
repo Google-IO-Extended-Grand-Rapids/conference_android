@@ -19,6 +19,7 @@ import timber.log.Timber;
  */
 public class ConferenceListActivityPresenter {
 
+    private final ConferenceBuilder conferenceBuilder;
     private ConferenceController conferenceController;
     private Subscription subscription;
     private IConferenceListActivity conferenceListActivity;
@@ -26,6 +27,7 @@ public class ConferenceListActivityPresenter {
     public ConferenceListActivityPresenter(ConferenceController conferenceController, IConferenceListActivity activity) {
         this.conferenceController = conferenceController;
         this.conferenceListActivity = activity;
+        this.conferenceBuilder = new ConferenceBuilder();
     }
 
     public void initialize() {
@@ -47,30 +49,13 @@ public class ConferenceListActivityPresenter {
             @Override
             public void onNext(List<ConferenceData> conferenceDatas) {
 
-                conferenceListActivity.populateConferences(buildViewModel(conferenceDatas));
+                conferenceListActivity.populateConferences(conferenceBuilder.toConferenceDataViewModel(conferenceDatas));
             }
         });
 
     }
 
-    public List<ConferenceDataViewModel> buildViewModel(List<ConferenceData> conferenceDatas) {
-        List<ConferenceDataViewModel> confDataViewModels = new ArrayList<ConferenceDataViewModel>();
-
-        for (ConferenceData currConfData : conferenceDatas) {
-            confDataViewModels.add(toConferenceDataViewModel(currConfData));
-        }
-
-        return confDataViewModels;
-    }
-
-    private ConferenceDataViewModel toConferenceDataViewModel(ConferenceData currConfData) {
-        ConferenceDataViewModel confDataViewModel = new ConferenceDataViewModel();
-
-        //TODO Fix this and get the city and state from the location.
-        confDataViewModel.setCityAndState("Grand Rapids, MI");
-        confDataViewModel.setName(currConfData.getName());
-        confDataViewModel.setId(currConfData.getId());
-
-        return confDataViewModel;
+    public void onDestroy() {
+        subscription.unsubscribe();
     }
 }

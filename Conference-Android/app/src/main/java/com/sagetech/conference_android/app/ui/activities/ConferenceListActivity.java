@@ -98,4 +98,11 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         launchConferenceSessionsListActivity(conferenceId);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.onDestroy();
+    }
+
+
 }
