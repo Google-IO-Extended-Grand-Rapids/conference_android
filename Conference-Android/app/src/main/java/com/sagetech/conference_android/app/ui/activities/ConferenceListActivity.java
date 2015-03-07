@@ -18,6 +18,7 @@ import com.sagetech.conference_android.app.model.ConferenceData;
 import com.sagetech.conference_android.app.ui.adapters.ConferencesAdapter;
 import com.sagetech.conference_android.app.ui.presenter.ConferenceListActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceListActivity;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceDataViewModel;
 
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     }
 
     @Override
-    public void populateConferences(List<ConferenceData> datas) {
+    public void populateConferences(List<ConferenceDataViewModel> datas) {
         mAdapter = new ConferencesAdapter(datas, this);
         mRecyclerView.setAdapter(mAdapter);
     }

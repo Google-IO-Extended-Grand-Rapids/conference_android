@@ -2,7 +2,9 @@ package com.sagetech.conference_android.app.ui.presenter;
 
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceData;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceDataViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -44,9 +46,31 @@ public class ConferenceListActivityPresenter {
 
             @Override
             public void onNext(List<ConferenceData> conferenceDatas) {
-                conferenceListActivity.populateConferences(conferenceDatas);
+
+                conferenceListActivity.populateConferences(buildViewModel(conferenceDatas));
             }
         });
 
+    }
+
+    public List<ConferenceDataViewModel> buildViewModel(List<ConferenceData> conferenceDatas) {
+        List<ConferenceDataViewModel> confDataViewModels = new ArrayList<ConferenceDataViewModel>();
+
+        for (ConferenceData currConfData : conferenceDatas) {
+            confDataViewModels.add(toConferenceDataViewModel(currConfData));
+        }
+
+        return confDataViewModels;
+    }
+
+    private ConferenceDataViewModel toConferenceDataViewModel(ConferenceData currConfData) {
+        ConferenceDataViewModel confDataViewModel = new ConferenceDataViewModel();
+
+        //TODO Fix this and get the city and state from the location.
+        confDataViewModel.setCityAndState("Grand Rapids, MI");
+        confDataViewModel.setName(currConfData.getName());
+        confDataViewModel.setId(currConfData.getId());
+
+        return confDataViewModel;
     }
 }
