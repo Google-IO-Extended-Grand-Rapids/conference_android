@@ -1,7 +1,9 @@
 package com.sagetech.conference_android.app.ui.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +31,10 @@ public class ConferenceDetailActivity extends ActionBarActivity {
 
         conferenceId = getIntent().getIntExtra("id", 0);
 
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_conference_detail);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //TODO This is a hack to bring up the conference session list.
         txtConferenceName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,20 +53,17 @@ public class ConferenceDetailActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_conference_detail, menu);
+//        getMenuInflater().inflate(R.menu.menu_conference_detail, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

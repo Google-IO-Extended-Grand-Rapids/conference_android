@@ -39,7 +39,7 @@ public class ConferenceSessionListActivityPresenter {
 
             @Override
             public void onError(Throwable e) {
-                Timber.e(e, "Error in ConferenceSessionListActivityPresenter", null);
+                Timber.e(e, "Error in ConferenceSessionListActivityPresenter", (Object)null);
 
             }
 
