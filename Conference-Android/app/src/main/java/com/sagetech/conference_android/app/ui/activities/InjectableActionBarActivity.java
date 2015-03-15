@@ -16,10 +16,6 @@ public class InjectableActionBarActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(R.string.app_name);
-
-
         ConferenceApplication app = ConferenceApplication.get(this);
         app.inject(this);
     }
