@@ -3,7 +3,9 @@ package com.sagetech.conference_android.app.ui.presenter;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.ui.activities.ConferenceSessionListActivity;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -45,12 +47,38 @@ public class ConferenceSessionListActivityPresenter {
 
             @Override
             public void onNext(List<ConferenceSessionData> conferenceSessionDatas) {
-                conferenceSessionListActivity.populateConferenceSessions(conferenceSessionDatas);
+                conferenceSessionListActivity.populateConferenceSessions(toConferenceSessionViewModel(conferenceSessionDatas));
             }
+
         });
+    }
+
+    private List<ConferenceSessionViewModel> toConferenceSessionViewModel(List<ConferenceSessionData> conferenceSessionDatas) {
+
+        List<ConferenceSessionViewModel> confSessionViewModels = new ArrayList<>();
+        if (conferenceSessionDatas == null) {
+            return confSessionViewModels;
+        }
+
+        for (ConferenceSessionData currConfSession : conferenceSessionDatas) {
+            confSessionViewModels.add(toConfrenceSessionViewModel(currConfSession));
+        }
+        return confSessionViewModels;
+    }
+
+    private ConferenceSessionViewModel toConfrenceSessionViewModel(ConferenceSessionData currConfSession) {
+        ConferenceSessionViewModel confViewModel = new ConferenceSessionViewModel();
+
+        confViewModel.setId(currConfSession.getId());
+        confViewModel.setRoom("112E");
+        confViewModel.setStartDttm(currConfSession.getStartDttm());
+        confViewModel.setTitle(currConfSession.getName());
+
+        return confViewModel;
     }
 
     public void onDestroy() {
         subscription.unsubscribe();
     }
+
 }

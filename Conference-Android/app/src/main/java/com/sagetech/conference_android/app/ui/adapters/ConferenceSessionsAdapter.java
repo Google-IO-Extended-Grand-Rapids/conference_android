@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,14 +22,14 @@ import butterknife.InjectView;
  * Created by carlushenry on 3/5/15.
  */
 public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSessionsAdapter.ViewHolder> {
-    private final List<ConferenceSessionData> conferenceSessions;
+    private final List<ConferenceSessionViewModel> conferenceSessions;
     private ConferenceSessionsOnClickListener onClickListener;
 
     public interface ConferenceSessionsOnClickListener {
         public void clicked(Long id);
     }
 
-    public ConferenceSessionsAdapter(List<ConferenceSessionData> conferenceSessions, ConferenceSessionsOnClickListener onClickListener) {
+    public ConferenceSessionsAdapter(List<ConferenceSessionViewModel> conferenceSessions, ConferenceSessionsOnClickListener onClickListener) {
         this.conferenceSessions = conferenceSessions;
         this.onClickListener = onClickListener;
     }
@@ -56,7 +57,7 @@ public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSe
         return conferenceSessions.size();
     }
 
-    public ConferenceSessionData getItem(int position) {
+    public ConferenceSessionViewModel getItem(int position) {
         return conferenceSessions.get(position);
     }
 
@@ -68,7 +69,7 @@ public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSe
         @InjectView(R.id.time) public TextView timeView;
         @InjectView(R.id.title) public TextView titleView;
         @InjectView(R.id.room) public TextView roomView;
-        private ConferenceSessionData conferenceSessionData;
+        private ConferenceSessionViewModel confereneSessionViewModel;
 
         // each data item is just a string in this case
         public ViewHolder(View v) {
@@ -81,29 +82,29 @@ public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSe
             this.titleView.setText(title);
         }
 
-        public void setDay(final Date date) {
-            this.dayView.setText(DAY_FORMATTER.format(date));
+        public void setDay(final String day) {
+            this.dayView.setText(day);
         }
 
-        public void setTime(final Date time) {
-            this.timeView.setText(TIME_FORMATTER.format(time));
+        public void setTime(final String time) {
+            this.timeView.setText(time);
         }
 
         public void setRoom(final String room) {
             this.roomView.setText(room);
         }
 
-        public void setConferenceSessionData(ConferenceSessionData conferenceSessionData) {
-            this.conferenceSessionData = conferenceSessionData;
-            setDay(conferenceSessionData.getStartDttm());
-            setTime(conferenceSessionData.getStartDttm());
-            setTitle(conferenceSessionData.getName());
-            setRoom("112E"); //TODO -- set to real value once room data is available
+        public void setConferenceSessionData(ConferenceSessionViewModel confereneSessionViewModel) {
+            this.confereneSessionViewModel = confereneSessionViewModel;
+            setDay(confereneSessionViewModel.getDay());
+            setTime(confereneSessionViewModel.getTime());
+            setTitle(confereneSessionViewModel.getTitle());
+            setRoom(confereneSessionViewModel.getRoom()); //TODO -- set to real value once room data is available
         }
 
         @Override
         public void onClick(View v) {
-            onClickListener.clicked(conferenceSessionData.getId());
+            onClickListener.clicked(confereneSessionViewModel.getId());
         }
     }
 }
