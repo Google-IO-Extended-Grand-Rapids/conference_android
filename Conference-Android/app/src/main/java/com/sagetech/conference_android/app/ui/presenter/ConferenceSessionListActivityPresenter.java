@@ -47,34 +47,10 @@ public class ConferenceSessionListActivityPresenter {
 
             @Override
             public void onNext(List<ConferenceSessionData> conferenceSessionDatas) {
-                conferenceSessionListActivity.populateConferenceSessions(toConferenceSessionViewModel(conferenceSessionDatas));
+                conferenceSessionListActivity.populateConferenceSessions(ConferenceSessionViewBuilder.toConferenceSessionViewModel(conferenceSessionDatas));
             }
 
         });
-    }
-
-    private List<ConferenceSessionViewModel> toConferenceSessionViewModel(List<ConferenceSessionData> conferenceSessionDatas) {
-
-        List<ConferenceSessionViewModel> confSessionViewModels = new ArrayList<>();
-        if (conferenceSessionDatas == null) {
-            return confSessionViewModels;
-        }
-
-        for (ConferenceSessionData currConfSession : conferenceSessionDatas) {
-            confSessionViewModels.add(toConfrenceSessionViewModel(currConfSession));
-        }
-        return confSessionViewModels;
-    }
-
-    private ConferenceSessionViewModel toConfrenceSessionViewModel(ConferenceSessionData currConfSession) {
-        ConferenceSessionViewModel confViewModel = new ConferenceSessionViewModel();
-
-        confViewModel.setId(currConfSession.getId());
-        confViewModel.setRoom("112E");
-        confViewModel.setStartDttm(currConfSession.getStartDttm());
-        confViewModel.setTitle(currConfSession.getName());
-
-        return confViewModel;
     }
 
     public void onDestroy() {
