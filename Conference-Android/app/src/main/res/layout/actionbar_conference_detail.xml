@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Event Details"
-            android:id="@+id/textView2"
+            android:id="@+id/txtEventetails"
             android:layout_margin="15dp"
             android:textColor="@android:color/white" />
     </LinearLayout>
@@ -27,14 +27,14 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView5"
+            android:id="@+id/imgConfDetailMap"
             android:layout_margin="15dp"
             android:src="@android:drawable/ic_dialog_map" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageView4"
+            android:id="@+id/imgConfDetailShare"
             android:layout_margin="15dp"
             android:src="@android:drawable/ic_menu_share"/>
 

@@ -5,21 +5,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 public class ConferenceDetailActivity extends ActionBarActivity {
 
 
     @InjectView(R.id.txtConferenceName)
     TextView txtConferenceName;
+
+    ImageView imgConfMap;
+
     private int conferenceId;
 
 
@@ -35,27 +39,18 @@ public class ConferenceDetailActivity extends ActionBarActivity {
         getSupportActionBar().setCustomView(R.layout.actionbar_conference_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //TODO This is a hack to bring up the conference session list.
-        txtConferenceName.setOnClickListener(new View.OnClickListener() {
+        imgConfMap = (ImageView) getSupportActionBar().getCustomView().findViewById(R.id.imgConfDetailMap);
+        imgConfMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent conferenceSessionListIntent = new Intent(v.getContext(), ConferenceSessionListActivity.class);
+                Intent conferenceSessionListIntent = new Intent(imgConfMap.getContext(), ConferenceSessionListActivity.class);
                 conferenceSessionListIntent.putExtra("id", conferenceId);
                 startActivity(conferenceSessionListIntent);
-
             }
         });
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.menu_conference_detail, menu);
-        return true;
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
