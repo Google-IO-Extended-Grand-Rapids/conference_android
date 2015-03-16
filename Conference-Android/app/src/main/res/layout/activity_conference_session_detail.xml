@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="#ff4dbf00">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Introduction and Keynote"
+            android:id="@+id/txtTitle"
+            android:paddingLeft="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Wed, May 25, 9 - 11:30 a.m."
+            android:id="@+id/txtSchedule"
+            android:layout_below="@+id/txtTitle"
+            android:paddingLeft="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Loosemore Auditorium"
+            android:id="@+id/txtRoom"
+            android:layout_below="@+id/txtSchedule"
+            android:paddingLeft="15dp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imgSessionType"
+            android:src="@drawable/codelabs_icon"
+            android:layout_alignParentStart="false"
+            android:layout_toRightOf="@+id/txtTitle"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/txtTitle"
+            android:layout_alignBottom="@+id/txtRoom" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView3" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae vulputate ante, sed posuere ante. Fusce non nisi nec turpis eleifend mattis. Mauris facilisis nulla a metus efficitur mollis. Vestibulum eget volutpat tellus. Duis vel libero sit amet eros pharetra cursus. Proin nec lacus ut justo commodo condimentum. Nulla scelerisque."
+                    android:id="@+id/txtDescription"
+                    android:layout_toRightOf="@+id/imgPin"
+                    android:padding="15dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imgPin"
+                    android:src="@drawable/ic_pin"
+                    android:layout_alignBottom="@+id/txtDescription"
+                    android:paddingLeft="15dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView3"
+                    android:src="@drawable/common_signin_btn_icon_focus_dark"
+                    android:layout_below="@+id/txtDescription"
+                    android:layout_alignLeft="@+id/txtDescription"
+                    android:paddingLeft="15dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+437 Recommended this on Google"
+                    android:id="@+id/textView2"
+                    android:layout_toRightOf="@+id/imageView3"
+                    android:layout_alignTop="@+id/imageView3" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Speakers"
+                    android:id="@+id/textView3"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imgSpeaker"
+                    android:layout_below="@+id/textView3"
+                    android:src="@drawable/common_ic_googleplayservices"
+                    android:layout_alignParentTop="false" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lindsay Mikita"
+                    android:id="@+id/txtPresenterName"
+                    android:layout_toRightOf="@+id/imgSpeaker"
+                    android:layout_alignTop="@+id/imgSpeaker" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Amway"
+                    android:id="@+id/txtPresenterCompany"
+                    android:layout_below="@+id/txtPresenterName"
+                    android:layout_alignLeft="@+id/txtPresenterName" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel lectus fermentum turpis porta aliquam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu elit ligula. Nunc vehicula mauris."
+                    android:id="@+id/textView4"
+                    android:layout_toRightOf="@+id/imgSpeaker"
+                    android:layout_below="@+id/txtPresenterCompany"
+                    android:paddingTop="10dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Media"
+                    android:id="@+id/textView5"
+                    android:paddingTop="10dp"
+                    android:paddingLeft="10dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
