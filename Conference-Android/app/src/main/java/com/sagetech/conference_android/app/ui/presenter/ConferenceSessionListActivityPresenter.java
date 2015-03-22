@@ -3,7 +3,9 @@ package com.sagetech.conference_android.app.ui.presenter;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.ui.activities.ConferenceSessionListActivity;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -45,12 +47,14 @@ public class ConferenceSessionListActivityPresenter {
 
             @Override
             public void onNext(List<ConferenceSessionData> conferenceSessionDatas) {
-                conferenceSessionListActivity.populateConferenceSessions(conferenceSessionDatas);
+                conferenceSessionListActivity.populateConferenceSessions(ConferenceSessionViewBuilder.toConferenceSessionViewModel(conferenceSessionDatas));
             }
+
         });
     }
 
     public void onDestroy() {
         subscription.unsubscribe();
     }
+
 }
