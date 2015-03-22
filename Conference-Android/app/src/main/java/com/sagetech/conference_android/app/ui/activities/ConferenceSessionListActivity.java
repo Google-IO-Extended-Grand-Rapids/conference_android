@@ -13,8 +13,12 @@ import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.ui.adapters.ConferenceSessionsAdapter;
 import com.sagetech.conference_android.app.ui.presenter.ConferenceSessionListActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionActivity;
+import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionListPresenter;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewModel;
+import com.sagetech.conference_android.app.util.module.ConferenceListModule;
+import com.sagetech.conference_android.app.util.module.ConferenceSessionListModule;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,14 +33,12 @@ import timber.log.Timber;
 public class ConferenceSessionListActivity extends InjectableActionBarActivity implements IConferenceSessionActivity, ConferenceSessionsAdapter.ConferenceSessionsOnClickListener {
 
     @Inject
-    ConferenceController conferenceController;
+    IConferenceSessionListPresenter presenter = null;
 
     @InjectView(R.id.confView)
     RecyclerView mRecyclerView;
 
     private ConferenceSessionsAdapter mAdapter;
-    private ConferenceSessionListActivityPresenter presenter = null;
-    private Integer conferenceId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,10 +52,15 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        conferenceId = getIntent().getIntExtra("id", 0);
-        presenter = new ConferenceSessionListActivityPresenter(this, conferenceController, conferenceId);
-        presenter.initialize();
+        Integer conferenceId = getIntent().getIntExtra("id", 0);
+        presenter.initialize(conferenceId);
     }
+
+    @Override
+    protected List<Object> getModules() {
+        return Arrays.<Object>asList(new ConferenceSessionListModule(this));
+    }
+
 
     @Override
     public void populateConferenceSessions(List<ConferenceSessionViewModel> conferenceSessions) {
@@ -77,6 +84,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         super.onDestroy();
         presenter.onDestroy();
     }
+
 
     private void launchEventDetailActivity(long sessionId) {
         Timber.d(String.format("Session Selected: %s", sessionId));

@@ -17,7 +17,7 @@ import timber.log.Timber;
 /**
  * Created by jrobertson on 2/21/15.
  */
-public class ConferenceListActivityPresenter {
+public class ConferenceListActivityPresenter implements IConferenceListPresenter {
 
     private final ConferenceBuilder conferenceBuilder;
     private ConferenceController conferenceController;

@@ -19,8 +19,11 @@ import com.sagetech.conference_android.app.model.ConferenceData;
 import com.sagetech.conference_android.app.ui.adapters.ConferencesAdapter;
 import com.sagetech.conference_android.app.ui.presenter.ConferenceListActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceListActivity;
+import com.sagetech.conference_android.app.ui.presenter.IConferenceListPresenter;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceDataViewModel;
+import com.sagetech.conference_android.app.util.module.ConferenceListModule;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -32,14 +35,12 @@ import timber.log.Timber;
 public class ConferenceListActivity extends InjectableActionBarActivity implements IConferenceListActivity, ConferencesAdapter.ConferencesOnClickListener {
 
     @Inject
-    ConferenceController conferenceController;
+    IConferenceListPresenter presenter;
 
     @InjectView(R.id.confView)
     RecyclerView mRecyclerView;
 
     private ConferencesAdapter mAdapter;
-
-    private ConferenceListActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +56,13 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        presenter = new ConferenceListActivityPresenter(conferenceController, this);
         presenter.initialize();
     }
 
+    @Override
+    protected List<Object> getModules() {
+        return Arrays.<Object>asList(new ConferenceListModule(this));
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -106,6 +110,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         super.onDestroy();
         presenter.onDestroy();
     }
+
 
 
 }

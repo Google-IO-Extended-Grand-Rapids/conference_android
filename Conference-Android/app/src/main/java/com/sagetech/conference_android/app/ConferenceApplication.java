@@ -43,4 +43,7 @@ public class ConferenceApplication extends Application {
         return (ConferenceApplication) context.getApplicationContext();
     }
 
+    public ObjectGraph createScopedGraph(Object[] modules) {
+        return objectGraph.plus(modules);
+    }
 }

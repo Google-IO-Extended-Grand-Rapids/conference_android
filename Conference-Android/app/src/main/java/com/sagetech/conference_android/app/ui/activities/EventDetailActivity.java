@@ -10,8 +10,12 @@ import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.ui.presenter.EventDetailActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IEventDetailActivity;
+import com.sagetech.conference_android.app.ui.presenter.IEventDetailPresenter;
 import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
+import com.sagetech.conference_android.app.util.module.ConferenceSessionListModule;
+import com.sagetech.conference_android.app.util.module.EventDetailModule;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,7 +27,7 @@ import timber.log.Timber;
 
 public class EventDetailActivity extends InjectableActionBarActivity implements IEventDetailActivity {
     @Inject
-    ConferenceController conferenceController;
+    IEventDetailPresenter presenter = null;
 
     @InjectView(R.id.title)
     TextView title;
@@ -49,10 +53,6 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
     @InjectView(R.id.scheduled)
     ImageView img;
 
-    private Long eventId;
-
-    EventDetailActivityPresenter presenter = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,10 +63,15 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
         ButterKnife.inject(this);
         Timber.d("onCreate");
 
-        eventId = getIntent().getExtras().getLong("id");
-        presenter = new EventDetailActivityPresenter(this, conferenceController, eventId);
-        presenter.initialize();
+        Long eventId = getIntent().getExtras().getLong("id");
+        presenter.initialize(eventId);
     }
+
+    @Override
+    protected List<Object> getModules() {
+        return Arrays.<Object>asList(new EventDetailModule(this));
+    }
+
 
     @Override
     public void populateWithEventDetailView(EventDetailViewModel eventDetailViewModel) {
@@ -111,6 +116,7 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
         super.onDestroy();
         presenter.onDestroy();
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

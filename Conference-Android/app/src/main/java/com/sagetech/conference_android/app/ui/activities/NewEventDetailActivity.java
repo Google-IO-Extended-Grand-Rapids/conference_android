@@ -1,6 +1,7 @@
 package com.sagetech.conference_android.app.ui.activities;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
 import com.sagetech.conference_android.app.R;
 
@@ -10,7 +11,7 @@ import timber.log.Timber;
 /**
  * Created by carlushenry on 3/15/15.
  */
-public class NewEventDetailActivity extends InjectableActionBarActivity {
+public class NewEventDetailActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
