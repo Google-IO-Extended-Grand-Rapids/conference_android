@@ -31,7 +31,7 @@ public class ConferenceListModule {
 
     @Provides
     @Singleton
-    public IConferenceListPresenter conferenceListActivityPresenter(ConferenceController controller, IConferenceListActivity view) {
+    public IConferenceListPresenter provideConferenceListActivityPresenter(ConferenceController controller, IConferenceListActivity view) {
         return new ConferenceListActivityPresenter(controller, view);
     }
 }

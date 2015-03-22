@@ -35,7 +35,7 @@ public class EventDetailModule {
 
     @Provides
     @Singleton
-    public IEventDetailPresenter eventDetailPresenter(ConferenceController controller, IEventDetailActivity view) {
+    public IEventDetailPresenter provideEventDetailPresenter(ConferenceController controller, IEventDetailActivity view) {
         return new EventDetailActivityPresenter(view, controller);
     }
 }
