@@ -1,5 +1,6 @@
 package com.sagetech.conference_android.app.ui.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -46,6 +47,8 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         setContentView(R.layout.activity_conferences);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_conf_list);
 
         ButterKnife.inject(this);
 
@@ -60,7 +63,7 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_conferences, menu);
+//        getMenuInflater().inflate(R.menu.menu_conferences, menu);
         return true;
     }
 
