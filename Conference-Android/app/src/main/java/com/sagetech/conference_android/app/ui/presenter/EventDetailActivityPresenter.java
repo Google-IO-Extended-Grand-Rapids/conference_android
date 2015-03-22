@@ -20,23 +20,21 @@ import timber.log.Timber;
 /**
  * Created by carlushenry on 2/19/15.
  */
-public class EventDetailActivityPresenter {
+public class EventDetailActivityPresenter implements IEventDetailPresenter {
 
     private final IEventDetailActivity eventDetailActivity;
     private final ConferenceController conferenceController;
-    private final Long eventId;
     private final EventDetailViewBuilder eventDetailViewBuilder;
     private Subscription subscription;
 
 
-    public EventDetailActivityPresenter(IEventDetailActivity eventDetailActivity, ConferenceController conferenceController, Long eventId) {
+    public EventDetailActivityPresenter(IEventDetailActivity eventDetailActivity, ConferenceController conferenceController) {
         this.eventDetailActivity = eventDetailActivity;
         this.conferenceController = conferenceController;
-        this.eventId = eventId;
         this.eventDetailViewBuilder = new EventDetailViewBuilder();
     }
 
-    public void initialize() {
+    public void initialize(Long eventId) {
         Observable<EventDetailViewModel> eventDetailViewObservable = createEventDetailViewObservable(eventId);
 
 

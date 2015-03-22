@@ -33,10 +33,6 @@ import timber.log.Timber;
 @Module(
         injects = {
                 ConferenceApplication.class,
-                ConferenceListActivity.class,
-                ConferenceSessionListActivity.class,
-                SplashActivity.class,
-                EventDetailActivity.class,
                 NewEventDetailActivity.class
         }, library = true
 )

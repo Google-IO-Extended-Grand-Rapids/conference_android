@@ -3,9 +3,11 @@ package com.sagetech.conference_android.app.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 
 import com.sagetech.conference_android.app.R;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
@@ -16,7 +18,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class SplashActivity extends InjectableActionBarActivity {
+public class SplashActivity extends ActionBarActivity {
 
     private Subscription subscription;
 
@@ -31,8 +33,6 @@ public class SplashActivity extends InjectableActionBarActivity {
 
 
         subscription = AppObservable.bindActivity(this, Observable.just(1))
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
                 .delay(3, TimeUnit.SECONDS)
                 .subscribe(new Subscriber<Integer>() {
                     @Override
@@ -62,4 +62,5 @@ public class SplashActivity extends InjectableActionBarActivity {
         super.onDestroy();
         subscription.unsubscribe();
     }
+
 }
