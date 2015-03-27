@@ -16,18 +16,15 @@ public class ConferenceSessionViewBuilder {
 
         List<ConferenceSessionViewModel> viewModels = new ArrayList<ConferenceSessionViewModel>();
 
-    for (ConferenceSessionData conferenceSessionData : conferenceSessionDatas) {
-        RoomData roomData = findRoomById(conferenceSessionData.getRoomId(), roomDatas);
-
-        viewModels.add(build(conferenceSessionData, roomData));
-    }
-
+        for (ConferenceSessionData conferenceSessionData : conferenceSessionDatas) {
+            RoomData roomData = findRoomById(conferenceSessionData.getRoomId(), roomDatas);
+            viewModels.add(build(conferenceSessionData, roomData));
+        }
 
         return viewModels;
-
     }
 
-    public ConferenceSessionViewModel build(ConferenceSessionData confSessionData, RoomData roomData) {
+    private ConferenceSessionViewModel build(ConferenceSessionData confSessionData, RoomData roomData) {
         ConferenceSessionViewModel model = new ConferenceSessionViewModel();
 
         model.setId(confSessionData.getId());
@@ -35,8 +32,9 @@ public class ConferenceSessionViewBuilder {
         model.setRoomShortDesc(roomData.getShortDesc());
         model.setStartDttm(confSessionData.getStartDttm());
 
-        if (roomData != null)
+        if (roomData != null) {
             model.setRoomShortDesc(roomData.getShortDesc());
+        }
 
         return model;
     }

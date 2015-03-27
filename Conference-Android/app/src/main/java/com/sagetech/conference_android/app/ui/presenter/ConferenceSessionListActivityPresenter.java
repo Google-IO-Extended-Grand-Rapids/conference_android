@@ -57,9 +57,6 @@ public class ConferenceSessionListActivityPresenter {
 
         Observable<List<ConferenceSessionData>> conferenceSessionObservable = conferenceController.getConferenceSessionsById(conferenceId).cache();
 
-//        List<Long> rooms = new ArrayList<Long>();
-//        rooms.add(2L);
-
         Observable<List<RoomData>> roomDataObservable = conferenceSessionObservable.flatMap(new Func1<List<ConferenceSessionData>, Observable<Long>>() {
             @Override
             public Observable<Long> call(List<ConferenceSessionData> conferenceSessionDatas) {
