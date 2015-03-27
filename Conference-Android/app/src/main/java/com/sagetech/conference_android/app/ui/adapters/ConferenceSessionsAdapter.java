@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
-import com.sagetech.conference_android.app.model.ConferenceSessionData;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewModel;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,14 +21,14 @@ import butterknife.InjectView;
  * Created by carlushenry on 3/5/15.
  */
 public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSessionsAdapter.ViewHolder> {
-    private final List<ConferenceSessionData> conferenceSessions;
+    private final List<ConferenceSessionViewModel> conferenceSessions;
     private ConferenceSessionsOnClickListener onClickListener;
 
     public interface ConferenceSessionsOnClickListener {
         public void clicked(Long id);
     }
 
-    public ConferenceSessionsAdapter(List<ConferenceSessionData> conferenceSessions, ConferenceSessionsOnClickListener onClickListener) {
+    public ConferenceSessionsAdapter(List<ConferenceSessionViewModel> conferenceSessions, ConferenceSessionsOnClickListener onClickListener) {
         this.conferenceSessions = conferenceSessions;
         this.onClickListener = onClickListener;
     }
@@ -56,7 +56,7 @@ public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSe
         return conferenceSessions.size();
     }
 
-    public ConferenceSessionData getItem(int position) {
+    public ConferenceSessionViewModel getItem(int position) {
         return conferenceSessions.get(position);
     }
 
@@ -68,7 +68,7 @@ public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSe
         @InjectView(R.id.time) public TextView timeView;
         @InjectView(R.id.title) public TextView titleView;
         @InjectView(R.id.room) public TextView roomView;
-        private ConferenceSessionData conferenceSessionData;
+        private ConferenceSessionViewModel conferenceSessionData;
 
         // each data item is just a string in this case
         public ViewHolder(View v) {
@@ -93,7 +93,7 @@ public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSe
             this.roomView.setText(room);
         }
 
-        public void setConferenceSessionData(ConferenceSessionData conferenceSessionData) {
+        public void setConferenceSessionData(ConferenceSessionViewModel conferenceSessionData) {
             this.conferenceSessionData = conferenceSessionData;
             setDay(conferenceSessionData.getStartDttm());
             setTime(conferenceSessionData.getStartDttm());

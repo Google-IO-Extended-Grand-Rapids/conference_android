@@ -9,10 +9,10 @@ import android.view.MenuItem;
 
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.api.ConferenceController;
-import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.ui.adapters.ConferenceSessionsAdapter;
 import com.sagetech.conference_android.app.ui.presenter.ConferenceSessionListActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionActivity;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewModel;
 
 import java.util.List;
 
@@ -55,7 +55,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     }
 
     @Override
-    public void populateConferenceSessions(List<ConferenceSessionData> conferenceSessions) {
+    public void populateConferenceSessions(List<ConferenceSessionViewModel> conferenceSessions) {
         mAdapter = new ConferenceSessionsAdapter(conferenceSessions, this);
         mRecyclerView.setAdapter(mAdapter);
     }
