@@ -98,7 +98,7 @@ public class ConferenceSessionsAdapter extends RecyclerView.Adapter<ConferenceSe
             setDay(conferenceSessionData.getStartDttm());
             setTime(conferenceSessionData.getStartDttm());
             setTitle(conferenceSessionData.getName());
-            setRoom("112E"); //TODO -- set to real value once room data is available
+            setRoom(conferenceSessionData.getRoomShortDesc());
         }
 
         @Override

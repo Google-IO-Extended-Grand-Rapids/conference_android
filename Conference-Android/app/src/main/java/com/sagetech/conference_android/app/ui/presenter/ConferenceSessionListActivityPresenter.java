@@ -1,7 +1,5 @@
 package com.sagetech.conference_android.app.ui.presenter;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Collections2;
 import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.RoomData;
@@ -59,16 +57,18 @@ public class ConferenceSessionListActivityPresenter {
 
         Observable<List<ConferenceSessionData>> conferenceSessionObservable = conferenceController.getConferenceSessionsById(conferenceId).cache();
 
+//        List<Long> rooms = new ArrayList<Long>();
+//        rooms.add(2L);
 
         Observable<List<RoomData>> roomDataObservable = conferenceSessionObservable.flatMap(new Func1<List<ConferenceSessionData>, Observable<Long>>() {
             @Override
             public Observable<Long> call(List<ConferenceSessionData> conferenceSessionDatas) {
-                return Observable.from(Collections2.transform(conferenceSessionDatas, new Function<ConferenceSessionData, Long>() {
+                return Observable.from(conferenceSessionDatas).flatMap(new Func1<ConferenceSessionData, Observable<Long>>() {
                     @Override
-                    public Long apply(ConferenceSessionData conferenceSessionData) {
-                        return conferenceSessionData.getRoomId();
+                    public Observable<Long> call(ConferenceSessionData conferenceSessionData) {
+                        return Observable.just(conferenceSessionData.getRoomId());
                     }
-                }));
+                });
             }
         }).flatMap(new Func1<Long, Observable<RoomData>>() {
             @Override
