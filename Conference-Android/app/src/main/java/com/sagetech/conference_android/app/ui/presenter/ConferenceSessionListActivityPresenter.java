@@ -62,15 +62,10 @@ public class ConferenceSessionListActivityPresenter {
             public Observable<ConferenceSessionData> call(List<ConferenceSessionData> conferenceSessionDatas) {
                 return Observable.from(conferenceSessionDatas);
             }
-        }).flatMap(new Func1<ConferenceSessionData, Observable<Long>>() {
+        }).flatMap(new Func1<ConferenceSessionData, Observable<RoomData>>() {
             @Override
-            public Observable<Long> call(ConferenceSessionData conferenceSessionData) {
-                return Observable.just(conferenceSessionData.getRoomId());
-            }
-        }).flatMap(new Func1<Long, Observable<RoomData>>() {
-            @Override
-            public Observable<RoomData> call(Long roomId) {
-                return conferenceController.getRoomById(roomId);
+            public Observable<RoomData> call(ConferenceSessionData conferenceSessionData) {
+                return conferenceController.getRoomById(conferenceSessionData.getRoomId());
             }
         }).toList();
 
