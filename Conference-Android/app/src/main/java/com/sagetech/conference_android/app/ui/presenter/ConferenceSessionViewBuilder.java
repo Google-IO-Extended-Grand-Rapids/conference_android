@@ -6,18 +6,19 @@ import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewMod
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jrobertson on 3/22/15.
  */
 public class ConferenceSessionViewBuilder {
 
-    public List<ConferenceSessionViewModel> build(List<ConferenceSessionData> conferenceSessionDatas, List<RoomData> roomDatas) {
+    public List<ConferenceSessionViewModel> build(List<ConferenceSessionData> conferenceSessionDatas, Map<Long, RoomData> roomDatas) {
 
         List<ConferenceSessionViewModel> viewModels = new ArrayList<ConferenceSessionViewModel>();
 
         for (ConferenceSessionData conferenceSessionData : conferenceSessionDatas) {
-            RoomData roomData = findRoomById(conferenceSessionData.getRoomId(), roomDatas);
+            RoomData roomData = roomDatas.get(conferenceSessionData.getRoomId());
             viewModels.add(build(conferenceSessionData, roomData));
         }
 
@@ -38,16 +39,4 @@ public class ConferenceSessionViewBuilder {
 
         return model;
     }
-
-    private RoomData findRoomById(final Long roomId, List<RoomData> roomDatas) {
-
-        for (RoomData roomData : roomDatas) {
-            if (roomId.equals(roomData.getId()))
-                return roomData;
-        }
-
-        return null;
-    }
-
-
 }

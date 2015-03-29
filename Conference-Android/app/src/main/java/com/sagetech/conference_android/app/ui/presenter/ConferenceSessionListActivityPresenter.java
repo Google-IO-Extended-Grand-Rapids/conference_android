@@ -6,6 +6,7 @@ import com.sagetech.conference_android.app.model.RoomData;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewModel;
 
 import java.util.List;
+import java.util.Map;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -57,7 +58,7 @@ public class ConferenceSessionListActivityPresenter {
 
         Observable<List<ConferenceSessionData>> conferenceSessionObservable = conferenceController.getConferenceSessionsById(conferenceId).cache();
 
-        Observable<List<RoomData>> roomDataObservable = conferenceSessionObservable.flatMap(new Func1<List<ConferenceSessionData>, Observable<ConferenceSessionData>>() {
+        Observable<Map<Long, RoomData>> roomDataObservable = conferenceSessionObservable.flatMap(new Func1<List<ConferenceSessionData>, Observable<ConferenceSessionData>>() {
             @Override
             public Observable<ConferenceSessionData> call(List<ConferenceSessionData> conferenceSessionDatas) {
                 return Observable.from(conferenceSessionDatas);
@@ -67,11 +68,16 @@ public class ConferenceSessionListActivityPresenter {
             public Observable<RoomData> call(ConferenceSessionData conferenceSessionData) {
                 return conferenceController.getRoomById(conferenceSessionData.getRoomId());
             }
-        }).toList();
-
-        return Observable.zip(conferenceSessionObservable, roomDataObservable, new Func2<List<ConferenceSessionData>, List<RoomData>, List<ConferenceSessionViewModel>>() {
+        }).toMap(new Func1<RoomData, Long>() {
             @Override
-            public List<ConferenceSessionViewModel> call(List<ConferenceSessionData> conferenceSessionDatas, List<RoomData> roomDatas) {
+            public Long call(RoomData roomData) {
+                return roomData.getId();
+            }
+        });
+
+        return Observable.zip(conferenceSessionObservable, roomDataObservable, new Func2<List<ConferenceSessionData>, Map<Long, RoomData>, List<ConferenceSessionViewModel>>() {
+            @Override
+            public List<ConferenceSessionViewModel> call(List<ConferenceSessionData> conferenceSessionDatas, Map<Long, RoomData> roomDatas) {
                 return new ConferenceSessionViewBuilder().build(conferenceSessionDatas, roomDatas);
             }
         });
