@@ -41,7 +41,7 @@ public class ConferenceSessionListActivityPresenter implements IConferenceSessio
 
             @Override
             public void onError(Throwable e) {
-                Timber.e(e, "Error in ConferenceSessionListActivityPresenter", (Object)null);
+                Timber.e(e, "Error in ConferenceSessionListActivityPresenter", (Object) null);
 
             }
 
@@ -62,10 +62,19 @@ public class ConferenceSessionListActivityPresenter implements IConferenceSessio
             public Observable<ConferenceSessionData> call(List<ConferenceSessionData> conferenceSessionDatas) {
                 return Observable.from(conferenceSessionDatas);
             }
-        }).flatMap(new Func1<ConferenceSessionData, Observable<RoomData>>() {
+        }).map(new Func1<ConferenceSessionData, Long>() {
+
             @Override
-            public Observable<RoomData> call(ConferenceSessionData conferenceSessionData) {
-                return conferenceController.getRoomById(conferenceSessionData.getRoomId());
+            public Long call(ConferenceSessionData conferenceSessionData) {
+                return conferenceSessionData.getRoomId();
+            }
+
+        })
+                .distinct()
+                .flatMap(new Func1<Long, Observable<RoomData>>() {
+            @Override
+            public Observable<RoomData> call(Long roomId) {
+                return conferenceController.getRoomById(roomId);
             }
         }).onErrorReturn(new Func1<Throwable, RoomData>() {
 
