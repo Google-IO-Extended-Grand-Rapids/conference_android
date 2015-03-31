@@ -20,7 +20,13 @@ public class ConferenceSessionViewBuilder {
         }
 
         for (ConferenceSessionData currConfSession : conferenceSessionDatas) {
-            RoomData roomData = roomDatas.get(currConfSession.getRoomId());
+            Long roomId = currConfSession.getRoomId();
+            if (!roomDatas.containsKey(roomId)) {
+                roomId = null;
+            }
+            RoomData roomData = roomDatas.get(roomId);
+
+
             confSessionViewModels.add(toConfrenceSessionViewModel(currConfSession, roomData));
         }
         return confSessionViewModels;

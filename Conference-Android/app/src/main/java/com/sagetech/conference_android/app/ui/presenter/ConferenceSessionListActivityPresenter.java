@@ -67,6 +67,17 @@ public class ConferenceSessionListActivityPresenter implements IConferenceSessio
             public Observable<RoomData> call(ConferenceSessionData conferenceSessionData) {
                 return conferenceController.getRoomById(conferenceSessionData.getRoomId());
             }
+        }).onErrorReturn(new Func1<Throwable, RoomData>() {
+
+            @Override
+            public RoomData call(Throwable throwable) {
+                RoomData rd = new RoomData();
+                rd.setConferenceId(null);
+                rd.setFullDesc("Full description");
+                rd.setId(null); // this will be the default roomData
+                rd.setShortDesc("Unknown");
+                return rd;
+            }
         }).toMap(new Func1<RoomData, Long>() {
             @Override
             public Long call(RoomData roomData) {
