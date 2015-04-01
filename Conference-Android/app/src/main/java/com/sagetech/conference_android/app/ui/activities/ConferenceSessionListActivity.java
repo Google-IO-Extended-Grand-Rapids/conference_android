@@ -46,7 +46,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         setContentView(R.layout.activity_conference_session_items);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        getSupportActionBar().setTitle(R.string.actionbar_title_activity_conference_sessions);
         ButterKnife.inject(this);
 
         mRecyclerView.setHasFixedSize(true);
