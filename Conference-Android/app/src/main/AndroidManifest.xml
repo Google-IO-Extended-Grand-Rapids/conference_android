@@ -62,7 +62,7 @@
         <activity
             android:name=".ui.activities.ConferenceSessionListActivity"
             android:label="@string/title_activity_conference_sessions"
-            android:parentActivityName=".ui.activities.ConferenceListActivity" >
+            android:parentActivityName=".ui.activities.ConferenceDetailActivity" >
         </activity>
         <activity
             android:name=".ui.activities.ConferenceDetailActivity"
