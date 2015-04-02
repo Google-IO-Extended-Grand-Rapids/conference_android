@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_weight="1">
 
     <ImageView
         android:id="@+id/conferenceImageView"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/conference_detail_image_layout_height"
-        android:background="@drawable/common_signin_btn_icon_focus_light" />
+        android:layout_height="match_parent"
+        android:background="@drawable/common_signin_btn_icon_focus_light"
+        android:layout_weight="70" />
 
     <TextView
         android:id="@+id/txtConferenceName"
@@ -35,106 +37,108 @@
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_weight="30">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:orientation="vertical">
+           <LinearLayout
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"
+               android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtConferenceFullDesc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="@dimen/conference_detail_padding"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend, odio a vehicula venenatis, nisi nisi commodo arcu, a iaculis nunc purus non orci. Maecenas ac tempor enim. Pellentesque vel enim arcu. Nunc aliquet augue sed consectetur posuere. Mauris congue quam id neque dictum, sed placerat nunc ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean maximus fermentum odio, placerat placerat turpis aliquet eu. Duis finibus tristique mauris vel malesuada. Donec nec ipsum sem."
-                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend, odio a vehicula venenatis, nisi nisi commodo arcu, a iaculis nunc purus non orci. Maecenas ac tempor enim. Pellentesque vel enim arcu. Nunc aliquet augue sed consectetur posuere. Mauris congue quam id neque dictum, sed placerat nunc ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean maximus fermentum odio, placerat placerat turpis aliquet eu. Duis finibus tristique mauris vel malesuada. Donec nec ipsum sem." />
+               <TextView
+                   android:id="@+id/txtConferenceFullDesc"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:padding="@dimen/conference_detail_padding"
+                   android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend, odio a vehicula venenatis, nisi nisi commodo arcu, a iaculis nunc purus non orci. Maecenas ac tempor enim. Pellentesque vel enim arcu. Nunc aliquet augue sed consectetur posuere. Mauris congue quam id neque dictum, sed placerat nunc ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean maximus fermentum odio, placerat placerat turpis aliquet eu. Duis finibus tristique mauris vel malesuada. Donec nec ipsum sem."
+                   tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend, odio a vehicula venenatis, nisi nisi commodo arcu, a iaculis nunc purus non orci. Maecenas ac tempor enim. Pellentesque vel enim arcu. Nunc aliquet augue sed consectetur posuere. Mauris congue quam id neque dictum, sed placerat nunc ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean maximus fermentum odio, placerat placerat turpis aliquet eu. Duis finibus tristique mauris vel malesuada. Donec nec ipsum sem." />
 
-            <Button
-                android:id="@+id/btnRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:width="@dimen/conference_detail_register_button_width"
-                android:background="@color/conference_detail_register_button"
-                android:text="Register"
-                tools:text="Register"/>
+               <Button
+                   android:id="@+id/btnRegister"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_gravity="center_horizontal"
+                   android:width="@dimen/conference_detail_register_button_width"
+                   android:background="@color/conference_detail_register_button"
+                   android:text="Register"
+                   tools:text="Register"/>
 
-            <TextView
-                android:id="@+id/txtThankSponsorsText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/conference_detail_marginLeft"
-                android:layout_marginTop="@dimen/conference_detail_marginTop"
-                tools:text="Thanks to our sponsors"
-                android:text="Thanks to our sponsors" />
+               <TextView
+                   android:id="@+id/txtThankSponsorsText"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="@dimen/conference_detail_marginLeft"
+                   android:layout_marginTop="@dimen/conference_detail_marginTop"
+                   tools:text="Thanks to our sponsors"
+                   android:text="Thanks to our sponsors" />
 
-            <GridLayout
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:columnCount="3"
-                android:rowCount="2">
+               <GridLayout
+                   android:layout_width="fill_parent"
+                   android:layout_height="fill_parent"
+                   android:columnCount="3"
+                   android:rowCount="2">
 
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 1"
-                    android:text="Image 1" />
+                   <Button
+                       android:id="@+id/button"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       tools:text="Image 1"
+                       android:text="Image 1" />
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 2"
-                    android:text="Image 2" />
+                   <Button
+                       android:id="@+id/button2"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       tools:text="Image 2"
+                       android:text="Image 2" />
 
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 3"
-                    android:text="Image 3" />
+                   <Button
+                       android:id="@+id/button3"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       tools:text="Image 3"
+                       android:text="Image 3" />
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 4"
-                    android:text="Image 4" />
+                   <Button
+                       android:id="@+id/button4"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       tools:text="Image 4"
+                       android:text="Image 4" />
 
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 5"
-                    android:text="image 5" />
+                   <Button
+                       android:id="@+id/button5"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       tools:text="Image 5"
+                       android:text="image 5" />
 
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 6"
-                    android:text="Image 6" />
-            </GridLayout>
+                   <Button
+                       android:id="@+id/button6"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       tools:text="Image 6"
+                       android:text="Image 6" />
+               </GridLayout>
 
-            <TextView
-                android:id="@+id/txtQuestionsText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/conference_detail_marginLeft"
-                android:layout_marginTop="@dimen/conference_detail_marginTop"
-                tools:text="Questions?"
-                android:text="Questions?" />
+               <TextView
+                   android:id="@+id/txtQuestionsText"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginLeft="@dimen/conference_detail_marginLeft"
+                   android:layout_marginTop="@dimen/conference_detail_marginTop"
+                   tools:text="Questions?"
+                   android:text="Questions?" />
 
-            <TextView
-                android:id="@+id/txtContactText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/conference_detail_marginLeft"
-                tools:text="Contact: Mahmoud Ahmadinejad"
-                android:text="Contact: Mahmoud Ahmadinejad"/>
-        </LinearLayout>
-    </ScrollView>
+               <TextView
+                   android:id="@+id/txtContactText"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="@dimen/conference_detail_marginLeft"
+                   tools:text="Contact: Mahmoud Ahmadinejad"
+                   android:text="Contact: Mahmoud Ahmadinejad"/>
+           </LinearLayout>
+       </ScrollView>
+
 
 </LinearLayout>
