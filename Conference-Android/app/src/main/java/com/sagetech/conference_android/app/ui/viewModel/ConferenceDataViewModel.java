@@ -7,6 +7,7 @@ public class ConferenceDataViewModel {
     private Integer id;
     private String cityAndState;
     private String name;
+    private String conferenceImageUrl;
 
     public Integer getId() {
         return id;
@@ -30,5 +31,13 @@ public class ConferenceDataViewModel {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getConferenceImageUrl() {
+        return conferenceImageUrl;
+    }
+
+    public void setConferenceImageUrl(String conferenceImageUrl) {
+        this.conferenceImageUrl = conferenceImageUrl;
     }
 }

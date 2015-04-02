@@ -22,6 +22,9 @@ public class ConferenceDetailActivity extends ActionBarActivity {
     @InjectView(R.id.txtConferenceName)
     TextView txtConferenceName;
 
+    @InjectView(R.id.conferenceImageView)
+    ImageView imgConferenceImageView;
+
     ImageView imgConfMap;
 
     private int conferenceId;

@@ -26,7 +26,6 @@
             android:layout_height="@dimen/conference_list_image_layout_height"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:background="@drawable/googlestream_icon"
             android:scaleType="center" />
 
         <TextView

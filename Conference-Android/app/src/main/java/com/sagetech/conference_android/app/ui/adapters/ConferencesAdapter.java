@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceDataViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -38,9 +39,7 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.conference_list_view_item, parent, false);
 
-        ViewHolder vh = new ViewHolder(v);
-
-        return vh;
+        return new ViewHolder(v);
     }
 
     public ConferenceDataViewModel getItem(int position) {
@@ -63,10 +62,14 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @InjectView(R.id.name) public TextView nameView;
-        @InjectView(R.id.cityAndState) public TextView cityAndStateView;
-        @InjectView(R.id.conferenceImage) public ImageView conferenceImageView;
-        @InjectView(R.id.conferenceLayout) public View conferenceLayout;
+        @InjectView(R.id.name)
+        public TextView nameView;
+        @InjectView(R.id.cityAndState)
+        public TextView cityAndStateView;
+        @InjectView(R.id.conferenceImage)
+        public ImageView conferenceImageView;
+        @InjectView(R.id.conferenceLayout)
+        public View conferenceLayout;
 
         private ConferenceDataViewModel conferenceData;
 
@@ -76,36 +79,28 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
             conferenceLayout.setOnClickListener(this);
         }
 
-        public void setName(String name) {
-            nameView.setText(name);
-        }
-        public void setCityAndState(String cityAndState) {
-            cityAndStateView.setText(cityAndState);
-        }
-
-
         public void setConferenceData(ConferenceDataViewModel conferenceData) {
             this.conferenceData = conferenceData;
             setName(conferenceData.getName());
             setCityAndState(conferenceData.getCityAndState());
-            setImage();
+            setImage(conferenceData.getConferenceImageUrl());
         }
 
-        private void setImage() {
-            //TODO This is to be replaced with the real images per conference when that is ready
-            int resId = R.drawable.codelabs_icon;
-            int modValue = conferenceData.getId() % 3;
-
-            if (modValue == 0) {
-                resId = R.drawable.codelabs_icon;
-            } else if (modValue == 1) {
-                resId = R.drawable.googlestream_icon;
-            } else if (modValue == 2) {
-                resId = R.drawable.presentation_icon;
-            }
-
-            this.conferenceImageView.setImageResource(resId);
+        public void setName(String name) {
+            nameView.setText(name);
         }
+
+        public void setCityAndState(String cityAndState) {
+            cityAndStateView.setText(cityAndState);
+        }
+
+        public void setImage(String imageUrl) {
+            Picasso
+                    .with(this.conferenceImageView.getContext())
+                    .load(imageUrl)
+                    .into(this.conferenceImageView);
+        }
+
 
         @Override
         public void onClick(View v) {
