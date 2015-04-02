@@ -25,6 +25,7 @@ public class ConferenceBuilder {
         ConferenceDataViewModel confDataViewModel = new ConferenceDataViewModel();
 
         //TODO Fix this and get the city and state from the location.
+        confDataViewModel.setConferenceImageUrl("https://dl.dropboxusercontent.com/s/453jegu9qnx9l6j/genevieve_pic1.jpg");
         confDataViewModel.setCityAndState("Grand Rapids, MI");
         confDataViewModel.setName(currConfData.getName());
         confDataViewModel.setId(currConfData.getId());
