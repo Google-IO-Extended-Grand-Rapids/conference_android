@@ -73,7 +73,9 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                Intent intent = NavUtils.getParentActivityIntent(this);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                NavUtils.navigateUpTo(this, intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -93,6 +95,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         eventDetailIntent.putExtra("id", sessionId);
         startActivity(eventDetailIntent);
     }
+
 
 
     @Override
