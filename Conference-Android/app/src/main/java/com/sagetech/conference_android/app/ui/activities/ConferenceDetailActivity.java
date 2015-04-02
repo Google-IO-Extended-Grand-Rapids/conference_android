@@ -11,12 +11,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
+import com.sagetech.conference_android.app.ui.presenter.IConferenceDetailActivity;
+import com.sagetech.conference_android.app.ui.presenter.IConferenceDetailActivityPresenter;
+import com.sagetech.conference_android.app.ui.presenter.IConferenceListPresenter;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceDetailViewModel;
+import com.sagetech.conference_android.app.util.module.ConferenceDetailModule;
+import com.sagetech.conference_android.app.util.module.ConferenceListModule;
+import com.squareup.picasso.Picasso;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
-public class ConferenceDetailActivity extends ActionBarActivity {
+public class ConferenceDetailActivity extends InjectableActionBarActivity implements IConferenceDetailActivity {
 
 
     @InjectView(R.id.txtConferenceName)
@@ -24,6 +36,18 @@ public class ConferenceDetailActivity extends ActionBarActivity {
 
     @InjectView(R.id.conferenceImageView)
     ImageView imgConferenceImageView;
+
+    @InjectView(R.id.txtConferenceDate)
+    TextView txtConferenceDate;
+
+    @InjectView(R.id.txtConferenceFullDesc)
+    TextView txtConferenceFullDesc;
+
+    @InjectView(R.id.txtContactText)
+    TextView txtContactText;
+
+    @Inject
+    IConferenceDetailActivityPresenter presenter;
 
     ImageView imgConfMap;
 
@@ -52,6 +76,14 @@ public class ConferenceDetailActivity extends ActionBarActivity {
             }
         });
 
+        // yes I am being lazy...
+        presenter.initialize(Long.valueOf(conferenceId));
+
+    }
+
+    @Override
+    protected List<Object> getModules() {
+        return Arrays.<Object>asList(new ConferenceDetailModule(this));
     }
 
 
@@ -65,5 +97,15 @@ public class ConferenceDetailActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void populateConferenceData(ConferenceDetailViewModel conferenceDetailViewModel) {
+        // load the conference image
+        Picasso.with(this).load(conferenceDetailViewModel.getImageUrl()).into(imgConferenceImageView);
+        txtConferenceName.setText(conferenceDetailViewModel.getName());
+        txtConferenceDate.setText(conferenceDetailViewModel.getDateInformation());
+        txtConferenceFullDesc.setText(conferenceDetailViewModel.getFullDescription());
+        txtContactText.setText(conferenceDetailViewModel.getConferenceContactPerson());
     }
 }

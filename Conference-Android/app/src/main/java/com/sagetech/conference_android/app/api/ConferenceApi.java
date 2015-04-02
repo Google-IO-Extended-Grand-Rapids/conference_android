@@ -21,6 +21,9 @@ public interface ConferenceApi {
     @GET("/api/conference")
     Observable<List<ConferenceData>> getConferenceData();
 
+    @GET("/api/conference/{id}")
+    Observable<ConferenceData> getConferenceDataById(@Path("id") Long id);
+
     @GET("/api/presenter/{id}")
     Observable<PresenterData> getPresenterById(@Path("id") Long id);
 
