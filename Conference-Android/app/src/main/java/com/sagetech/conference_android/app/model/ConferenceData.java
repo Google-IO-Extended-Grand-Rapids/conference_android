@@ -6,8 +6,27 @@ package com.sagetech.conference_android.app.model;
 public class ConferenceData {
     private Integer id;
     private String name;
-    private String short_desc;
-    private String full_desc;
+    private String shortDesc;
+    private String fullDesc;
+    private String startDate;
+    private String endDate;
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
     private String imageUrl;
 
     public String getImageUrl() {
@@ -34,20 +53,20 @@ public class ConferenceData {
         this.name = name;
     }
 
-    public String getShort_desc() {
-        return short_desc;
+    public String getShortDesc() {
+        return shortDesc;
     }
 
-    public void setShort_desc(String short_desc) {
-        this.short_desc = short_desc;
+    public void setShortDesc(String short_desc) {
+        this.shortDesc = short_desc;
     }
 
-    public String getFull_desc() {
-        return full_desc;
+    public String getFullDesc() {
+        return fullDesc;
     }
 
-    public void setFull_desc(String full_desc) {
-        this.full_desc = full_desc;
+    public void setFullDesc(String full_desc) {
+        this.fullDesc = full_desc;
     }
 
 }

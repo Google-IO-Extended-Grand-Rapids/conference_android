@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:background="@color/conference_detail_title_background"
         android:padding="@dimen/conference_detail_conf_name_padding"
-        android:text="Google I/O"
         tools:text="Google I/O"
         android:textColor="@color/white" />
 
@@ -28,7 +27,6 @@
         android:layout_height="wrap_content"
         android:background="@color/conference_detail_title_background"
         android:padding="@dimen/conference_detail_conf_name_padding"
-        android:text="May 23 - 24 2015"
         tools:text="May 23 - 24 2015"
         android:textColor="@color/white" />
 
@@ -47,7 +45,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/conference_detail_padding"
-                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend, odio a vehicula venenatis, nisi nisi commodo arcu, a iaculis nunc purus non orci. Maecenas ac tempor enim. Pellentesque vel enim arcu. Nunc aliquet augue sed consectetur posuere. Mauris congue quam id neque dictum, sed placerat nunc ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean maximus fermentum odio, placerat placerat turpis aliquet eu. Duis finibus tristique mauris vel malesuada. Donec nec ipsum sem."
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend, odio a vehicula venenatis, nisi nisi commodo arcu, a iaculis nunc purus non orci. Maecenas ac tempor enim. Pellentesque vel enim arcu. Nunc aliquet augue sed consectetur posuere. Mauris congue quam id neque dictum, sed placerat nunc ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean maximus fermentum odio, placerat placerat turpis aliquet eu. Duis finibus tristique mauris vel malesuada. Donec nec ipsum sem." />
 
             <Button
@@ -66,8 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/conference_detail_marginLeft"
                 android:layout_marginTop="@dimen/conference_detail_marginTop"
-                tools:text="Thanks to our sponsors"
-                android:text="Thanks to our sponsors" />
+                tools:text="Thanks to our sponsors" />
 
             <GridLayout
                 android:layout_width="fill_parent"
@@ -132,8 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/conference_detail_marginLeft"
-                tools:text="Contact: Mahmoud Ahmadinejad"
-                android:text="Contact: Mahmoud Ahmadinejad"/>
+                tools:text="Contact: Mahmoud Ahmadinejad"/>
         </LinearLayout>
     </ScrollView>
 
