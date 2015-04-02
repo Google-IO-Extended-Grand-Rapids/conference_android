@@ -62,10 +62,14 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @InjectView(R.id.name) public TextView nameView;
-        @InjectView(R.id.cityAndState) public TextView cityAndStateView;
-        @InjectView(R.id.conferenceImage) public ImageView conferenceImageView;
-        @InjectView(R.id.conferenceLayout) public View conferenceLayout;
+        @InjectView(R.id.name)
+        public TextView nameView;
+        @InjectView(R.id.cityAndState)
+        public TextView cityAndStateView;
+        @InjectView(R.id.conferenceImage)
+        public ImageView conferenceImageView;
+        @InjectView(R.id.conferenceLayout)
+        public View conferenceLayout;
 
         private ConferenceDataViewModel conferenceData;
 
@@ -85,13 +89,16 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
         public void setName(String name) {
             nameView.setText(name);
         }
+
         public void setCityAndState(String cityAndState) {
             cityAndStateView.setText(cityAndState);
         }
+
         public void setImage(String imageUrl) {
-            Picasso pi = Picasso.with(this.conferenceImageView.getContext());
-            pi.setLoggingEnabled(true);
-            pi.load(imageUrl).into(this.conferenceImageView);
+            Picasso
+                    .with(this.conferenceImageView.getContext())
+                    .load(imageUrl)
+                    .into(this.conferenceImageView);
         }
 
 
