@@ -115,38 +115,7 @@
                     android:paddingTop="10dp"
                     android:paddingLeft="10dp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imgSpeaker"
-                    android:layout_below="@+id/textView3"
-                    android:src="@drawable/common_ic_googleplayservices"
-                    android:layout_alignParentTop="false" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lindsay Mikita"
-                    android:id="@+id/txtPresenterName"
-                    android:layout_toRightOf="@+id/imgSpeaker"
-                    android:layout_alignTop="@+id/imgSpeaker" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Amway"
-                    android:id="@+id/txtPresenterCompany"
-                    android:layout_below="@+id/txtPresenterName"
-                    android:layout_alignLeft="@+id/txtPresenterName" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel lectus fermentum turpis porta aliquam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu elit ligula. Nunc vehicula mauris."
-                    android:id="@+id/textView4"
-                    android:layout_toRightOf="@+id/imgSpeaker"
-                    android:layout_below="@+id/txtPresenterCompany"
-                    android:paddingTop="10dp" />
             </RelativeLayout>
 
         </LinearLayout>

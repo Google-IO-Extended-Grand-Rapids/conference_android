@@ -45,9 +45,6 @@ public class NewEventDetailActivity extends ActionBarActivity implements IEventD
     TextView recommend;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
