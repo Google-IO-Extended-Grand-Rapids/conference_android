@@ -20,6 +20,8 @@ import timber.log.Timber;
  */
 public class NewEventDetailActivity extends ActionBarActivity implements IEventDetailActivity {
 
+
+
     @Inject
     EventDetailActivityPresenter presenter;
 
@@ -38,12 +40,8 @@ public class NewEventDetailActivity extends ActionBarActivity implements IEventD
     @InjectView(R.id.txtDescription)
     TextView description;
 
-    @InjectView(R.id.imgPin)
-    ImageView pin;
-
     @InjectView(R.id.txtRecommend)
     TextView recommend;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,37 @@ public class NewEventDetailActivity extends ActionBarActivity implements IEventD
 
     @Override
     public void populateWithEventDetailView(EventDetailViewModel eventDetailViewModel) {
+        setTitle(eventDetailViewModel.getTitle());
+        //TODO: setSchedule
+        setRoom(eventDetailViewModel.getRoomName());
+        setDescription(eventDetailViewModel.getDescription());
+        setRecommend("+437 Recommended this on Google"); //TODO: set recommend stats when available
 
 
+
+    }
+
+    private void setTitle(String title) {
+        this.title.setText(title);
+    }
+
+    private void setSchedule(String schedule) {
+        this.schedule.setText(schedule);
+    }
+
+    private void setRoom(String room) {
+        this.room.setText(room);
+    }
+
+    private void setSessionTypeImg(String imageUrl) {
+
+    }
+
+    private void setDescription(String description) {
+        this.description.setText(description);
+    }
+
+    private void setRecommend(String recommend) {
+        this.recommend.setText(recommend);
     }
 }

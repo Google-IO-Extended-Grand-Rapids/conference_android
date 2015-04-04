@@ -7,12 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
-import com.sagetech.conference_android.app.api.ConferenceController;
-import com.sagetech.conference_android.app.ui.presenter.EventDetailActivityPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IEventDetailActivity;
 import com.sagetech.conference_android.app.ui.presenter.IEventDetailPresenter;
 import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
-import com.sagetech.conference_android.app.util.module.ConferenceSessionListModule;
 import com.sagetech.conference_android.app.util.module.EventDetailModule;
 
 import java.util.Arrays;
@@ -127,6 +124,10 @@ public class EventDetailActivity extends InjectableActionBarActivity implements 
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public enum EventType {
+        PRESENTATION, CODE_LABS
     }
 
 }

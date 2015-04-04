@@ -71,9 +71,11 @@ public class SessionPresenterAdapter extends RecyclerView.Adapter<SessionPresent
             setName(presenter.getFullName());
             setCompany("Company Name"); //TODO: set company name when available
             setBio(presenter.getBiography());
+            setPic("https://dl.dropboxusercontent.com/s/94j05poa7rg2rf1/UnknownProfile.png");
         }
 
         private void setPic(String imageUrl) {
+            //TODO: implement Picasso
         }
 
         private void setName(String name) {
