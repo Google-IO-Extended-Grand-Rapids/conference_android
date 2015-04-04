@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel lectus fermentum turpis porta aliquam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu elit ligula. Nunc vehicula mauris."
-            android:id="@+id/textView4"
+            android:id="@+id/txtBio"
             android:layout_toRightOf="@+id/imgSpeaker"
             android:layout_below="@+id/txtPresenterCompany"
             android:paddingTop="10dp" />
