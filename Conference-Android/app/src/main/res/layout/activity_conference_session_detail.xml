@@ -83,7 +83,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/imageView3"
+                    android:id="@+id/imgGooglePlus"
                     android:src="@drawable/common_signin_btn_icon_focus_dark"
                     android:layout_below="@+id/txtDescription"
                     android:layout_alignLeft="@+id/txtDescription"
@@ -93,9 +93,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+437 Recommended this on Google"
-                    android:id="@+id/textView2"
-                    android:layout_toRightOf="@+id/imageView3"
-                    android:layout_alignTop="@+id/imageView3" />
+                    android:id="@+id/txtRecommend"
+                    android:layout_toRightOf="@+id/imgGooglePlus"
+                    android:layout_alignTop="@+id/imgGooglePlus" />
             </RelativeLayout>
 
             <RelativeLayout
