@@ -1,29 +1,34 @@
 package com.sagetech.conference_android.app.ui.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
-import com.sagetech.conference_android.app.ui.presenter.EventDetailActivityPresenter;
+import com.sagetech.conference_android.app.ui.adapters.SessionPresenterAdapter;
 import com.sagetech.conference_android.app.ui.presenter.IEventDetailActivity;
+import com.sagetech.conference_android.app.ui.presenter.IEventDetailPresenter;
 import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
+import com.sagetech.conference_android.app.util.module.NewEventDetailModule;
+
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 import timber.log.Timber;
 
 /**
  * Created by carlushenry on 3/15/15.
  */
-public class NewEventDetailActivity extends ActionBarActivity implements IEventDetailActivity {
-
-
+public class NewEventDetailActivity extends InjectableActionBarActivity implements IEventDetailActivity {
 
     @Inject
-    EventDetailActivityPresenter presenter;
+    IEventDetailPresenter presenter;
 
     @InjectView(R.id.txtTitle)
     TextView title;
@@ -43,6 +48,11 @@ public class NewEventDetailActivity extends ActionBarActivity implements IEventD
     @InjectView(R.id.txtRecommend)
     TextView recommend;
 
+    @InjectView(R.id.presenterView)
+    RecyclerView mPresenterView;
+
+    private SessionPresenterAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +61,11 @@ public class NewEventDetailActivity extends ActionBarActivity implements IEventD
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Timber.d("onCreate");
+
+        ButterKnife.inject(this);
+
+        mPresenterView.setHasFixedSize(true);
+        mPresenterView.setLayoutManager(new LinearLayoutManager(this));
 
         Long eventId = getIntent().getExtras().getLong("id");
         presenter.initialize(eventId);
@@ -64,13 +79,17 @@ public class NewEventDetailActivity extends ActionBarActivity implements IEventD
     @Override
     public void populateWithEventDetailView(EventDetailViewModel eventDetailViewModel) {
         setTitle(eventDetailViewModel.getTitle());
-        //TODO: setSchedule
+        setSchedule("Wed, May 25, 9 - 11:30 a.m."); //TODO: set this when it is formatted correctly
         setRoom(eventDetailViewModel.getRoomName());
         setDescription(eventDetailViewModel.getDescription());
         setRecommend("+437 Recommended this on Google"); //TODO: set recommend stats when available
+        mAdapter = new SessionPresenterAdapter(eventDetailViewModel.getPresenters());
+        mPresenterView.setAdapter(mAdapter);
+    }
 
-
-
+    @Override
+    protected List<Object> getModules() {
+        return Arrays.<Object>asList(new NewEventDetailModule(this));
     }
 
     private void setTitle(String title) {

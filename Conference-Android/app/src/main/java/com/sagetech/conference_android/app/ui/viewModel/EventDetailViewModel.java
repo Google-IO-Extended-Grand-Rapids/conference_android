@@ -99,6 +99,8 @@ public class EventDetailViewModel {
         private String firstName;
         private String lastName;
         private String biography;
+        private String picUrl;
+
 
         public String getFullName() {
             return String.format("%s %s", firstName, lastName);
@@ -126,6 +128,10 @@ public class EventDetailViewModel {
 
         public void setBiography(String biography) {
             this.biography = biography;
+        }
+
+        public String getPicUrl() {
+            return "https://dl.dropboxusercontent.com/s/94j05poa7rg2rf1/UnknownProfile.png";
         }
     }
 
