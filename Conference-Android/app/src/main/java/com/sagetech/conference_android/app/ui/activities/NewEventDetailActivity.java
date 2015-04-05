@@ -79,7 +79,7 @@ public class NewEventDetailActivity extends InjectableActionBarActivity implemen
     @Override
     public void populateWithEventDetailView(EventDetailViewModel eventDetailViewModel) {
         setTitle(eventDetailViewModel.getTitle());
-        setSchedule("Wed, May 25, 9 - 11:30 a.m."); //TODO: set this when it is formatted correctly
+        setSchedule(eventDetailViewModel.getEventDateAndDuration());
         setRoom(eventDetailViewModel.getRoomName());
         setDescription(eventDetailViewModel.getDescription());
         setRecommend("+437 Recommended this on Google"); //TODO: set recommend stats when available
