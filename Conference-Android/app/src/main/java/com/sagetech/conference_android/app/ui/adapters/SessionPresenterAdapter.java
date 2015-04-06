@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import java.util.List;
 
@@ -72,14 +73,22 @@ public class SessionPresenterAdapter extends RecyclerView.Adapter<SessionPresent
             setName(presenter.getFullName());
             setCompany("Company Name"); //TODO: set company name when available
             setBio(presenter.getBiography());
-            setPic(presenter.getPicUrl());
+            setPic(presenter);
         }
 
-        private void setPic(String imageUrl) {
-            Picasso
-                    .with(this.pic.getContext())
-                    .load(imageUrl)
-                    .into(this.pic);
+        private void setPic(EventDetailViewModel.EventDetailPresenterView presenter) {
+            Picasso picasso = Picasso
+                    .with(this.pic.getContext());
+            RequestCreator reqCreator = null;
+
+            if (presenter.getPicUrl() != null) {
+                reqCreator = picasso.load(presenter.getPicUrl());
+            } else {
+                reqCreator = picasso.load(presenter.getDefaultProfilePicId());
+            }
+
+            reqCreator.into(this.pic);
+
         }
 
         private void setName(String name) {

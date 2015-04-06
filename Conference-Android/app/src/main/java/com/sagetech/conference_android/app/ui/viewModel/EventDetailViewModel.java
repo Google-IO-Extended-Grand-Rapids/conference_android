@@ -1,5 +1,6 @@
 package com.sagetech.conference_android.app.ui.viewModel;
 
+import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.PresenterData;
 import com.sagetech.conference_android.app.model.RoomData;
@@ -105,7 +106,11 @@ public class EventDetailViewModel {
         }
 
         public String getPicUrl() {
-            return "https://dl.dropboxusercontent.com/s/94j05poa7rg2rf1/UnknownProfile.png";  //TODO: pic url when available
+            return presenterData.getProfilePicUrl();
+        }
+
+        public int getDefaultProfilePicId() {
+            return R.drawable.unknown_profile;
         }
     }
 
