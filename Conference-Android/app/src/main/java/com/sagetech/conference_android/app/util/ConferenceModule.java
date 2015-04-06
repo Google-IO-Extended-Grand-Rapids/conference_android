@@ -13,11 +13,6 @@ import com.sagetech.conference_android.app.BuildConfig;
 import com.sagetech.conference_android.app.ConferenceApplication;
 import com.sagetech.conference_android.app.api.ConferenceApi;
 import com.sagetech.conference_android.app.api.ConferenceController;
-import com.sagetech.conference_android.app.ui.activities.ConferenceListActivity;
-import com.sagetech.conference_android.app.ui.activities.ConferenceSessionListActivity;
-import com.sagetech.conference_android.app.ui.activities.EventDetailActivity;
-import com.sagetech.conference_android.app.ui.activities.NewEventDetailActivity;
-import com.sagetech.conference_android.app.ui.activities.SplashActivity;
 
 import java.lang.reflect.Type;
 import java.util.Date;
@@ -32,8 +27,7 @@ import timber.log.Timber;
 
 @Module(
         injects = {
-                ConferenceApplication.class,
-                NewEventDetailActivity.class
+                ConferenceApplication.class
         }, library = true
 )
 public final class ConferenceModule {
@@ -77,5 +71,4 @@ public final class ConferenceModule {
     ConferenceController provideConferenceController(ConferenceApi conferenceApi) {
         return new ConferenceController(conferenceApi);
     }
-
 }

@@ -24,14 +24,12 @@ public class EventDetailActivityPresenter implements IEventDetailPresenter {
 
     private final IEventDetailActivity eventDetailActivity;
     private final ConferenceController conferenceController;
-    private final EventDetailViewBuilder eventDetailViewBuilder;
     private Subscription subscription;
 
 
     public EventDetailActivityPresenter(IEventDetailActivity eventDetailActivity, ConferenceController conferenceController) {
         this.eventDetailActivity = eventDetailActivity;
         this.conferenceController = conferenceController;
-        this.eventDetailViewBuilder = new EventDetailViewBuilder();
     }
 
     public void initialize(Long eventId) {
@@ -104,7 +102,7 @@ public class EventDetailActivityPresenter implements IEventDetailPresenter {
         return Observable.zip(conferenceSessionObservable, presenterObservable, roomDataObservable, new Func3<ConferenceSessionData, List<PresenterData>, RoomData, EventDetailViewModel>() {
             @Override
             public EventDetailViewModel call(ConferenceSessionData confSessionData, List<PresenterData> presenterDataList, RoomData roomData) {
-                return eventDetailViewBuilder.toEventDetailView(confSessionData, presenterDataList, roomData);
+                return new EventDetailViewModel(confSessionData, roomData, presenterDataList);
             }
         });
     }

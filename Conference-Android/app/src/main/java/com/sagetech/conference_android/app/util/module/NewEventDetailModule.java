@@ -1,13 +1,8 @@
 package com.sagetech.conference_android.app.util.module;
 
-
 import com.sagetech.conference_android.app.api.ConferenceController;
-import com.sagetech.conference_android.app.ui.activities.ConferenceSessionListActivity;
-import com.sagetech.conference_android.app.ui.activities.EventDetailActivity;
-import com.sagetech.conference_android.app.ui.presenter.ConferenceSessionListActivityPresenter;
+import com.sagetech.conference_android.app.ui.activities.NewEventDetailActivity;
 import com.sagetech.conference_android.app.ui.presenter.EventDetailActivityPresenter;
-import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionActivity;
-import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionListPresenter;
 import com.sagetech.conference_android.app.ui.presenter.IEventDetailActivity;
 import com.sagetech.conference_android.app.ui.presenter.IEventDetailPresenter;
 import com.sagetech.conference_android.app.util.ConferenceModule;
@@ -17,15 +12,18 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
+/**
+ * Created by jrobertson on 4/4/15.
+ */
 @Module(
-        injects = EventDetailActivity.class,
+        injects = NewEventDetailActivity.class,
         addsTo = ConferenceModule.class
 )
-public class EventDetailModule {
+public class NewEventDetailModule {
 
     private IEventDetailActivity view;
 
-    public EventDetailModule(IEventDetailActivity view) {
+    public NewEventDetailModule(IEventDetailActivity view) {
         this.view = view;
     }
 

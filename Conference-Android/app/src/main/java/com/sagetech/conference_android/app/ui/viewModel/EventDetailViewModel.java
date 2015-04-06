@@ -1,9 +1,14 @@
 package com.sagetech.conference_android.app.ui.viewModel;
 
+import com.sagetech.conference_android.app.model.ConferenceSessionData;
+import com.sagetech.conference_android.app.model.PresenterData;
+import com.sagetech.conference_android.app.model.RoomData;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by carlushenry on 2/19/15.
@@ -14,118 +19,93 @@ public class EventDetailViewModel {
         PRESENTATION, CODE_LABS
     }
 
-    private List<EventDetailPresenterView> presenters;
-    private String title;
-    private String description;
-    private String roomName;
-    private Date startDttm;
-    private Date endDttm;
-    private EventType eventType;
-    private static SimpleDateFormat timeFormatter1 = new SimpleDateFormat("EEE, h:mm-", Locale.US);
-    private static SimpleDateFormat timeFormatter2 = new SimpleDateFormat("h:mm aaa", Locale.US);
+    private static SimpleDateFormat startDateTimeFormatter = new SimpleDateFormat("EE, MMM d, h");
+    private static SimpleDateFormat startMinuteFormatter = new SimpleDateFormat(":mm");
+    private static SimpleDateFormat endTimeFormatter = new SimpleDateFormat("h:mm aaa");
+    private static String ZERO_MINUTE = ":00";
 
-    public String getLocationAndStartTime() {
+    private ConferenceSessionData sessionData;
+    private RoomData roomData;
+    private List<PresenterData> presenterDatas;
 
-        String locationAndStartTime = null;
+    public EventDetailViewModel(ConferenceSessionData sessionData, RoomData roomData, List<PresenterData> presenterDatas) {
+        this.sessionData = sessionData;
+        this.roomData = roomData;
+        this.presenterDatas = presenterDatas;
+    }
 
-        if (roomName == null) {
-            locationAndStartTime = String.format("%s%s", timeFormatter1.format(startDttm), timeFormatter2.format(endDttm));
+    public String getEventDateAndDuration() {
+        String startMinute = startMinuteFormatter.format(this.getStartDttm());
+
+        if (ZERO_MINUTE.equals(startMinute)) {
+            return String.format("%s - %s", startDateTimeFormatter.format(this.getStartDttm()), endTimeFormatter.format(this.getEndDttm()));
         } else {
-            locationAndStartTime = String.format("%s%s in %s", timeFormatter1.format(startDttm), timeFormatter2.format(endDttm), roomName);
+            return String.format("%s%s - %s", startDateTimeFormatter.format(this.getStartDttm()), startMinute, endTimeFormatter.format(this.getEndDttm()));
         }
-
-
-        return locationAndStartTime;
-
-    }
-
-    public List<EventDetailPresenterView> getPresenters() {
-        return presenters;
-    }
-
-    public void setPresenters(List<EventDetailPresenterView> presenters) {
-        this.presenters = presenters;
     }
 
     public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        return sessionData.getName();
     }
 
     public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+        return sessionData.getFullDesc();
     }
 
     public String getRoomName() {
-        return roomName;
-    }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+        return roomData.getShortDesc();
     }
 
     public Date getStartDttm() {
-        return startDttm;
-    }
-
-    public void setStartDttm(Date startDttm) {
-        this.startDttm = startDttm;
+        return sessionData.getStartDttm();
     }
 
     public Date getEndDttm() {
-        return endDttm;
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(sessionData.getStartDttm());
+        cal.add(Calendar.MINUTE, sessionData.getDurationMinutes());
+        return cal.getTime();
     }
 
-    public void setEndDttm(Date endDttm) {
-        this.endDttm = endDttm;
-    }
+    public List<EventDetailPresenterView> getPresenters() {
+        List<EventDetailPresenterView> views = new ArrayList<EventDetailPresenterView>();
 
-    public EventType getEventType() {
-        return eventType;
-    }
+        for (PresenterData presenter : presenterDatas) {
+            if (presenter == null) {
+                continue;
+            }
+            views.add(new EventDetailPresenterView(presenter));
+        }
 
-    public void setEventType(EventType eventType) {
-        this.eventType = eventType;
+        return views;
     }
 
     public class EventDetailPresenterView {
-        private String firstName;
-        private String lastName;
-        private String biography;
+
+        private PresenterData presenterData;
+
+        public EventDetailPresenterView(PresenterData presenterData) {
+            this.presenterData = presenterData;
+        }
 
         public String getFullName() {
-            return String.format("%s %s", firstName, lastName);
+            return String.format("%s %s", this.getFirstName(), this.getLastName());
         }
 
         public String getFirstName() {
-            return firstName;
-        }
-
-        public void setFirstName(String firstName) {
-            this.firstName = firstName;
+            return presenterData.getId() + "";
         }
 
         public String getLastName() {
-            return lastName;
-        }
-
-        public void setLastName(String lastName) {
-            this.lastName = lastName;
+            return presenterData.getUserId();
         }
 
         public String getBiography() {
-            return biography;
+            return presenterData.getShortBio();
         }
 
-        public void setBiography(String biography) {
-            this.biography = biography;
+        public String getPicUrl() {
+            return "https://dl.dropboxusercontent.com/s/94j05poa7rg2rf1/UnknownProfile.png";  //TODO: pic url when available
         }
     }
 
