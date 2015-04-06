@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceDataViewModel;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
             this.conferenceData = conferenceData;
             setName(conferenceData.getName());
             setCityAndState(conferenceData.getCityAndState());
-            setImage(conferenceData.getConferenceImageUrl());
+            setImage(conferenceData);
         }
 
         public void setName(String name) {
@@ -94,11 +95,19 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
             cityAndStateView.setText(cityAndState);
         }
 
-        public void setImage(String imageUrl) {
-            Picasso
-                    .with(this.conferenceImageView.getContext())
-                    .load(imageUrl)
-                    .into(this.conferenceImageView);
+        public void setImage(ConferenceDataViewModel conferenceDataViewModel) {
+            Picasso picasso = Picasso
+                    .with(this.conferenceImageView.getContext());
+
+            RequestCreator reqCreator = null;
+
+            if (conferenceDataViewModel.getConferenceImageUrl() != null) {
+                reqCreator = picasso.load(conferenceDataViewModel.getConferenceImageUrl());
+            } else {
+                reqCreator = picasso.load(conferenceDataViewModel.getConferenceImageDefaultId());
+            }
+
+            reqCreator.into(this.conferenceImageView);
         }
 
 

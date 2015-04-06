@@ -1,5 +1,6 @@
 package com.sagetech.conference_android.app.ui.presenter;
 
+import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.model.ConferenceData;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceDataViewModel;
 
@@ -25,7 +26,8 @@ public class ConferenceBuilder {
         ConferenceDataViewModel confDataViewModel = new ConferenceDataViewModel();
 
         //TODO Fix this and get the city and state from the location.
-        confDataViewModel.setConferenceImageUrl((currConfData.getImageUrl() != null) ? currConfData.getImageUrl() : "https://dl.dropboxusercontent.com/s/xe4d4thsslgdxyp/event1-140px.jpg");
+        confDataViewModel.setConferenceImageUrl(currConfData.getImageUrl());
+        confDataViewModel.setConferenceImageDefaultId(R.drawable.default_event);
         confDataViewModel.setCityAndState("Grand Rapids, MI");
         confDataViewModel.setName(currConfData.getName());
         confDataViewModel.setId(currConfData.getId());
