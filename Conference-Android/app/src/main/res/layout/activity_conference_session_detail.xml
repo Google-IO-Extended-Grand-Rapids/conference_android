@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -14,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Introduction and Keynote"
+            tools:text="Introduction and Keynote"
             android:id="@+id/txtTitle"
             android:paddingLeft="15dp" />
 
@@ -22,7 +24,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Wed, May 25, 9 - 11:30 a.m."
+            tools:text="Wed, May 25, 9 - 11:30 a.m."
             android:id="@+id/txtSchedule"
             android:layout_below="@+id/txtTitle"
             android:paddingLeft="15dp" />
@@ -31,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Loosemore Auditorium"
+            tools:text="Loosemore Auditorium"
             android:id="@+id/txtRoom"
             android:layout_below="@+id/txtSchedule"
             android:paddingLeft="15dp" />
@@ -67,7 +69,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae vulputate ante, sed posuere ante. Fusce non nisi nec turpis eleifend mattis. Mauris facilisis nulla a metus efficitur mollis. Vestibulum eget volutpat tellus. Duis vel libero sit amet eros pharetra cursus. Proin nec lacus ut justo commodo condimentum. Nulla scelerisque."
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae vulputate ante, sed posuere ante. Fusce non nisi nec turpis eleifend mattis. Mauris facilisis nulla a metus efficitur mollis. Vestibulum eget volutpat tellus. Duis vel libero sit amet eros pharetra cursus. Proin nec lacus ut justo commodo condimentum. Nulla scelerisque."
                     android:id="@+id/txtDescription"
                     android:layout_toRightOf="@+id/imgPin"
                     android:padding="15dp" />
@@ -92,7 +94,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+437 Recommended this on Google"
+                    tools:text="+437 Recommended this on Google"
                     android:id="@+id/txtRecommend"
                     android:layout_toRightOf="@+id/imgGooglePlus"
                     android:layout_alignTop="@+id/imgGooglePlus" />
@@ -106,7 +108,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Speakers"
+                    tools:text="Speakers"
                     android:id="@+id/textView3"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentLeft="true"
