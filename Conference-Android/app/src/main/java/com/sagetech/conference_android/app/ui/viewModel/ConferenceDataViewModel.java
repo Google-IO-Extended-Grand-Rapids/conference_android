@@ -9,12 +9,6 @@ public class ConferenceDataViewModel {
     private String name;
     private String conferenceImageUrl;
 
-    public int getConferenceImageDefaultId() {
-        return conferenceImageDefaultId;
-    }
-
-    private int conferenceImageDefaultId;
-
     public Integer getId() {
         return id;
     }
@@ -47,7 +41,4 @@ public class ConferenceDataViewModel {
         this.conferenceImageUrl = conferenceImageUrl;
     }
 
-    public void setConferenceImageDefaultId(int conferenceImageDefaultId) {
-        this.conferenceImageDefaultId = conferenceImageDefaultId;
-    }
 }

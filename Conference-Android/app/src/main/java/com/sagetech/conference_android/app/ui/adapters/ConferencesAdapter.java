@@ -84,7 +84,7 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
             this.conferenceData = conferenceData;
             setName(conferenceData.getName());
             setCityAndState(conferenceData.getCityAndState());
-            setImage(conferenceData);
+            setImage(conferenceData.getConferenceImageUrl());
         }
 
         public void setName(String name) {
@@ -95,19 +95,13 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
             cityAndStateView.setText(cityAndState);
         }
 
-        public void setImage(ConferenceDataViewModel conferenceDataViewModel) {
-            Picasso picasso = Picasso
-                    .with(this.conferenceImageView.getContext());
-
-            RequestCreator reqCreator = null;
-
-            if (conferenceDataViewModel.getConferenceImageUrl() != null) {
-                reqCreator = picasso.load(conferenceDataViewModel.getConferenceImageUrl());
-            } else {
-                reqCreator = picasso.load(conferenceDataViewModel.getConferenceImageDefaultId());
-            }
-
-            reqCreator.into(this.conferenceImageView);
+        public void setImage(String imgUrl) {
+            Picasso
+                    .with(this.conferenceImageView.getContext())
+                    .load(imgUrl)
+                    .placeholder(R.drawable.default_event)
+                    .error(R.drawable.default_event)
+                    .into(this.conferenceImageView);
         }
 
 

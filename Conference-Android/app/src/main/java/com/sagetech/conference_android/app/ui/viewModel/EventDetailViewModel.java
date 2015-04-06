@@ -108,10 +108,6 @@ public class EventDetailViewModel {
         public String getPicUrl() {
             return presenterData.getProfilePicUrl();
         }
-
-        public int getDefaultProfilePicId() {
-            return R.drawable.unknown_profile;
-        }
     }
 
 }

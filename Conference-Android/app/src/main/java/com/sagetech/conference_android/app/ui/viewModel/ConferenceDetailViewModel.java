@@ -30,10 +30,6 @@ public class ConferenceDetailViewModel {
         return confData.getImageUrl();
     }
 
-    public int getConferenceImageDefaultId() {
-        return R.drawable.default_event;
-    }
-
     public String getConferenceContactPerson() {
         return "Mahmoud Ahmadinejad";
     }

@@ -103,14 +103,11 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
     @Override
     public void populateConferenceData(ConferenceDetailViewModel conferenceDetailViewModel) {
         // load the conference image
-        Picasso picasso = Picasso.with(this);
-        RequestCreator reqCreator = null;
-        if (conferenceDetailViewModel.getImageUrl() != null) {
-            reqCreator = picasso.load(conferenceDetailViewModel.getImageUrl());
-        } else {
-            reqCreator = picasso.load(conferenceDetailViewModel.getConferenceImageDefaultId());
-        }
-        reqCreator.into(imgConferenceImageView);
+        Picasso.with(this)
+                .load(conferenceDetailViewModel.getImageUrl())
+                .placeholder(R.drawable.default_event)
+                .error(R.drawable.default_event)
+                .into(imgConferenceImageView);
 
         txtConferenceName.setText(conferenceDetailViewModel.getName());
         txtConferenceDate.setText(conferenceDetailViewModel.getDateInformation());
