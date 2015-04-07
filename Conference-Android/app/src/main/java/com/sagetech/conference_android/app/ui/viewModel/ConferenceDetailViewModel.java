@@ -1,5 +1,6 @@
 package com.sagetech.conference_android.app.ui.viewModel;
 
+import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.model.ConferenceData;
 
 /**
@@ -26,7 +27,7 @@ public class ConferenceDetailViewModel {
     }
 
     public String getImageUrl() {
-        return (confData.getImageUrl() != null) ? confData.getImageUrl() : "https://dl.dropboxusercontent.com/s/xe4d4thsslgdxyp/event1-140px.jpg";
+        return confData.getImageUrl();
     }
 
     public String getConferenceContactPerson() {

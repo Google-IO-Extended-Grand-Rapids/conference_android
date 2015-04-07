@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceDataViewModel;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import java.util.List;
 
@@ -94,10 +95,12 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
             cityAndStateView.setText(cityAndState);
         }
 
-        public void setImage(String imageUrl) {
+        public void setImage(String imgUrl) {
             Picasso
                     .with(this.conferenceImageView.getContext())
-                    .load(imageUrl)
+                    .load(imgUrl)
+                    .placeholder(R.drawable.default_event)
+                    .error(R.drawable.default_event)
                     .into(this.conferenceImageView);
         }
 

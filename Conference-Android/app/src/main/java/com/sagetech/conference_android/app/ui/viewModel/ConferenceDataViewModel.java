@@ -40,4 +40,5 @@ public class ConferenceDataViewModel {
     public void setConferenceImageUrl(String conferenceImageUrl) {
         this.conferenceImageUrl = conferenceImageUrl;
     }
+
 }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import java.util.List;
 
@@ -75,10 +76,12 @@ public class SessionPresenterAdapter extends RecyclerView.Adapter<SessionPresent
             setPic(presenter.getPicUrl());
         }
 
-        private void setPic(String imageUrl) {
+        private void setPic(String picUrl) {
             Picasso
                     .with(this.pic.getContext())
-                    .load(imageUrl)
+                    .load(picUrl)
+                    .placeholder(R.drawable.unknown_profile)
+                    .error(R.drawable.unknown_profile)
                     .into(this.pic);
         }
 

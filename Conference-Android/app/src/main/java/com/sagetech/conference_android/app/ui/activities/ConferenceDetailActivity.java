@@ -18,6 +18,7 @@ import com.sagetech.conference_android.app.ui.viewModel.ConferenceDetailViewMode
 import com.sagetech.conference_android.app.util.module.ConferenceDetailModule;
 import com.sagetech.conference_android.app.util.module.ConferenceListModule;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -102,7 +103,12 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
     @Override
     public void populateConferenceData(ConferenceDetailViewModel conferenceDetailViewModel) {
         // load the conference image
-        Picasso.with(this).load(conferenceDetailViewModel.getImageUrl()).into(imgConferenceImageView);
+        Picasso.with(this)
+                .load(conferenceDetailViewModel.getImageUrl())
+                .placeholder(R.drawable.default_event)
+                .error(R.drawable.default_event)
+                .into(imgConferenceImageView);
+
         txtConferenceName.setText(conferenceDetailViewModel.getName());
         txtConferenceDate.setText(conferenceDetailViewModel.getDateInformation());
         txtConferenceFullDesc.setText(conferenceDetailViewModel.getFullDescription());

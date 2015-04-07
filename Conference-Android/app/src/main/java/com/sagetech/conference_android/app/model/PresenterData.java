@@ -9,6 +9,15 @@ public class PresenterData {
     private String userId;
     private String shortBio;
     private String jobTitle;
+    private String profilePicUrl;
+
+    public String getProfilePicUrl() {
+        return profilePicUrl;
+    }
+
+    public void setProfilePicUrl(String profilePicUrl) {
+        this.profilePicUrl = profilePicUrl;
+    }
 
     public Long getId() {
         return id;
