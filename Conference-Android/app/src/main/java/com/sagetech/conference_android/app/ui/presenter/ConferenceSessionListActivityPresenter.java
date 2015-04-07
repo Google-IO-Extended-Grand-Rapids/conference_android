@@ -30,10 +30,16 @@ public class ConferenceSessionListActivityPresenter implements IConferenceSessio
         this.conferenceController = conferenceController;
     }
 
-    public void initialize(Integer conferenceId) {
+    public void initialize(Long conferenceId) {
         Observable<List<ConferenceSessionViewModel>> conferenceDataObservable = createConferenceSessionViewModelObservable(conferenceId);
 
-        subscription = conferenceDataObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<List<ConferenceSessionViewModel>>() {
+        subscription = conferenceDataObservable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(populateConferenceSessionListSubscriber());
+    }
+
+    private Subscriber<List<ConferenceSessionViewModel>> populateConferenceSessionListSubscriber() {
+        return new Subscriber<List<ConferenceSessionViewModel>>() {
             @Override
             public void onCompleted() {
 
@@ -50,10 +56,10 @@ public class ConferenceSessionListActivityPresenter implements IConferenceSessio
                 conferenceSessionListActivity.populateConferenceSessions(conferenceSessionViewModels);
             }
 
-        });
+        };
     }
 
-    private Observable<List<ConferenceSessionViewModel>> createConferenceSessionViewModelObservable(Integer conferenceId) {
+    private Observable<List<ConferenceSessionViewModel>> createConferenceSessionViewModelObservable(Long conferenceId) {
 
         Observable<List<ConferenceSessionData>> conferenceSessionObservable = conferenceController.getConferenceSessionsById(conferenceId).cache();
 
@@ -72,27 +78,27 @@ public class ConferenceSessionListActivityPresenter implements IConferenceSessio
         })
                 .distinct()
                 .flatMap(new Func1<Long, Observable<RoomData>>() {
-            @Override
-            public Observable<RoomData> call(Long roomId) {
-                return conferenceController.getRoomById(roomId);
-            }
-        }).onErrorReturn(new Func1<Throwable, RoomData>() {
+                    @Override
+                    public Observable<RoomData> call(Long roomId) {
+                        return conferenceController.getRoomById(roomId);
+                    }
+                }).onErrorReturn(new Func1<Throwable, RoomData>() {
 
-            @Override
-            public RoomData call(Throwable throwable) {
-                RoomData rd = new RoomData();
-                rd.setConferenceId(null);
-                rd.setFullDesc("Full description");
-                rd.setId(null); // this will be the default roomData
-                rd.setShortDesc("Unknown");
-                return rd;
-            }
-        }).toMap(new Func1<RoomData, Long>() {
-            @Override
-            public Long call(RoomData roomData) {
-                return roomData.getId();
-            }
-        });
+                    @Override
+                    public RoomData call(Throwable throwable) {
+                        RoomData rd = new RoomData();
+                        rd.setConferenceId(null);
+                        rd.setFullDesc("Full description");
+                        rd.setId(null); // this will be the default roomData
+                        rd.setShortDesc("Unknown");
+                        return rd;
+                    }
+                }).toMap(new Func1<RoomData, Long>() {
+                    @Override
+                    public Long call(RoomData roomData) {
+                        return roomData.getId();
+                    }
+                });
 
         return Observable.zip(conferenceSessionObservable, roomDataObservable, new Func2<List<ConferenceSessionData>, Map<Long, RoomData>, List<ConferenceSessionViewModel>>() {
             @Override

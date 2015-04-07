@@ -8,14 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 
 import com.sagetech.conference_android.app.R;
-import com.sagetech.conference_android.app.api.ConferenceController;
-import com.sagetech.conference_android.app.model.ConferenceSessionData;
-import com.sagetech.conference_android.app.ui.adapters.ConferenceSessionsAdapter;
-import com.sagetech.conference_android.app.ui.presenter.ConferenceSessionListActivityPresenter;
+import com.sagetech.conference_android.app.ui.adapters.ConferenceSessionListAdapter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionActivity;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionListPresenter;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewModel;
-import com.sagetech.conference_android.app.util.module.ConferenceListModule;
 import com.sagetech.conference_android.app.util.module.ConferenceSessionListModule;
 
 import java.util.Arrays;
@@ -30,7 +26,7 @@ import timber.log.Timber;
 /**
  * Created by adam on 2/21/15.
  */
-public class ConferenceSessionListActivity extends InjectableActionBarActivity implements IConferenceSessionActivity, ConferenceSessionsAdapter.ConferenceSessionsOnClickListener {
+public class ConferenceSessionListActivity extends InjectableActionBarActivity implements IConferenceSessionActivity, ConferenceSessionListAdapter.ConferenceSessionListOnClickListener {
 
     @Inject
     IConferenceSessionListPresenter presenter = null;
@@ -38,7 +34,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     @InjectView(R.id.confView)
     RecyclerView mRecyclerView;
 
-    private ConferenceSessionsAdapter mAdapter;
+    private ConferenceSessionListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +48,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Integer conferenceId = getIntent().getIntExtra("id", 0);
+        Long conferenceId = getIntent().getLongExtra("id", 0);
         presenter.initialize(conferenceId);
     }
 
@@ -64,7 +60,7 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
     @Override
     public void populateConferenceSessions(List<ConferenceSessionViewModel> conferenceSessions) {
-        mAdapter = new ConferenceSessionsAdapter(conferenceSessions, this);
+        mAdapter = new ConferenceSessionListAdapter(conferenceSessions, this);
         mRecyclerView.setAdapter(mAdapter);
     }
 
@@ -86,10 +82,10 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     }
 
 
-    private void launchEventDetailActivity(long sessionId) {
+    private void launchEventDetailActivity(Long sessionId) {
         Timber.d(String.format("Session Selected: %s", sessionId));
 
-        Intent eventDetailIntent = new Intent(this, NewEventDetailActivity.class);
+        Intent eventDetailIntent = new Intent(this, ConferenceSessionDetailActivity.class);
         eventDetailIntent.putExtra("id", sessionId);
         startActivity(eventDetailIntent);
     }

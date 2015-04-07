@@ -14,9 +14,9 @@ import java.util.List;
 /**
  * Created by carlushenry on 2/19/15.
  */
-public class EventDetailViewModel {
+public class ConferenceSessionDetailViewModel {
 
-    public enum EventType {
+    public enum ConferenceSessionType {
         PRESENTATION, CODE_LABS
     }
 
@@ -29,7 +29,7 @@ public class EventDetailViewModel {
     private RoomData roomData;
     private List<PresenterData> presenterDatas;
 
-    public EventDetailViewModel(ConferenceSessionData sessionData, RoomData roomData, List<PresenterData> presenterDatas) {
+    public ConferenceSessionDetailViewModel(ConferenceSessionData sessionData, RoomData roomData, List<PresenterData> presenterDatas) {
         this.sessionData = sessionData;
         this.roomData = roomData;
         this.presenterDatas = presenterDatas;

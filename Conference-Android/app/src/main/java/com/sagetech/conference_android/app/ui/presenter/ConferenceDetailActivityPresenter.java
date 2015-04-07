@@ -5,7 +5,6 @@ import com.sagetech.conference_android.app.model.ConferenceData;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceDetailViewModel;
 
 import rx.Observer;
-import rx.android.app.AppObservable;
 import rx.android.schedulers.AndroidSchedulers;
 
 /**
@@ -25,22 +24,27 @@ public class ConferenceDetailActivityPresenter implements IConferenceDetailActiv
 
         controller.getConferenceDataById(conferenceId)
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<ConferenceData>() {
-                    ConferenceData conferenceData;
-                    @Override
-                    public void onCompleted() {
-                        view.populateConferenceData(new ConferenceDetailViewModel(conferenceData));
-                    }
+                .subscribe(populateConferenceDataSubscriber());
+    }
 
-                    @Override
-                    public void onError(Throwable e) {
+    private Observer<ConferenceData> populateConferenceDataSubscriber() {
+        return new Observer<ConferenceData>() {
+            ConferenceData conferenceData;
 
-                    }
+            @Override
+            public void onCompleted() {
+                view.populateConferenceData(new ConferenceDetailViewModel(conferenceData));
+            }
 
-                    @Override
-                    public void onNext(ConferenceData conferenceData) {
-                        this.conferenceData = conferenceData;
-                    }
-                });
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(ConferenceData conferenceData) {
+                this.conferenceData = conferenceData;
+            }
+        };
     }
 }

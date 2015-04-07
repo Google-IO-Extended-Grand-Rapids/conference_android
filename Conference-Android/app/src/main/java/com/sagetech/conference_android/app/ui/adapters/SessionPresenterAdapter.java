@@ -8,9 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
-import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionDetailViewModel;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 
 import java.util.List;
 
@@ -22,9 +21,9 @@ import butterknife.InjectView;
  */
 public class SessionPresenterAdapter extends RecyclerView.Adapter<SessionPresenterAdapter.ViewHolder> {
 
-    private List<EventDetailViewModel.EventDetailPresenterView> presenterViews;
+    private List<ConferenceSessionDetailViewModel.EventDetailPresenterView> presenterViews;
 
-    public SessionPresenterAdapter(List<EventDetailViewModel.EventDetailPresenterView> presenterViews) {
+    public SessionPresenterAdapter(List<ConferenceSessionDetailViewModel.EventDetailPresenterView> presenterViews) {
         this.presenterViews = presenterViews;
     }
 
@@ -36,7 +35,7 @@ public class SessionPresenterAdapter extends RecyclerView.Adapter<SessionPresent
         return new ViewHolder(v);
     }
 
-    public EventDetailViewModel.EventDetailPresenterView getItem(int position) {
+    public ConferenceSessionDetailViewModel.EventDetailPresenterView getItem(int position) {
         return presenterViews.get(position);
     }
 
@@ -69,7 +68,7 @@ public class SessionPresenterAdapter extends RecyclerView.Adapter<SessionPresent
             ButterKnife.inject(this, view);
         }
 
-        public void setPresenterView(EventDetailViewModel.EventDetailPresenterView presenter) {
+        public void setPresenterView(ConferenceSessionDetailViewModel.EventDetailPresenterView presenter) {
             setName(presenter.getFullName());
             setCompany("Company Name"); //TODO: set company name when available
             setBio(presenter.getBiography());

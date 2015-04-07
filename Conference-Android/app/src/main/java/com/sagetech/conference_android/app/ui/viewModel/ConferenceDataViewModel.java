@@ -4,16 +4,16 @@ package com.sagetech.conference_android.app.ui.viewModel;
  * Created by carlushenry on 3/7/15.
  */
 public class ConferenceDataViewModel {
-    private Integer id;
+    private Long id;
     private String cityAndState;
     private String name;
     private String conferenceImageUrl;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

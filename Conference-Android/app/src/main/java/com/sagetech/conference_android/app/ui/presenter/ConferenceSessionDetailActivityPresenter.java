@@ -4,7 +4,7 @@ import com.sagetech.conference_android.app.api.ConferenceController;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.PresenterData;
 import com.sagetech.conference_android.app.model.RoomData;
-import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionDetailViewModel;
 
 import java.util.List;
 
@@ -20,26 +20,25 @@ import timber.log.Timber;
 /**
  * Created by carlushenry on 2/19/15.
  */
-public class EventDetailActivityPresenter implements IEventDetailPresenter {
+public class ConferenceSessionDetailActivityPresenter implements IConferenceSessionDetailPresenter {
 
-    private final IEventDetailActivity eventDetailActivity;
+    private final IConferenceSessionDetailActivity eventDetailActivity;
     private final ConferenceController conferenceController;
     private Subscription subscription;
 
 
-    public EventDetailActivityPresenter(IEventDetailActivity eventDetailActivity, ConferenceController conferenceController) {
+    public ConferenceSessionDetailActivityPresenter(IConferenceSessionDetailActivity eventDetailActivity, ConferenceController conferenceController) {
         this.eventDetailActivity = eventDetailActivity;
         this.conferenceController = conferenceController;
     }
 
     public void initialize(Long eventId) {
-        Observable<EventDetailViewModel> eventDetailViewObservable = createEventDetailViewObservable(eventId);
+        Observable<ConferenceSessionDetailViewModel> conferenceSessionDetailViewObservable = createConferenceSessionDetailViewObservable(eventId);
 
 
-        subscription = eventDetailViewObservable
-                .subscribeOn(Schedulers.io())
+        subscription = conferenceSessionDetailViewObservable
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<EventDetailViewModel>() {
+                .subscribe(new Subscriber<ConferenceSessionDetailViewModel>() {
                     @Override
                     public void onCompleted() {
                     }
@@ -50,14 +49,14 @@ public class EventDetailActivityPresenter implements IEventDetailPresenter {
                     }
 
                     @Override
-                    public void onNext(EventDetailViewModel eventDetailViewModel) {
-                        eventDetailActivity.populateWithEventDetailView(eventDetailViewModel);
+                    public void onNext(ConferenceSessionDetailViewModel eventDetailViewModel) {
+                        eventDetailActivity.populateWithConferenceSessionDetailView(eventDetailViewModel);
                     }
                 });
 
     }
 
-    private Observable<EventDetailViewModel> createEventDetailViewObservable(Long eventId) {
+    private Observable<ConferenceSessionDetailViewModel> createConferenceSessionDetailViewObservable(Long eventId) {
         // A - we only want to call this data one time...therefore we are caching
         // FIXME this should use eventId, but we have to wait until we are being passed valid values.
         final Observable<ConferenceSessionData> conferenceSessionObservable =
@@ -98,11 +97,11 @@ public class EventDetailActivityPresenter implements IEventDetailPresenter {
                     }
                 });
 
-        // Combine all of the observers results together into one EventDetailViewModel
-        return Observable.zip(conferenceSessionObservable, presenterObservable, roomDataObservable, new Func3<ConferenceSessionData, List<PresenterData>, RoomData, EventDetailViewModel>() {
+        // Combine all of the observers results together into one ConferenceSessionDetailViewModel
+        return Observable.zip(conferenceSessionObservable, presenterObservable, roomDataObservable, new Func3<ConferenceSessionData, List<PresenterData>, RoomData, ConferenceSessionDetailViewModel>() {
             @Override
-            public EventDetailViewModel call(ConferenceSessionData confSessionData, List<PresenterData> presenterDataList, RoomData roomData) {
-                return new EventDetailViewModel(confSessionData, roomData, presenterDataList);
+            public ConferenceSessionDetailViewModel call(ConferenceSessionData confSessionData, List<PresenterData> presenterDataList, RoomData roomData) {
+                return new ConferenceSessionDetailViewModel(confSessionData, roomData, presenterDataList);
             }
         });
     }

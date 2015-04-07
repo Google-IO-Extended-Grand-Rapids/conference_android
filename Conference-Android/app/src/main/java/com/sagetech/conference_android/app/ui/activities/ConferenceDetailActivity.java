@@ -52,7 +52,7 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
 
     ImageView imgConfMap;
 
-    private int conferenceId;
+    private Long conferenceId;
 
 
     @Override
@@ -61,7 +61,7 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
         setContentView(R.layout.conference_detail);
         ButterKnife.inject(this);
 
-        conferenceId = getIntent().getIntExtra("id", 0);
+        conferenceId = getIntent().getLongExtra("id", 0);
 
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.actionbar_conference_detail);
@@ -78,7 +78,7 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
         });
 
         // yes I am being lazy...
-        presenter.initialize(Long.valueOf(conferenceId));
+        presenter.initialize(conferenceId);
 
     }
 

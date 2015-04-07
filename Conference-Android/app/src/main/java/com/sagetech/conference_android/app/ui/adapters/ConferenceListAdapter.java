@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceDataViewModel;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 
 import java.util.List;
 
@@ -20,23 +19,23 @@ import butterknife.InjectView;
 /**
  * Created by carlushenry on 3/5/15.
  */
-public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.ViewHolder> {
+public class ConferenceListAdapter extends RecyclerView.Adapter<ConferenceListAdapter.ViewHolder> {
 
-    private ConferencesOnClickListener onClickListener;
+    private ConferenceOnClickListener onClickListener;
     private List<ConferenceDataViewModel> conferenceDatas;
 
 
-    public interface ConferencesOnClickListener {
-        public void clicked(Integer conferenceId);
+    public interface ConferenceOnClickListener {
+        public void clicked(Long conferenceId);
     }
 
-    public ConferencesAdapter(List<ConferenceDataViewModel> conferenceDatas, ConferencesOnClickListener conferencesOnClickListener) {
+    public ConferenceListAdapter(List<ConferenceDataViewModel> conferenceDatas, ConferenceOnClickListener conferencesOnClickListener) {
         this.conferenceDatas = conferenceDatas;
         this.onClickListener = conferencesOnClickListener;
     }
 
     @Override
-    public ConferencesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ConferenceListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.conference_list_view_item, parent, false);
 
@@ -48,7 +47,7 @@ public class ConferencesAdapter extends RecyclerView.Adapter<ConferencesAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ConferencesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ConferenceListAdapter.ViewHolder holder, int position) {
         holder.setConferenceData(getItem(position));
     }
 
