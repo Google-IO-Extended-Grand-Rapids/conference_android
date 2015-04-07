@@ -8,10 +8,10 @@ import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.adapters.SessionPresenterAdapter;
-import com.sagetech.conference_android.app.ui.presenter.IEventDetailActivity;
-import com.sagetech.conference_android.app.ui.presenter.IEventDetailPresenter;
-import com.sagetech.conference_android.app.ui.viewModel.EventDetailViewModel;
-import com.sagetech.conference_android.app.util.module.NewEventDetailModule;
+import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionDetailActivity;
+import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionDetailPresenter;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionDetailViewModel;
+import com.sagetech.conference_android.app.util.module.ConferenceSessionDetailModule;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,10 +25,10 @@ import timber.log.Timber;
 /**
  * Created by carlushenry on 3/15/15.
  */
-public class NewEventDetailActivity extends InjectableActionBarActivity implements IEventDetailActivity {
+public class ConferenceSessionDetailActivity extends InjectableActionBarActivity implements IConferenceSessionDetailActivity {
 
     @Inject
-    IEventDetailPresenter presenter;
+    IConferenceSessionDetailPresenter presenter;
 
     @InjectView(R.id.txtTitle)
     TextView title;
@@ -77,7 +77,7 @@ public class NewEventDetailActivity extends InjectableActionBarActivity implemen
     }
 
     @Override
-    public void populateWithEventDetailView(EventDetailViewModel eventDetailViewModel) {
+    public void populateWithConferenceSessionDetailView(ConferenceSessionDetailViewModel eventDetailViewModel) {
         setTitle(eventDetailViewModel.getTitle());
         setSchedule(eventDetailViewModel.getEventDateAndDuration());
         setRoom(eventDetailViewModel.getRoomName());
@@ -89,7 +89,7 @@ public class NewEventDetailActivity extends InjectableActionBarActivity implemen
 
     @Override
     protected List<Object> getModules() {
-        return Arrays.<Object>asList(new NewEventDetailModule(this));
+        return Arrays.<Object>asList(new ConferenceSessionDetailModule(this));
     }
 
     private void setTitle(String title) {
