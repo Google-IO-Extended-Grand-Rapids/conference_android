@@ -37,7 +37,6 @@ public class ConferenceSessionDetailActivityPresenter implements IConferenceSess
 
 
         subscription = conferenceSessionDetailViewObservable
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<ConferenceSessionDetailViewModel>() {
                     @Override

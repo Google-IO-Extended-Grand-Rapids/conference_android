@@ -34,7 +34,14 @@ public class ConferenceListActivityPresenter implements IConferenceListPresenter
 
         Observable<List<ConferenceData>> conferenceDataObservable = conferenceController.getConferencesData();
 
-        subscription = conferenceDataObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<List<ConferenceData>>() {
+        subscription = conferenceDataObservable
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(populateConferencesSubscriber());
+
+    }
+
+    private Subscriber<List<ConferenceData>> populateConferencesSubscriber() {
+        return new Subscriber<List<ConferenceData>>() {
             @Override
             public void onCompleted() {
 
@@ -51,8 +58,7 @@ public class ConferenceListActivityPresenter implements IConferenceListPresenter
 
                 conferenceListActivity.populateConferences(conferenceBuilder.toConferenceDataViewModel(conferenceDatas));
             }
-        });
-
+        };
     }
 
     public void onDestroy() {
