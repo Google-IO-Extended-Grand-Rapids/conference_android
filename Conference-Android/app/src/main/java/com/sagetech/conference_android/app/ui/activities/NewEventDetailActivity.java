@@ -67,7 +67,7 @@ public class NewEventDetailActivity extends InjectableActionBarActivity implemen
         mPresenterView.setHasFixedSize(true);
         mPresenterView.setLayoutManager(new LinearLayoutManager(this));
 
-        Long eventId = getIntent().getExtras().getLong("id");
+        Long eventId = getIntent().getLongExtra("id", 0);
         presenter.initialize(eventId);
     }
 

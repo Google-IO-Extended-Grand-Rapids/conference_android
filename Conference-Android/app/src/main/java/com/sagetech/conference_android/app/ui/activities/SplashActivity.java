@@ -31,7 +31,6 @@ public class SplashActivity extends ActionBarActivity {
         final ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
-
         subscription = AppObservable.bindActivity(this, Observable.just(1))
                 .delay(3, TimeUnit.SECONDS)
                 .subscribe(new Subscriber<Integer>() {

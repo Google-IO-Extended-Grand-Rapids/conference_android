@@ -4,7 +4,7 @@ package com.sagetech.conference_android.app.model;
  * Created by jrobertson on 2/18/15.
  */
 public class ConferenceData {
-    private Integer id;
+    private Long id;
     private String name;
     private String shortDesc;
     private String fullDesc;
@@ -37,11 +37,11 @@ public class ConferenceData {
         this.imageUrl = imageUrl;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

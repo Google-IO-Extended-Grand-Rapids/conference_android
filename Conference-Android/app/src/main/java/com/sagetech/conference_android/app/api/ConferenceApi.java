@@ -31,5 +31,5 @@ public interface ConferenceApi {
     Observable<RoomData> getRoomById(@Path("id") Long id);
 
     @GET("/api/conference/{id}/conferenceSessions")
-    Observable<List<ConferenceSessionData>> getConferenceSessionsById(@Path("id") Integer id);
+    Observable<List<ConferenceSessionData>> getConferenceSessionsById(@Path("id") Long id);
 }

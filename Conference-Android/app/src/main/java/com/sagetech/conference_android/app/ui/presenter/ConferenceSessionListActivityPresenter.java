@@ -30,7 +30,7 @@ public class ConferenceSessionListActivityPresenter implements IConferenceSessio
         this.conferenceController = conferenceController;
     }
 
-    public void initialize(Integer conferenceId) {
+    public void initialize(Long conferenceId) {
         Observable<List<ConferenceSessionViewModel>> conferenceDataObservable = createConferenceSessionViewModelObservable(conferenceId);
 
         subscription = conferenceDataObservable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Subscriber<List<ConferenceSessionViewModel>>() {
@@ -53,7 +53,7 @@ public class ConferenceSessionListActivityPresenter implements IConferenceSessio
         });
     }
 
-    private Observable<List<ConferenceSessionViewModel>> createConferenceSessionViewModelObservable(Integer conferenceId) {
+    private Observable<List<ConferenceSessionViewModel>> createConferenceSessionViewModelObservable(Long conferenceId) {
 
         Observable<List<ConferenceSessionData>> conferenceSessionObservable = conferenceController.getConferenceSessionsById(conferenceId).cache();
 
