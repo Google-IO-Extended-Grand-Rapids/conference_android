@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/conference_detail_image_layout_height"
         android:transitionName="@string/transition_conference_image"
-        android:background="@drawable/common_signin_btn_icon_focus_light" />
+        android:scaleType="center"/>
 
     <TextView
         android:id="@+id/txtConferenceName"
