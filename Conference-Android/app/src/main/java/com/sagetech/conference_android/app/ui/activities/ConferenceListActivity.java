@@ -3,10 +3,13 @@ package com.sagetech.conference_android.app.ui.activities;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.adapters.ConferenceListAdapter;
@@ -84,17 +87,25 @@ public class ConferenceListActivity extends InjectableActionBarActivity implemen
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    private void launchConferenceSessionsListActivity(Long conferenceId) {
+    private void launchConferenceSessionsListActivity(Long conferenceId, View imgView) {
         Timber.d(String.format("Conference Selected: %s", conferenceId));
+
 
         Intent conferenceSessionListIntent = new Intent(this, ConferenceDetailActivity.class);
         conferenceSessionListIntent.putExtra("id", conferenceId);
-        startActivity(conferenceSessionListIntent);
+        String transitionName = getString(R.string.transition_conference_image);
+        ActivityOptionsCompat options =
+                ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                        imgView,   // The view which starts the transition
+                        transitionName    // The transitionName of the view we’re transitioning to
+                );
+        ActivityCompat.startActivity(this, conferenceSessionListIntent, options.toBundle());
+
     }
 
     @Override
-    public void clicked(Long conferenceId) {
-        launchConferenceSessionsListActivity(conferenceId);
+    public void clicked(Long conferenceId, View imgView) {
+        launchConferenceSessionsListActivity(conferenceId, imgView);
     }
 
     @Override
