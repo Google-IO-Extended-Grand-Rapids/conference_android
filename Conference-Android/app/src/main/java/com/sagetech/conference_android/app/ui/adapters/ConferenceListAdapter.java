@@ -26,7 +26,7 @@ public class ConferenceListAdapter extends RecyclerView.Adapter<ConferenceListAd
 
 
     public interface ConferenceOnClickListener {
-        public void clicked(Long conferenceId);
+        public void clicked(Long conferenceId, View imgView);
     }
 
     public ConferenceListAdapter(List<ConferenceDataViewModel> conferenceDatas, ConferenceOnClickListener conferencesOnClickListener) {
@@ -106,7 +106,7 @@ public class ConferenceListAdapter extends RecyclerView.Adapter<ConferenceListAd
 
         @Override
         public void onClick(View v) {
-            onClickListener.clicked(conferenceData.getId());
+            onClickListener.clicked(conferenceData.getId(), conferenceImageView);
         }
     }
 }

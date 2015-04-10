@@ -26,6 +26,7 @@
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:adjustViewBounds="true"
+            android:transitionName="@string/transition_conference_image"
             android:scaleType="center" />
 
         <TextView

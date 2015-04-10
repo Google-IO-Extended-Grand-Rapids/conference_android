@@ -9,5 +9,6 @@
     <string name="title_activity_conferences">ConferencesActivity</string>
     <string name="title_activity_conference_sessions">ConferenceSessionsActivity</string>
     <string name="title_activity_conference_detail">ConferenceDetailActivity</string>
+    <string name="transition_conference_image">transition_conference_image</string>
 
 </resources>
