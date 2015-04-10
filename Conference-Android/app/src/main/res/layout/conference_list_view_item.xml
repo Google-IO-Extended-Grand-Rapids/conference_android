@@ -17,7 +17,8 @@
         android:layout_height="match_parent"
         android:clickable="true"
         android:focusable="true"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:descendantFocusability="blocksDescendants">
 
         <ImageView
             android:id="@+id/conferenceImage"
@@ -39,8 +40,6 @@
             android:layout_marginLeft="30dp"
             android:layout_marginTop="1054dp"
             android:layout_marginBottom="30dp"
-            android:clickable="true"
-            android:focusable="true"
             android:orientation="vertical">
 
             <TextView
