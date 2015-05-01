@@ -48,16 +48,6 @@
                 android:padding="@dimen/conference_detail_padding"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eleifend, odio a vehicula venenatis, nisi nisi commodo arcu, a iaculis nunc purus non orci. Maecenas ac tempor enim. Pellentesque vel enim arcu. Nunc aliquet augue sed consectetur posuere. Mauris congue quam id neque dictum, sed placerat nunc ullamcorper. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean maximus fermentum odio, placerat placerat turpis aliquet eu. Duis finibus tristique mauris vel malesuada. Donec nec ipsum sem." />
 
-            <Button
-                android:id="@+id/btnRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:width="@dimen/conference_detail_register_button_width"
-                android:background="@color/conference_detail_register_button"
-                android:text="Register"
-                tools:text="Register"/>
-
             <TextView
                 android:id="@+id/txtThankSponsorsText"
                 android:layout_width="wrap_content"
