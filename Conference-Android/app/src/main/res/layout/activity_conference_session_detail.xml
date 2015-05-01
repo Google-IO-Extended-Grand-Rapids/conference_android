@@ -71,33 +71,8 @@
                     android:layout_height="wrap_content"
                     tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae vulputate ante, sed posuere ante. Fusce non nisi nec turpis eleifend mattis. Mauris facilisis nulla a metus efficitur mollis. Vestibulum eget volutpat tellus. Duis vel libero sit amet eros pharetra cursus. Proin nec lacus ut justo commodo condimentum. Nulla scelerisque."
                     android:id="@+id/txtDescription"
-                    android:layout_toRightOf="@+id/imgPin"
                     android:padding="15dp" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imgPin"
-                    android:src="@drawable/ic_pin"
-                    android:layout_alignBottom="@+id/txtDescription"
-                    android:paddingLeft="15dp" />
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imgGooglePlus"
-                    android:src="@drawable/common_signin_btn_icon_focus_dark"
-                    android:layout_below="@+id/txtDescription"
-                    android:layout_alignLeft="@+id/txtDescription"
-                    android:paddingLeft="15dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="+437 Recommended this on Google"
-                    android:id="@+id/txtRecommend"
-                    android:layout_toRightOf="@+id/imgGooglePlus"
-                    android:layout_alignTop="@+id/imgGooglePlus" />
             </RelativeLayout>
 
             <RelativeLayout
