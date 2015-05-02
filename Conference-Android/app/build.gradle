@@ -65,8 +65,8 @@ final String DAGGER_VERSION = '1.2.2'
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.1.1'
-    compile 'com.android.support:recyclerview-v7:21.0.0'
-    compile 'com.android.support:cardview-v7:21.0.0'
+    compile 'com.android.support:recyclerview-v7:22.1.1'
+    compile 'com.android.support:cardview-v7:22.1.1'
     compile 'com.google.android.gms:play-services-plus:7.3.0'
 
     compile "com.squareup.dagger:dagger:${DAGGER_VERSION}"
