@@ -9,7 +9,6 @@ import dagger.ObjectGraph;
 import timber.log.Timber;
 
 import static timber.log.Timber.DebugTree;
-import static timber.log.Timber.HollowTree;
 
 /**
  * Created by carlushenry on 5/28/14.
@@ -24,7 +23,12 @@ public class ConferenceApplication extends Application {
         if (BuildConfig.DEBUG) {
             Timber.plant(new DebugTree());
         } else {
-            Timber.plant(new HollowTree());
+            Timber.plant(new Timber.Tree() {
+                @Override
+                protected void log(int priority, String tag, String message, Throwable t) {
+                    // Hollow
+                }
+            });
         }
 
         buildObjectGraphAndInject();
