@@ -27,7 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import timber.log.Timber;
 
-public class ConferenceListActivity extends InjectableActionBarActivity implements IConferenceListActivity, ConferenceListAdapter.ConferenceOnClickListener {
+public class ConferenceListActivity extends InjectableActivity implements IConferenceListActivity, ConferenceListAdapter.ConferenceOnClickListener {
 
     @Inject
     IConferenceListPresenter presenter;
