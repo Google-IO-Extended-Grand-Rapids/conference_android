@@ -31,12 +31,5 @@
             android:layout_margin="15dp"
             android:src="@android:drawable/ic_dialog_map" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imgConfDetailShare"
-            android:layout_margin="15dp"
-            android:src="@android:drawable/ic_menu_share"/>
-
     </LinearLayout>
 </LinearLayout>
