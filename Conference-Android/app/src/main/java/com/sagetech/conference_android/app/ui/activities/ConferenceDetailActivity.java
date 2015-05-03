@@ -74,6 +74,8 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
             public void onClick(View v) {
                 Intent conferenceSessionListIntent = new Intent(imgConfMap.getContext(), ConferenceSessionListActivity.class);
                 conferenceSessionListIntent.putExtra("id", conferenceId);
+                conferenceSessionListIntent.putExtra("conferenceName", txtConferenceName.getText());
+                conferenceSessionListIntent.putExtra("conferenceDate", txtConferenceDate.getText());
                 startActivity(conferenceSessionListIntent);
             }
         });

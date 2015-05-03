@@ -64,6 +64,8 @@ public class ConferenceSessionDetailActivity extends InjectableActionBarActivity
         mPresenterView.setHasFixedSize(true);
         mPresenterView.setLayoutManager(new LinearLayoutManager(this));
 
+        super.setTitle("Session Details");
+
         Long eventId = getIntent().getLongExtra("id", 0);
         presenter.initialize(eventId);
     }

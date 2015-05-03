@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Event Details"
-            android:id="@+id/txtEventetails"
+            android:id="@+id/txtEventDetails"
             android:layout_margin="15dp"
             android:textColor="@android:color/white" />
     </LinearLayout>

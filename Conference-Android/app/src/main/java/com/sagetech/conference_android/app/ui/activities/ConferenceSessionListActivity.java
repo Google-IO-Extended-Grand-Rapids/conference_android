@@ -6,11 +6,15 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
+import com.sagetech.conference_android.app.model.ConferenceData;
 import com.sagetech.conference_android.app.ui.adapters.ConferenceSessionListAdapter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionActivity;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionListPresenter;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceDetailViewModel;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewModel;
 import com.sagetech.conference_android.app.util.module.ConferenceSessionListModule;
 
@@ -34,6 +38,12 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
     @InjectView(R.id.confView)
     RecyclerView mRecyclerView;
 
+    @InjectView(R.id.txtConferenceName)
+    TextView txtConferenceName;
+
+    @InjectView(R.id.txtConferenceDate)
+    TextView txtConferenceDate;
+
     private ConferenceSessionListAdapter mAdapter;
 
     @Override
@@ -47,6 +57,11 @@ public class ConferenceSessionListActivity extends InjectableActionBarActivity i
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        setTitle("Event Sessions");
+
+        this.txtConferenceDate.setText(getIntent().getStringExtra("conferenceDate"));
+        this.txtConferenceName.setText(getIntent().getStringExtra("conferenceName"));
 
         Long conferenceId = getIntent().getLongExtra("id", 0);
         presenter.initialize(conferenceId);
