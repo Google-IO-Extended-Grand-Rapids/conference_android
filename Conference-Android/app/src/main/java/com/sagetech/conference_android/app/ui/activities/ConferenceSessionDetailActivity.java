@@ -45,9 +45,6 @@ public class ConferenceSessionDetailActivity extends InjectableActionBarActivity
     @InjectView(R.id.txtDescription)
     TextView description;
 
-    @InjectView(R.id.txtRecommend)
-    TextView recommend;
-
     @InjectView(R.id.presenterView)
     RecyclerView mPresenterView;
 
@@ -82,7 +79,6 @@ public class ConferenceSessionDetailActivity extends InjectableActionBarActivity
         setSchedule(eventDetailViewModel.getEventDateAndDuration());
         setRoom(eventDetailViewModel.getRoomName());
         setDescription(eventDetailViewModel.getDescription());
-        setRecommend("+437 Recommended this on Google"); //TODO: set recommend stats when available
         mAdapter = new SessionPresenterAdapter(eventDetailViewModel.getPresenters());
         mPresenterView.setAdapter(mAdapter);
     }
@@ -112,7 +108,4 @@ public class ConferenceSessionDetailActivity extends InjectableActionBarActivity
         this.description.setText(description);
     }
 
-    private void setRecommend(String recommend) {
-        this.recommend.setText(recommend);
-    }
 }
