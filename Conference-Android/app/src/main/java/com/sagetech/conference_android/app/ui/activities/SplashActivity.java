@@ -7,15 +7,12 @@ import android.support.v7.app.ActionBarActivity;
 
 import com.sagetech.conference_android.app.R;
 
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.app.AppObservable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 public class SplashActivity extends ActionBarActivity {
@@ -37,7 +34,8 @@ public class SplashActivity extends ActionBarActivity {
                     @Override
                     public void onCompleted() {
                         Timber.i("onCompleted");
-                        Intent intent = new Intent(getApplicationContext(), ConferenceListActivity.class);
+                        Intent intent = new Intent(getApplicationContext(), ConferenceDetailActivity.class);
+                        intent.putExtra("id", Long.valueOf(getString(R.string.google_io_conference_id)));
                         startActivity(intent);
                         finish();
                     }

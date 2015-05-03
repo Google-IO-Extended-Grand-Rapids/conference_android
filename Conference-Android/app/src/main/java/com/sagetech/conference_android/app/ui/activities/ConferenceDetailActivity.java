@@ -28,6 +28,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 public class ConferenceDetailActivity extends InjectableActionBarActivity implements IConferenceDetailActivity {
 
