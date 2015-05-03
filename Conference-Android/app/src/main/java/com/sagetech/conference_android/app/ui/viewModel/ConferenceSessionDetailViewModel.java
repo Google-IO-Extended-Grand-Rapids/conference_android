@@ -1,6 +1,5 @@
 package com.sagetech.conference_android.app.ui.viewModel;
 
-import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.PresenterData;
 import com.sagetech.conference_android.app.model.RoomData;
@@ -10,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by carlushenry on 2/19/15.
@@ -20,9 +20,9 @@ public class ConferenceSessionDetailViewModel {
         PRESENTATION, CODE_LABS
     }
 
-    private static SimpleDateFormat startDateTimeFormatter = new SimpleDateFormat("EE, MMM d, h");
-    private static SimpleDateFormat startMinuteFormatter = new SimpleDateFormat(":mm");
-    private static SimpleDateFormat endTimeFormatter = new SimpleDateFormat("h:mm aaa");
+    private static SimpleDateFormat startDateTimeFormatter = new SimpleDateFormat("EE, MMM d, h", Locale.getDefault());
+    private static SimpleDateFormat startMinuteFormatter = new SimpleDateFormat(":mm", Locale.getDefault());
+    private static SimpleDateFormat endTimeFormatter = new SimpleDateFormat("h:mm aaa", Locale.getDefault());
     private static String ZERO_MINUTE = ":00";
 
     private ConferenceSessionData sessionData;

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
@@ -18,18 +20,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Lindsay Mikita"
+            tools:text="Lindsay Mikita"
             android:id="@+id/txtPresenterName"
             android:layout_toRightOf="@+id/imgSpeaker"
+            android:layout_toEndOf="@+id/imgSpeaker"
             android:layout_alignTop="@+id/imgSpeaker" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Amway"
+            tools:text="Amway"
             android:id="@+id/txtPresenterCompany"
             android:layout_below="@+id/txtPresenterName"
-            android:layout_alignLeft="@+id/txtPresenterName" />
+            android:layout_alignLeft="@+id/txtPresenterName"
+            android:layout_alignStart="@+id/txtPresenterName" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -37,6 +41,7 @@
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel lectus fermentum turpis porta aliquam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu elit ligula. Nunc vehicula mauris."
             android:id="@+id/txtBio"
             android:layout_toRightOf="@+id/imgSpeaker"
+            android:layout_toEndOf="@+id/imgSpeaker"
             android:layout_below="@+id/txtPresenterCompany"
             android:paddingTop="10dp" />
 

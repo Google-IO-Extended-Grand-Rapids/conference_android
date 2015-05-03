@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_margin="15dp"
         android:theme="@style/Theme.Googleio"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textColor="@color/white" />
 
     <ImageView
@@ -20,6 +20,7 @@
         android:id="@+id/imageView3"
         android:layout_margin="15dp"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:clickable="true"
         android:src="@drawable/abc_ic_search_api_mtrl_alpha" />
 
