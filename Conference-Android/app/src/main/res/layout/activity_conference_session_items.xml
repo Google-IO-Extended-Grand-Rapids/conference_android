@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         android:background="@color/purple_dark"
         android:padding="@dimen/conference_detail_conf_name_padding"
-        android:text="Google I/O"
         tools:text="Google I/O"
         android:textColor="@color/white" />
 
@@ -22,7 +21,6 @@
 
         android:background="@color/purple_dark"
         android:padding="@dimen/conference_detail_conf_name_padding"
-        android:text="May 25 - 24 2015"
         tools:text="May 23 - 24 2015"
         android:textColor="@color/white" />
 

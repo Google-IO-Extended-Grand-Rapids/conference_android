@@ -6,13 +6,18 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Explore"
+        android:text="@string/explore"
         android:id="@+id/txtTitle"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="15dp"
         android:theme="@style/Theme.Googleio"
-        android:textSize="20dp"
-        android:textColor="@color/white" />
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_toRightOf="@+id/imageView4"
+        android:layout_toEndOf="@+id/imageView4"
+        android:layout_toLeftOf="@+id/imageView3"
+        android:layout_toStartOf="@+id/imageView3"
+        android:gravity="center_horizontal" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -20,7 +25,9 @@
         android:id="@+id/imageView3"
         android:layout_margin="15dp"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:clickable="true"
+        android:contentDescription="@string/search"
         android:src="@drawable/abc_ic_search_api_mtrl_alpha" />
 
     <ImageView
@@ -28,5 +35,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/imageView4"
         android:layout_margin="15dp"
+        android:contentDescription="@string/copy_session"
         android:src="@drawable/abc_ic_menu_copy_mtrl_am_alpha" />
 </RelativeLayout>

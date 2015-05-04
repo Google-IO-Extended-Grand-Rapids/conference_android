@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,12 +12,9 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceDetailActivity;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceDetailActivityPresenter;
-import com.sagetech.conference_android.app.ui.presenter.IConferenceListPresenter;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceDetailViewModel;
 import com.sagetech.conference_android.app.util.module.ConferenceDetailModule;
-import com.sagetech.conference_android.app.util.module.ConferenceListModule;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,9 +23,8 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
-public class ConferenceDetailActivity extends InjectableActionBarActivity implements IConferenceDetailActivity {
+public class ConferenceDetailActivity extends InjectableActivity implements IConferenceDetailActivity {
 
 
     @InjectView(R.id.txtConferenceName)
@@ -105,8 +100,8 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
         // load the conference image
         Picasso.with(this)
                 .load(conferenceDetailViewModel.getImageUrl())
-                .placeholder(R.drawable.default_event)
-                .error(R.drawable.default_event)
+                .placeholder(R.drawable.default_event_banner)
+                .error(R.drawable.default_event_banner)
                 .into(imgConferenceImageView);
 
         txtConferenceName.setText(conferenceDetailViewModel.getName());

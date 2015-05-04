@@ -2,6 +2,10 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <dimen name="avatar_margin_horizontal">8dp</dimen>
+    <dimen name="avatar_margin_vertical">8dp</dimen>
+
     <dimen name="conference_list_image_layout_width">150dp</dimen>
     <dimen name="conference_list_image_layout_height">150dp</dimen>
 
@@ -23,4 +27,4 @@
     <dimen name="list_view_item_image_layout_height">50dp</dimen>
     <dimen name="list_view_item_image_layout_width">50dp</dimen>
 
-    </resources>
+</resources>

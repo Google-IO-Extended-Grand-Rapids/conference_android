@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:id="@+id/imageView"
         android:src="@drawable/skyline"
+        android:contentDescription="@string/skyline_description"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
         android:layout_below="@+id/textView"/>
@@ -21,19 +22,20 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/logo"
+        android:contentDescription="@string/google_io_extended_gr"
         android:layout_marginTop="20dp" />
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Powered by Sagetech"
+        android:text="@string/powered_by"
         android:id="@+id/textView"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
         android:textColor="@color/white"
         android:textStyle="bold|italic"
-        android:textSize="16dp"
+        android:textSize="16sp"
         android:layout_marginTop="10dp" />
 
     <ProgressBar

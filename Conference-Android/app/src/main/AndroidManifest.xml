@@ -52,11 +52,19 @@
             android:name=".ui.activities.ConferenceSessionListActivity"
             android:label="@string/title_activity_conference_sessions"
             android:parentActivityName=".ui.activities.ConferenceListActivity" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.ConferenceListActivity" />
         </activity>
         <activity
             android:name=".ui.activities.ConferenceDetailActivity"
             android:label="@string/title_activity_conference_detail"
             android:parentActivityName=".ui.activities.ConferenceListActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.activities.ConferenceListActivity" />
         </activity>
     </application>
 

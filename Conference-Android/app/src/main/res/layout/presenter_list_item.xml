@@ -1,44 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/imgSpeaker"
+        style="@style/Theme.Googleio.Widget.ImageView.Avatar"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/presenter_photo"
+        android:src="@drawable/unknown_profile" />
 
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/imgSpeaker"
-            android:layout_below="@+id/textView3"
-            android:src="@drawable/common_ic_googleplayservices"
-            android:layout_alignParentTop="false" />
+    <TextView
+        android:id="@+id/txtPresenterName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imgSpeaker"
+        android:layout_toEndOf="@+id/imgSpeaker"
+        android:layout_toRightOf="@+id/imgSpeaker"
+        tools:text="Lindsay Mikita" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lindsay Mikita"
-            android:id="@+id/txtPresenterName"
-            android:layout_toRightOf="@+id/imgSpeaker"
-            android:layout_alignTop="@+id/imgSpeaker" />
+    <TextView
+        android:id="@+id/txtPresenterCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtPresenterName"
+        android:layout_alignRight="@+id/txtPresenterName"
+        android:layout_below="@+id/txtPresenterName"
+        android:layout_toEndOf="@+id/imgSpeaker"
+        android:layout_toRightOf="@+id/imgSpeaker"
+        tools:text="Amway" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Amway"
-            android:id="@+id/txtPresenterCompany"
-            android:layout_below="@+id/txtPresenterName"
-            android:layout_alignLeft="@+id/txtPresenterName" />
+    <TextView
+        android:id="@+id/txtBio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/txtPresenterCompany"
+        android:layout_alignRight="@+id/txtPresenterCompany"
+        android:layout_below="@+id/txtPresenterCompany"
+        android:layout_toEndOf="@+id/imgSpeaker"
+        android:layout_toRightOf="@+id/imgSpeaker"
+        android:paddingTop="10dp"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel lectus fermentum turpis porta aliquam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu elit ligula. Nunc vehicula mauris." />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean vel lectus fermentum turpis porta aliquam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce eu elit ligula. Nunc vehicula mauris."
-            android:id="@+id/txtBio"
-            android:layout_toRightOf="@+id/imgSpeaker"
-            android:layout_below="@+id/txtPresenterCompany"
-            android:paddingTop="10dp" />
-
-    </RelativeLayout>
-</LinearLayout>
+</RelativeLayout>

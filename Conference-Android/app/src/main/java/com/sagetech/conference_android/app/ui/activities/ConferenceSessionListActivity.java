@@ -26,7 +26,7 @@ import timber.log.Timber;
 /**
  * Created by adam on 2/21/15.
  */
-public class ConferenceSessionListActivity extends InjectableActionBarActivity implements IConferenceSessionActivity, ConferenceSessionListAdapter.ConferenceSessionListOnClickListener {
+public class ConferenceSessionListActivity extends InjectableActivity implements IConferenceSessionActivity, ConferenceSessionListAdapter.ConferenceSessionListOnClickListener {
 
     @Inject
     IConferenceSessionListPresenter presenter = null;

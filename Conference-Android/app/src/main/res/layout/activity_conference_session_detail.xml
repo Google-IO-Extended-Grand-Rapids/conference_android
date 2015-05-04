@@ -6,10 +6,9 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="15dp"
-        android:paddingBottom="15dp"
+        android:padding="15dp"
         android:background="#ff4dbf00">
 
         <TextView
@@ -18,7 +17,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             tools:text="Introduction and Keynote"
             android:id="@+id/txtTitle"
-            android:paddingLeft="15dp" />
+            android:layout_toLeftOf="@+id/imgSessionType"
+            android:layout_toStartOf="@+id/imgSessionType"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +29,10 @@
             tools:text="Wed, May 25, 9 - 11:30 a.m."
             android:id="@+id/txtSchedule"
             android:layout_below="@+id/txtTitle"
-            android:paddingLeft="15dp" />
+            android:layout_toLeftOf="@+id/imgSessionType"
+            android:layout_toStartOf="@+id/imgSessionType"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -36,19 +41,19 @@
             tools:text="Loosemore Auditorium"
             android:id="@+id/txtRoom"
             android:layout_below="@+id/txtSchedule"
-            android:paddingLeft="15dp" />
+            android:layout_toLeftOf="@+id/imgSessionType"
+            android:layout_toStartOf="@+id/imgSessionType"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imgSessionType"
-            android:src="@drawable/codelabs_icon"
-            android:layout_alignParentStart="false"
-            android:layout_toRightOf="@+id/txtTitle"
-            android:layout_alignParentLeft="false"
+            tools:src="@drawable/ic_codelabs"
+            android:contentDescription="@string/session_type_indicator"
             android:layout_alignParentRight="true"
-            android:layout_alignTop="@+id/txtTitle"
-            android:layout_alignBottom="@+id/txtRoom" />
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
@@ -59,11 +64,11 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
@@ -76,7 +81,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
