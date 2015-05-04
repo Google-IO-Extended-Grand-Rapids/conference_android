@@ -10,5 +10,6 @@
     <string name="title_activity_conference_sessions">ConferenceSessionsActivity</string>
     <string name="title_activity_conference_detail">ConferenceDetailActivity</string>
     <string name="transition_conference_image">transition_conference_image</string>
+    <string name="presenter_photo">Presenter Photo</string>
 
 </resources>

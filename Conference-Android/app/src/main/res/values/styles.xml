@@ -63,4 +63,19 @@
         <item name="dropDownListViewStyle">@style/DropDownListView.Googleio</item>
     </style>
 
+    <style name="Theme.Googleio.Widget.ImageView"/>
+
+    <style name="Theme.Googleio.Widget.ImageView.Avatar">
+        <item name="android:layout_width">@dimen/avatar_width</item>
+        <item name="android:layout_height">@dimen/avatar_height</item>
+        <item name="android:layout_marginTop">@dimen/avatar_margin_vertical</item>
+        <item name="android:layout_marginBottom">@dimen/avatar_margin_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/avatar_margin_horizontal</item>
+        <item name="android:layout_marginRight">@dimen/avatar_margin_horizontal</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+
+    <dimen name="avatar_width">50dp</dimen>
+    <dimen name="avatar_height">50dp</dimen>
 </resources>
