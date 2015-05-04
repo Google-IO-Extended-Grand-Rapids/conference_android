@@ -11,5 +11,19 @@
     <string name="title_activity_conference_detail">ConferenceDetailActivity</string>
     <string name="transition_conference_image">transition_conference_image</string>
     <string name="presenter_photo">Presenter Photo</string>
+    <string name="questions_with_mark">Questions?</string>
+    <string name="description">Description</string>
+    <string name="speakers">Speakers</string>
+    <string name="event_details">Event Details</string>
+    <string name="view_map">View Map</string>
+    <string name="explore">Explore</string>
+    <string name="powered_by">Powered by Sagetech</string>
+    <string name="search">Search</string>
+    <string name="skyline_description">Grand Rapids Skyline</string>
+    <string name="conference_banner_image_description">Conference Banner Image</string>
+    <string name="google_io_extended_gr">Google I/O Extended Grand Rapids</string>
+    <string name="session_type_c">Session Type C</string>
+    <string name="copy_session">Copy Session</string>
+    <string name="session_type_indicator">Session Type Indicator</string>
 
 </resources>

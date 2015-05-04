@@ -32,8 +32,8 @@
             android:layout_marginEnd="@dimen/list_view_item_image_marginRight"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_sessiontype_c"
-            android:contentDescription="Item Icon" />
+            tools:src="@drawable/ic_sessiontype_c"
+            android:contentDescription="@string/session_type_indicator" />
 
     </RelativeLayout>
 

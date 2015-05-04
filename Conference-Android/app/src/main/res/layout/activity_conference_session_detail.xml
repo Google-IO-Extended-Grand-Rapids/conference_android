@@ -50,7 +50,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imgSessionType"
-            android:src="@drawable/ic_codelabs"
+            tools:src="@drawable/ic_codelabs"
+            android:contentDescription="@string/session_type_indicator"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 

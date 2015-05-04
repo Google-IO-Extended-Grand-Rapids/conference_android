@@ -33,6 +33,8 @@
             android:layout_marginTop="0dp"
             android:adjustViewBounds="true"
             android:scaleType="center"
+            tools:src="@drawable/default_event_banner"
+            android:contentDescription="@string/conference_banner_image_description"
             android:transitionName="@string/transition_conference_image" />
 
         <LinearLayout

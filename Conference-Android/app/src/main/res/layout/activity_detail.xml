@@ -51,7 +51,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
             android:layout_marginEnd="15dp"
-            android:src="@drawable/googlestream_icon" />
+            android:contentDescription="@string/session_type_indicator"
+            tools:src="@drawable/googlestream_icon" />
 
     </RelativeLayout>
 
@@ -72,7 +73,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="10dp"
-                android:text="Description"
+                android:text="@string/description"
                 android:textAllCaps="true"
                 android:textColor="@color/blue"
                 android:textSize="12sp" />
@@ -101,7 +102,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginTop="25dp"
                 android:textAllCaps="true"
-                android:text="Speakers"
+                android:text="@string/speakers"
                 android:textColor="@color/blue"
                 android:textSize="12sp" />
 

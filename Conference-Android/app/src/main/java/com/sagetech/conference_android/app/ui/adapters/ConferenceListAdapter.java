@@ -98,8 +98,8 @@ public class ConferenceListAdapter extends RecyclerView.Adapter<ConferenceListAd
             Picasso
                     .with(this.conferenceImageView.getContext())
                     .load(imgUrl)
-                    .placeholder(R.drawable.default_event)
-                    .error(R.drawable.default_event)
+                    .placeholder(R.drawable.default_event_banner)
+                    .error(R.drawable.default_event_banner)
                     .into(this.conferenceImageView);
         }
 

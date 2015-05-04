@@ -100,8 +100,8 @@ public class ConferenceDetailActivity extends InjectableActivity implements ICon
         // load the conference image
         Picasso.with(this)
                 .load(conferenceDetailViewModel.getImageUrl())
-                .placeholder(R.drawable.default_event)
-                .error(R.drawable.default_event)
+                .placeholder(R.drawable.default_event_banner)
+                .error(R.drawable.default_event_banner)
                 .into(imgConferenceImageView);
 
         txtConferenceName.setText(conferenceDetailViewModel.getName());
