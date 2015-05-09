@@ -4,8 +4,11 @@ import android.text.format.DateFormat;
 
 import com.sagetech.conference_android.app.model.ConferenceData;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import timber.log.Timber;
 
 /**
  * Created by carlushenry on 4/2/15.
@@ -53,8 +56,8 @@ public class ConferenceDetailViewModel {
 
             // May 31 - Jun 02 2015
             return String.format("%s %s - %s %s %s", startMonth, startDay, endMonth, endDay, year);
-        } catch(Exception ex) {
-            // Do nothing, just return the default
+        } catch(ParseException e) {
+            Timber.e("Parse exception while attempting to parse date.", e);
         }
 
         return null;

@@ -45,9 +45,6 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
     @InjectView(R.id.txtConferenceFullDesc)
     TextView txtConferenceFullDesc;
 
-    @InjectView(R.id.txtContactText)
-    TextView txtContactText;
-
     @Inject
     IConferenceDetailActivityPresenter presenter;
 
@@ -115,6 +112,5 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
         txtConferenceName.setText(conferenceDetailViewModel.getName());
         txtConferenceDate.setText(conferenceDetailViewModel.getDateInformation());
         txtConferenceFullDesc.setText(conferenceDetailViewModel.getFullDescription());
-        txtContactText.setText(conferenceDetailViewModel.getConferenceContactPerson());
     }
 }
