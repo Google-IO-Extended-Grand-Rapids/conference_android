@@ -28,6 +28,7 @@ import javax.inject.Inject;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 public class ConferenceDetailActivity extends InjectableActionBarActivity implements IConferenceDetailActivity {
 
@@ -43,9 +44,6 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
 
     @InjectView(R.id.txtConferenceFullDesc)
     TextView txtConferenceFullDesc;
-
-    @InjectView(R.id.txtContactText)
-    TextView txtContactText;
 
     @Inject
     IConferenceDetailActivityPresenter presenter;
@@ -73,6 +71,8 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
             public void onClick(View v) {
                 Intent conferenceSessionListIntent = new Intent(imgConfMap.getContext(), ConferenceSessionListActivity.class);
                 conferenceSessionListIntent.putExtra("id", conferenceId);
+                conferenceSessionListIntent.putExtra("conferenceName", txtConferenceName.getText());
+                conferenceSessionListIntent.putExtra("conferenceDate", txtConferenceDate.getText());
                 startActivity(conferenceSessionListIntent);
             }
         });
@@ -112,6 +112,5 @@ public class ConferenceDetailActivity extends InjectableActionBarActivity implem
         txtConferenceName.setText(conferenceDetailViewModel.getName());
         txtConferenceDate.setText(conferenceDetailViewModel.getDateInformation());
         txtConferenceFullDesc.setText(conferenceDetailViewModel.getFullDescription());
-        txtContactText.setText(conferenceDetailViewModel.getConferenceContactPerson());
     }
 }

@@ -1,7 +1,14 @@
 package com.sagetech.conference_android.app.ui.viewModel;
 
-import com.sagetech.conference_android.app.R;
+import android.text.format.DateFormat;
+
 import com.sagetech.conference_android.app.model.ConferenceData;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import timber.log.Timber;
 
 /**
  * Created by carlushenry on 4/2/15.
@@ -9,6 +16,7 @@ import com.sagetech.conference_android.app.model.ConferenceData;
 public class ConferenceDetailViewModel {
 
     private final ConferenceData confData;
+    private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public ConferenceDetailViewModel(ConferenceData confData) {
         this.confData = confData;
@@ -19,7 +27,40 @@ public class ConferenceDetailViewModel {
     }
 
     public String getDateInformation() {
-        return String.format("%s %d - %d %d", "May", 23, 24, 2015);
+        String startDate = confData.getStartDate();
+        String endDate = confData.getEndDate();
+
+        if(startDate == null || startDate.isEmpty() || endDate == null || endDate.isEmpty()) {
+            return null;
+        }
+
+        try {
+            Date start = sdf.parse(startDate);
+            Date end = sdf.parse(endDate);
+
+            String startMonth = (String) DateFormat.format("MMMM", start);
+            String startDay = (String) DateFormat.format("dd", start);
+            String endMonth = (String) DateFormat.format("MMMM", end);
+            String endDay = (String) DateFormat.format("dd", end);
+            String year = (String) DateFormat.format("yyyy", end);
+
+            if(startMonth != null && startMonth.equals(endMonth)) {
+                if(startDay != null && startDay.equals(endDay)) {
+                    // May 19 2015
+                    return String.format("%s %s %s", startMonth, startDay, year);
+                }
+
+                // May 24 - 25 2015
+                return String.format("%s %s - %s %s", startMonth, startDay, endDay, year);
+            }
+
+            // May 31 - Jun 02 2015
+            return String.format("%s %s - %s %s %s", startMonth, startDay, endMonth, endDay, year);
+        } catch(ParseException e) {
+            Timber.e("Parse exception while attempting to parse date.", e);
+        }
+
+        return null;
     }
 
     public String getFullDescription() {
