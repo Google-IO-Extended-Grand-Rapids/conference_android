@@ -147,7 +147,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/conference_detail_marginLeft"
                 android:layout_marginTop="@dimen/conference_detail_marginTop"
-                android:text="Gold Sponsors"
+                android:text="Silver Sponsors"
                 android:textStyle="bold" />
 
             <View
@@ -201,7 +201,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/conference_detail_marginLeft"
                 android:layout_marginTop="@dimen/conference_detail_marginTop"
-                android:text="Gold Sponsors"
+                android:text="Bronze Sponsors"
                 android:textStyle="bold" />
 
             <View
