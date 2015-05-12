@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/conference_detail_image_layout_height"
         android:transitionName="@string/transition_conference_image"
-        android:scaleType="center"/>
+        android:scaleType="center" />
 
     <TextView
         android:id="@+id/txtConferenceName"
@@ -50,60 +49,174 @@
 
             <TextView
                 android:id="@+id/txtThankSponsorsText"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/conference_detail_marginLeft"
+                android:text="Thank you to our sponsors" />
+
+            <TextView
+                android:id="@+id/txtPlatinumSponsors"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/conference_detail_marginLeft"
                 android:layout_marginTop="@dimen/conference_detail_marginTop"
-                tools:text="Thanks to our sponsors" />
+                android:text="Plantinum Sponsors"
+                android:textStyle="bold" />
 
-            <GridLayout
+            <View
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:columnCount="3"
-                android:rowCount="2">
+                android:layout_height="1dp"
+                android:layout_margin="15dp"
+                android:background="@color/conference_detail_title_background" />
 
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 1"
-                    android:text="Image 1" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_spectrum"
+                android:layout_gravity="center" />
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 2"
-                    android:text="Image 2" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_spindance"
+                android:layout_gravity="center" />
 
-                <Button
-                    android:id="@+id/button3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 3"
-                    android:text="Image 3" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_bravolt"
+                android:layout_gravity="center" />
 
-                <Button
-                    android:id="@+id/button4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 4"
-                    android:text="Image 4" />
+            <TextView
+                android:id="@+id/txtGoldSponsors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/conference_detail_marginLeft"
+                android:layout_marginTop="@dimen/conference_detail_marginTop"
+                android:text="Gold Sponsors"
+                android:textStyle="bold" />
 
-                <Button
-                    android:id="@+id/button5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 5"
-                    android:text="image 5" />
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_margin="15dp"
+                android:background="@color/conference_detail_title_background" />
 
-                <Button
-                    android:id="@+id/button6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="Image 6"
-                    android:text="Image 6" />
-            </GridLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_gfs"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_gvsu"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_grcurrent"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_teksystems"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/txtSilverSponsors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/conference_detail_marginLeft"
+                android:layout_marginTop="@dimen/conference_detail_marginTop"
+                android:text="Gold Sponsors"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_margin="15dp"
+                android:background="@color/conference_detail_title_background" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_amway"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-35dp"
+                android:layout_marginTop="-35dp"
+                android:src="@drawable/ic_logo_ost"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_kforce"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_steelcase"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:src="@drawable/ic_logo_atomic"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/txtBronzeSponsors"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/conference_detail_marginLeft"
+                android:layout_marginTop="@dimen/conference_detail_marginTop"
+                android:text="Gold Sponsors"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_margin="15dp"
+                android:background="@color/conference_detail_title_background" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-50dp"
+                android:layout_marginTop="-50dp"
+                android:src="@drawable/ic_logo_softwaregr"
+                android:layout_gravity="center" />
 
         </LinearLayout>
     </ScrollView>

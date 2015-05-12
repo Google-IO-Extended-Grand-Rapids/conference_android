@@ -1,5 +1,7 @@
 package com.sagetech.conference_android.app.model;
 
+import java.util.List;
+
 /**
  * Created by jrobertson on 2/18/15.
  */
@@ -10,6 +12,7 @@ public class ConferenceData {
     private String fullDesc;
     private String startDate;
     private String endDate;
+    private List<SponsorLevelData> sponsorLevels;
 
     public String getStartDate() {
         return startDate;
