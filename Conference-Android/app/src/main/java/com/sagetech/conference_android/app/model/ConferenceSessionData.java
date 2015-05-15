@@ -19,6 +19,8 @@ public class ConferenceSessionData {
     private Integer durationMinutes;
     private Date createDttm;
     private Date lastUpdateDttm;
+    private ConferenceSessionTypeData conferenceSessionType;
+
     public Long getId() {
         return id;
     }
@@ -84,5 +86,13 @@ public class ConferenceSessionData {
     }
     public void setLastUpdateDttm(Date lastUpdateDttm) {
         this.lastUpdateDttm = lastUpdateDttm;
+    }
+
+    public ConferenceSessionTypeData getConferenceSessionType() {
+        return conferenceSessionType;
+    }
+
+    public void setConferenceSessionType(ConferenceSessionTypeData conferenceSessionType) {
+        this.conferenceSessionType = conferenceSessionType;
     }
 }

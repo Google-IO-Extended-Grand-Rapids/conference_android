@@ -11,6 +11,7 @@ import com.sagetech.conference_android.app.ui.adapters.SessionPresenterAdapter;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionDetailActivity;
 import com.sagetech.conference_android.app.ui.presenter.IConferenceSessionDetailPresenter;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionDetailViewModel;
+import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionType;
 import com.sagetech.conference_android.app.util.module.ConferenceSessionDetailModule;
 
 import java.util.Arrays;
@@ -81,6 +82,7 @@ public class ConferenceSessionDetailActivity extends InjectableActionBarActivity
         setSchedule(eventDetailViewModel.getEventDateAndDuration());
         setRoom(eventDetailViewModel.getRoomName());
         setDescription(eventDetailViewModel.getDescription());
+        setSessionTypeImg(eventDetailViewModel.getType());
         mAdapter = new SessionPresenterAdapter(eventDetailViewModel.getPresenters());
         mPresenterView.setAdapter(mAdapter);
     }
@@ -102,8 +104,8 @@ public class ConferenceSessionDetailActivity extends InjectableActionBarActivity
         this.room.setText(room);
     }
 
-    private void setSessionTypeImg(String imageUrl) {
-
+    private void setSessionTypeImg(ConferenceSessionType type) {
+        sessionType.setImageResource(type.getImage());
     }
 
     private void setDescription(String description) {
