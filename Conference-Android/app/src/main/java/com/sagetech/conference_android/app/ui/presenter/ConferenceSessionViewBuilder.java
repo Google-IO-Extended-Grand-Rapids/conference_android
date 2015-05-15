@@ -8,10 +8,12 @@ import com.sagetech.conference_android.app.ui.viewModel.SessionListItemType;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 
 /**
  * Created by carlushenry on 3/15/15.
@@ -37,13 +39,29 @@ public class ConferenceSessionViewBuilder {
                 }
                 RoomData roomData = roomDatas.get(roomId);
 
-
                 confSessionViewModels.add(toConfrenceSessionViewModel(currConfSession, roomData));
             }
         }
 
+        if (confSessionViewModels.isEmpty()) {
+            return confSessionViewModels;
+        }
 
-        return confSessionViewModels;
+        return orderViewModels(confSessionViewModels);
+    }
+
+    private static List<ConferenceSessionViewModel> orderViewModels(List<ConferenceSessionViewModel> conferenceSessionDatas) {
+        Comparator<ConferenceSessionViewModel> byDateComparator = new Comparator<ConferenceSessionViewModel>() {
+            @Override
+            public int compare(ConferenceSessionViewModel lhs, ConferenceSessionViewModel rhs) {
+                return lhs.getStartDttm().compareTo(rhs.getStartDttm());
+            }
+        };
+
+        TreeSet<ConferenceSessionViewModel> datas = new TreeSet<ConferenceSessionViewModel>(byDateComparator);
+        datas.addAll(conferenceSessionDatas);
+
+        return new ArrayList<ConferenceSessionViewModel>(datas);
     }
 
     private static ConferenceSessionViewModel buildDayHeader(Date date) {

@@ -54,6 +54,8 @@ public class ConferenceSessionViewModel {
         this.startDttm = startDttm;
     }
 
+    public Date getStartDttm() { return startDttm; }
+
     public ConferenceSessionType getType() {
         return type;
     }
