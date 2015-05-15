@@ -10,7 +10,6 @@ import android.widget.TextView;
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionType;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionViewModel;
-import com.sagetech.conference_android.app.ui.viewModel.SessionListItemType;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ import butterknife.InjectView;
 /**
  * Created by carlushenry on 3/5/15.
  */
-public class ConferenceSessionListAdapter extends RecyclerView.Adapter<ConferenceSessionListAdapter.ViewHolder> {
+public class ConferenceSessionListAdapter extends RecyclerView.Adapter<ConferenceSessionListAdapter.BaseViewHolder> {
     private final List<ConferenceSessionViewModel> conferenceSessions;
     private ConferenceSessionListOnClickListener onClickListener;
 
@@ -34,9 +33,11 @@ public class ConferenceSessionListAdapter extends RecyclerView.Adapter<Conferenc
     }
 
     @Override
-    public ConferenceSessionListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == 2) {
-
+            View v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.list_day_hdr, parent, false);
+            return new DayViewHolder(v);
         }
 
         View v = LayoutInflater.from(parent.getContext())
@@ -50,8 +51,8 @@ public class ConferenceSessionListAdapter extends RecyclerView.Adapter<Conferenc
     }
 
     @Override
-    public void onBindViewHolder(ConferenceSessionListAdapter.ViewHolder holder, int position) {
-        holder.setConferenceSessionData(getItem(position));
+    public void onBindViewHolder(ConferenceSessionListAdapter.BaseViewHolder holder, int position) {
+        holder.setData(getItem(position));
     }
 
     @Override
@@ -68,15 +69,17 @@ public class ConferenceSessionListAdapter extends RecyclerView.Adapter<Conferenc
         return conferenceSessions.get(position);
     }
 
-    public class BaseViewHolder extends RecyclerView.ViewHolder {
+    public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
 
         public BaseViewHolder(View v) {
             super(v);
         }
+
+        public abstract void setData(ConferenceSessionViewModel confereneSessionViewModel);
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends BaseViewHolder implements View.OnClickListener {
         @InjectView(R.id.day) public TextView dayView;
         @InjectView(R.id.time) public TextView timeView;
         @InjectView(R.id.title) public TextView titleView;
@@ -112,20 +115,13 @@ public class ConferenceSessionListAdapter extends RecyclerView.Adapter<Conferenc
             iconView.setImageResource(type.getImage());
         }
 
-        public void setConferenceSessionData(ConferenceSessionViewModel confereneSessionViewModel) {
+        public void setData(ConferenceSessionViewModel confereneSessionViewModel) {
             this.confereneSessionViewModel = confereneSessionViewModel;
-
-            if (SessionListItemType.DAYHEADER.equals(confereneSessionViewModel.getListItemType()))
-            {
-                return;
-            }
 
             setDay(confereneSessionViewModel.getDay());
             setTime(confereneSessionViewModel.getTime());
             setTitle(confereneSessionViewModel.getTitle());
-
             setIcon(confereneSessionViewModel.getType());
-
             setRoom(confereneSessionViewModel.getRoom());
         }
 
@@ -133,8 +129,29 @@ public class ConferenceSessionListAdapter extends RecyclerView.Adapter<Conferenc
         public void onClick(View v) {
             onClickListener.clicked(confereneSessionViewModel.getId());
         }
+    }
 
 
+    public class DayViewHolder extends BaseViewHolder {
+        @InjectView(R.id.dayTxt) public TextView dayView;
 
+        private ConferenceSessionViewModel confereneSessionViewModel;
+
+        // each data item is just a string in this case
+        public DayViewHolder(View v) {
+            super(v);
+            ButterKnife.inject(this, v);
+        }
+
+        public void setDay(final String day) {
+            this.dayView.setText(day);
+        }
+
+
+        public void setData(ConferenceSessionViewModel confereneSessionViewModel) {
+            this.confereneSessionViewModel = confereneSessionViewModel;
+
+            setDay(confereneSessionViewModel.getDay());
+        }
     }
 }
