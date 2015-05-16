@@ -98,12 +98,19 @@ public class ConferenceSessionDetailViewModel {
             return String.format("%s %s", this.getFirstName(), this.getLastName());
         }
 
+        public String getCompany() {
+            if (presenterData.getCompanyView() == null) {
+                return "";
+            }
+            return presenterData.getCompanyView().getName();
+        }
+
         public String getFirstName() {
-            return presenterData.getId() + "";
+            return presenterData.getFirstName();
         }
 
         public String getLastName() {
-            return presenterData.getUserId();
+            return presenterData.getLastName();
         }
 
         public String getBiography() {

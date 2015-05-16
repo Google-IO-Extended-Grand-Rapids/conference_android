@@ -10,6 +10,10 @@ public class PresenterData {
     private String shortBio;
     private String jobTitle;
     private String profilePicUrl;
+    private String firstName;
+    private String lastName;
+    private String emailAddress;
+    private CompanyData companyView;
 
     public String getProfilePicUrl() {
         return profilePicUrl;
@@ -49,5 +53,37 @@ public class PresenterData {
 
     public void setJobTitle(String jobTitle) {
         this.jobTitle = jobTitle;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public CompanyData getCompanyView() {
+        return companyView;
+    }
+
+    public void setCompanyView(CompanyData companyView) {
+        this.companyView = companyView;
     }
 }

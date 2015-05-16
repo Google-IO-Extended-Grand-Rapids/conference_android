@@ -70,9 +70,4 @@ public class ConferenceDetailViewModel {
     public String getImageUrl() {
         return confData.getImageUrl();
     }
-
-    public String getConferenceContactPerson() {
-        return "Mahmoud Ahmadinejad";
-    }
-
 }
