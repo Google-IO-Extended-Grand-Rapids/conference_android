@@ -1,6 +1,5 @@
 package com.sagetech.conference_android.app.ui.viewModel;
 
-import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.model.ConferenceSessionData;
 import com.sagetech.conference_android.app.model.PresenterData;
 import com.sagetech.conference_android.app.model.RoomData;
@@ -16,10 +15,6 @@ import java.util.List;
  */
 public class ConferenceSessionDetailViewModel {
 
-    public enum ConferenceSessionType {
-        PRESENTATION, CODE_LABS
-    }
-
     private static SimpleDateFormat startDateTimeFormatter = new SimpleDateFormat("EE, MMM d, h");
     private static SimpleDateFormat startMinuteFormatter = new SimpleDateFormat(":mm");
     private static SimpleDateFormat endTimeFormatter = new SimpleDateFormat("h:mm aaa");
@@ -28,6 +23,8 @@ public class ConferenceSessionDetailViewModel {
     private ConferenceSessionData sessionData;
     private RoomData roomData;
     private List<PresenterData> presenterDatas;
+    private ConferenceSessionType type;
+
 
     public ConferenceSessionDetailViewModel(ConferenceSessionData sessionData, RoomData roomData, List<PresenterData> presenterDatas) {
         this.sessionData = sessionData;
@@ -43,6 +40,14 @@ public class ConferenceSessionDetailViewModel {
         } else {
             return String.format("%s%s - %s", startDateTimeFormatter.format(this.getStartDttm()), startMinute, endTimeFormatter.format(this.getEndDttm()));
         }
+    }
+
+    public ConferenceSessionType getType() {
+        if (sessionData.getConferenceSessionType() == null) {
+            return ConferenceSessionType.ONSITE;
+        }
+
+        return ConferenceSessionType.fromId(sessionData.getConferenceSessionType().getId());
     }
 
     public String getTitle() {
@@ -93,12 +98,19 @@ public class ConferenceSessionDetailViewModel {
             return String.format("%s %s", this.getFirstName(), this.getLastName());
         }
 
+        public String getCompany() {
+            if (presenterData.getCompanyView() == null) {
+                return "";
+            }
+            return presenterData.getCompanyView().getName();
+        }
+
         public String getFirstName() {
-            return presenterData.getId() + "";
+            return presenterData.getFirstName();
         }
 
         public String getLastName() {
-            return presenterData.getUserId();
+            return presenterData.getLastName();
         }
 
         public String getBiography() {

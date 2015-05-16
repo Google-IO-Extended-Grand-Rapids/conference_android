@@ -11,11 +11,12 @@ public class ConferenceSessionViewModel {
     private static final SimpleDateFormat DAY_FORMATTER = new SimpleDateFormat("EEEE, MMMM dd, yyyy", Locale.US);
     private static final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat("h:mm a", Locale.US);
 
-
     private Long id;
     private String title;
     private String room;
     private Date startDttm;
+    private ConferenceSessionType type;
+    private SessionListItemType listItemType;
 
     public Long getId() {
         return id;
@@ -53,4 +54,21 @@ public class ConferenceSessionViewModel {
         this.startDttm = startDttm;
     }
 
+    public Date getStartDttm() { return startDttm; }
+
+    public ConferenceSessionType getType() {
+        return type;
+    }
+
+    public void setType(ConferenceSessionType type) {
+        this.type = type;
+    }
+
+    public SessionListItemType getListItemType() {
+        return listItemType;
+    }
+
+    public void setListItemType(SessionListItemType listItemType) {
+        this.listItemType = listItemType;
+    }
 }

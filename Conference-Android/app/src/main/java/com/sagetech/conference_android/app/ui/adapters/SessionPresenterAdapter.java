@@ -4,12 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sagetech.conference_android.app.R;
 import com.sagetech.conference_android.app.ui.viewModel.ConferenceSessionDetailViewModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -50,10 +48,6 @@ public class SessionPresenterAdapter extends RecyclerView.Adapter<SessionPresent
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-        @InjectView(R.id.imgSpeaker)
-        ImageView pic;
-
         @InjectView(R.id.txtPresenterName)
         TextView name;
 
@@ -70,18 +64,8 @@ public class SessionPresenterAdapter extends RecyclerView.Adapter<SessionPresent
 
         public void setPresenterView(ConferenceSessionDetailViewModel.EventDetailPresenterView presenter) {
             setName(presenter.getFullName());
-            setCompany("Company Name"); //TODO: set company name when available
+            setCompany(presenter.getCompany());
             setBio(presenter.getBiography());
-            setPic(presenter.getPicUrl());
-        }
-
-        private void setPic(String picUrl) {
-            Picasso
-                    .with(this.pic.getContext())
-                    .load(picUrl)
-                    .placeholder(R.drawable.unknown_profile)
-                    .error(R.drawable.unknown_profile)
-                    .into(this.pic);
         }
 
         private void setName(String name) {
