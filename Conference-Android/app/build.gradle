@@ -38,8 +38,6 @@ android {
             storeFile file("google_io.jks")
             keyAlias "google_io"
 
-//            storeFile file("google_io_temp.jks")
-//            keyAlias "sagetech"
         }
     }
 
