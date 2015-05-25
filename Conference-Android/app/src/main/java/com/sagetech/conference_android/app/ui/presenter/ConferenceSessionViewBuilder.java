@@ -54,7 +54,14 @@ public class ConferenceSessionViewBuilder {
         Comparator<ConferenceSessionViewModel> byDateComparator = new Comparator<ConferenceSessionViewModel>() {
             @Override
             public int compare(ConferenceSessionViewModel lhs, ConferenceSessionViewModel rhs) {
-                return lhs.getStartDttm().compareTo(rhs.getStartDttm());
+                int i = lhs.getStartDttm().compareTo(rhs.getStartDttm());
+
+                if (i != 0) {
+                    return i;
+                }
+
+                return lhs.getId().compareTo(rhs.getId());
+
             }
         };
 
